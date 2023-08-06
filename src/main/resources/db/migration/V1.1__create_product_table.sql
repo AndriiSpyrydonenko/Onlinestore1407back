@@ -22,10 +22,10 @@ create table products
     priority_score   int           not null default 0,
     rating           double (2, 1) ,
     review_count int ,
-    discount_percent int ,
+    discount_percent int not null default 0 ,
     create_date datetime not null ,
-    constraint products_priority_score_check check ( priority_score between -1 and 16),
-    constraint products_discount_percent_check check ( discount_percent between -1 and 101),
+    constraint products_priorityq_score_CHECK check ( priority_score between -1 and 16),
+    constraint products_discount_percent_CHECK check ( discount_percent between -1 and 101),
     constraint products_categories_category_id_FK foreign key(category_id) references categories(category_id),
     constraint products_product_id_PK primary key (product_id)
 );
@@ -35,7 +35,7 @@ create table pictures
     picture_id int auto_increment,
     product_id int                 not null,
     url_path   varchar(255) unique not null,
-    constraint pictures_picture_id primary key (picture_id),
+    constraint pictures_picture_id_PK primary key (picture_id),
     constraint pictures_products_product_id_FK foreign key (product_id) references products (product_id)
 );
 

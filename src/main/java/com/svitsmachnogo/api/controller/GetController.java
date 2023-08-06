@@ -1,4 +1,4 @@
-package com.svitsmachnogo.api.svitsmachnogo.controller;
+package com.svitsmachnogo.api.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 

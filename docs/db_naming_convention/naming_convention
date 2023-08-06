@@ -1,0 +1,22 @@
+-- Database Naming Convention --
+
+- Table names are plural nouns written in snake_case.
+  Example: users, products
+
+- Column names are written in snake_case.
+  Example: created_at, last_modified
+
+- Primary key name has the following structure:
+  table_name + id + PK, written in CamelCase.
+  Example: user_user_id_PK
+
+- Foreign key name has the following structure:
+  source_table + target_table + referenced_column + FK, written in snake_case.
+  Example: user_products_product_id_FK
+
+- For other constraints, the name structure is:
+  table_name + column + abbreviated_constraint_name.
+  Abbreviated constraint names: check - CK, not null - NN, unique - UQ, default - DF.
+  Example: products_price_DF
+
+-- End of Naming Convention --

@@ -1,0 +1,10 @@
+bucket: svitsmachnogo
+AWS Region: eu-central-1
+Amazon Resource Name (ARN): arn:aws:s3:::svitsmachnogo
+
+
+
+user: onlineshop1407_aws_user
+Access key: AKIATZYJU7BQ374W2NZB
+Secret access key: 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
+Amazon Resource Name (ARN): arn:aws:iam::261476382817:user/onlineshop1407_aws_user

@@ -3,7 +3,7 @@ use svitsmachnogo;
 insert into products
 (category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
  country_producer, description)
-    value ('grocery', 123456, 'Квасоля червона', true, 0, 4.2, 50, 0, sysdate(), 'Україна',
+    value ('grocery', 123456, 'Квасоля червона', true, 0, 4.2, 50, 20, sysdate(), 'Україна',
            'Склад: Квасоля червона "Рубін" - вона є чудовою альтернативою м''ясу для вегетаріанців і тих, хто поститься. Червона квасоля містить до 25% білка, який за своєю харчовою цінністю не поступається білку м''яса. До того ж білок квасолі засвоюється на 70 – 80%.');
 
 insert into products
@@ -15,7 +15,7 @@ insert into products
 insert into products
 (category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
  country_producer, description)
-    value ('grocery', 234567, 'Кіноа Червона', false, 1, 4.8, 10, 0, sysdate(), 'Перу',
+    value ('grocery', 234567, 'Кіноа Червона', false, 1, 4.8, 10, 20, sysdate(), 'Перу',
            'Склад: Кіноа Червона - зернова культура з сімейства мареві, яка росте на гірських схилах Анд. Батьківщиною білої кіноа прийнято вважати берега озера Тітікака в Південній Америці. Поряд з картоплею і кукурудзою кіноа входила в трійку головних продуктів харчування Індіанців.');
 
 insert into products
@@ -39,7 +39,7 @@ insert into products
 insert into products
 (category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
  country_producer, description)
-    value ('dried_fruits', 124875, 'Журавлина сушена без цукру', true, 0, 4.2, 100, 0, sysdate(), 'Канада', 'Склад: Журавлина сушена без цукра, ягода журавлини використовують у лікуванні захворювань серцево-судинної системи.
+    value ('dried_fruits', 124875, 'Журавлина сушена без цукру', true, 0, 4.2, 100, 50, sysdate(), 'Канада', 'Склад: Журавлина сушена без цукра, ягода журавлини використовують у лікуванні захворювань серцево-судинної системи.
 Вживання журавлини в їжу позитивно позначається на настрої. Вона рятує від депресій і нервових розладів. Журавлина також стимулює вироблення шлункового соку, а тому особливо ефективна для лікування гастриту зі зниженою кислотністю.
 ');
 
@@ -66,7 +66,7 @@ insert into products
 insert into products
 (category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
  country_producer, description)
-    value ('dried_fruits', 90075, 'Чорнослив копчений без кісточки', true, 3, 4.2, 100, 0, sysdate(), 'Україна',
+    value ('dried_fruits', 90075, 'Чорнослив копчений без кісточки', true, 3, 4.2, 100, 40, sysdate(), 'Україна',
            'Склад: За розміром вони стандартні та мають приємний, м''який і зрозуміло копчений смак. Попри процес коптування, вони пристойно соковиті. Копчені плоди сливи не втрачають своїх цінних властивостей, майже повністю зберігаючи свій вітамінно-мінеральний склад. Він є одним із найбільш доступних сухофруктів у наших регіонах. Він містить вітаміни: В1, В2, С, PP, Е, А, бета каротин; мінерали: залізо, фосфор, калій, натрій, магній, кальцій.');
 
 insert into products

@@ -30,8 +30,7 @@ create table products
     country_producer varchar(255),
     exist            boolean       not null default true,
     priority_score   int           not null default 0,
-    rating           double (2, 1
-) ,
+    rating           double (2, 1) ,
     review_count int ,
     discount_percent int not null default 0 ,
     create_date datetime not null ,

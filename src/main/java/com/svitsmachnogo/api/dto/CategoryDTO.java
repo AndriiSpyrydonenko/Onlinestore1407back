@@ -5,7 +5,7 @@ import com.svitsmachnogo.api.domain.entity.Category;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryDTOForMainPage {
+public class CategoryDTO {
 
     private String id;
 
@@ -15,20 +15,20 @@ public class CategoryDTOForMainPage {
 
     private String hoverPictureUrl;
 
-    private CategoryDTOForMainPage() {
+    private CategoryDTO() {
     }
 
-    public CategoryDTOForMainPage(Category category) {
+    public CategoryDTO(Category category) {
         this.id = category.getId();
         this.name = category.getName();
         this.fillPictureUrl = category.getFillPictureUrl();
         this.hoverPictureUrl = category.getHoverPictureUrl();
     }
 
-    public static List<CategoryDTOForMainPage> getList(List<Category> categories){
-        List<CategoryDTOForMainPage> categoryList = new ArrayList<>();
+    public static List<CategoryDTO> getList(List<Category> categories){
+        List<CategoryDTO> categoryList = new ArrayList<>();
         for (Category category : categories) {
-            categoryList.add(new CategoryDTOForMainPage(category));
+            categoryList.add(new CategoryDTO(category));
         }
         return categoryList;
     }

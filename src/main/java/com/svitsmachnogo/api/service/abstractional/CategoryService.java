@@ -1,4 +1,4 @@
-package com.svitsmachnogo.api.service;
+package com.svitsmachnogo.api.service.abstractional;
 
 import com.svitsmachnogo.api.domain.entity.Category;
 

@@ -1,6 +1,7 @@
 package com.svitsmachnogo.api.domain.dao;
 
 
+import com.svitsmachnogo.api.domain.dao.abstractional.CategoryDAO;
 import com.svitsmachnogo.api.domain.entity.Category;
 import jakarta.persistence.EntityManager;
 import org.hibernate.Session;

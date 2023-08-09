@@ -1,4 +1,4 @@
-package com.svitsmachnogo.api.domain.dao;
+package com.svitsmachnogo.api.domain.dao.abstractional;
 
 import com.svitsmachnogo.api.domain.entity.GiftSet;
 import org.springframework.data.jpa.repository.JpaRepository;

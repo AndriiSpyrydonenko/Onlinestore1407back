@@ -8,4 +8,6 @@ public interface CategoryDAO {
 
     List<Category> findAll();
 
+    Category findByIdWithProduct(String id);
+
 }

@@ -9,4 +9,6 @@ public interface ProductService {
     List<Product> getByPriorityForMainPage();
     List<Product> getByDiscountPercentForMainPage();
 
+    List<Product> getByPartName(String partName);
+
 }

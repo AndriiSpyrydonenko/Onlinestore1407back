@@ -1,6 +1,5 @@
 package com.svitsmachnogo.api.dto;
 
-import com.svitsmachnogo.api.domain.entity.Category;
 import com.svitsmachnogo.api.domain.entity.Product;
 
 import java.sql.Timestamp;
@@ -12,7 +11,7 @@ public class ProductDTO {
 
     private int id;
 
-    private Category category;
+    private CategoryDTO category;
 
     private int article;
 
@@ -44,7 +43,7 @@ public class ProductDTO {
     private ProductDTO() {
     }
 
-    public static ProductDTO createForPriorityBlock(Product product) {
+    public static ProductDTO createSimpleCard(Product product) {
         ProductDTO dto = new ProductDTO();
         dto.id = product.getId();
         dto.name = product.getName();
@@ -68,13 +67,29 @@ public class ProductDTO {
         List<ProductDTO> dtos = new ArrayList<>();
 
         for (Product product : products) {
-            ProductDTO dto = ProductDTO.createForPriorityBlock(product);
+            ProductDTO dto = ProductDTO.createSimpleCard(product);
             dtos.add(dto);
         }
         return dtos;
     }
 
-    public static List<ProductDTO> getListForDiscountBlock (List<Product> products) {
+    public static ProductDTO createForQuickView(Product product) {
+        ProductDTO dto = new ProductDTO();
+        dto.id = product.getId();
+        dto.category = new CategoryDTO(product.getCategory());
+        dto.article = product.getArticle();
+        dto.name = product.getName();
+        dto.description = product.getDescription();
+        dto.countryProducer = product.getCountryProducer();
+        dto.rating = product.getRating();
+        dto.reviewCount = product.getReviewCount();
+        dto.pictures = PictureDTO.getList(product.getPictures());
+        dto.packaging = product.getPackaging();
+
+        return dto;
+    }
+
+    public static List<ProductDTO> getListForDiscountBlock(List<Product> products) {
         List<ProductDTO> dtos = new ArrayList<>();
 
         for (Product product : products) {
@@ -92,11 +107,11 @@ public class ProductDTO {
         this.id = id;
     }
 
-    public Category getCategory() {
+    public CategoryDTO getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(CategoryDTO category) {
         this.category = category;
     }
 

@@ -22,4 +22,15 @@ public class CategoryDAOImp implements CategoryDAO {
         List<Category> categories = session.createQuery("from Category").getResultList();
         return categories;
     }
+
+    @Override
+    public Category findByIdWithProduct(String id) {
+        Session session = entityManager.unwrap(Session.class);
+        List<Category> categories = session.createQuery("from Category c" +
+                        " join  fetch c.products" +
+                        " where c.id = :id ")
+                .setParameter("id", id)
+                .getResultList();
+        return categories.get(0);
+    }
 }

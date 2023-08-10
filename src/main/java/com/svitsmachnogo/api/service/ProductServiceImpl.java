@@ -30,4 +30,10 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getByDiscountPercentForMainPage() {
        return productDAO.findForDiscountBlock();
     }
+
+    @Override
+    @Transactional
+    public List<Product> getByPartName(String partName) {
+        return productDAO.findByPartName(partName);
+    }
 }

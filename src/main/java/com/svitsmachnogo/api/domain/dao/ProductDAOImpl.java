@@ -49,6 +49,7 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public List<Product> findAllByRatingWithLimit(int lim) {
         Session session = entityManager.unwrap(Session.class);
+        session.setDefaultReadOnly(true);
         Query query = session.createQuery("from Product p" +
                 " join fetch p.pictures " +
                 " join fetch p.packaging " +
@@ -58,5 +59,14 @@ public class ProductDAOImpl implements ProductDAO {
         return query
                 .setMaxResults(lim)
                 .getResultList();
+    }
+
+    @Override
+    public List<Product> findByPartName(String partName) {
+        Session session = entityManager.unwrap(Session.class);
+        session.setDefaultReadOnly(true);
+        Query query = session.createQuery("from Product p where p.name like :param ")
+                .setParameter("param" , "%"+partName+"%");
+        return query.getResultList();
     }
 }

@@ -25,7 +25,7 @@ public class Category {
 
     @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "category")
-    List<Product> products;
+    private List<Product> products;
 
     public Category() {
     }
@@ -60,6 +60,14 @@ public class Category {
 
     public void setHoverPictureUrl(String hoverPictureUrl) {
         this.hoverPictureUrl = hoverPictureUrl;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override

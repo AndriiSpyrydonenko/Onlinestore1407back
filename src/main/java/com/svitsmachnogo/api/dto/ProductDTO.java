@@ -47,6 +47,7 @@ public class ProductDTO {
         ProductDTO dto = new ProductDTO();
         dto.id = product.getId();
         dto.name = product.getName();
+        dto.category = new CategoryDTO(product.getCategory());
         dto.exist = product.isExist();
         dto.rating = product.getRating();
         dto.reviewCount = product.getReviewCount();

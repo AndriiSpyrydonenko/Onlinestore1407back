@@ -13,6 +13,8 @@ public class ProductDTO {
 
     private CategoryDTO category;
 
+    private String categoryId ;
+
     private int article;
 
     private String name;
@@ -47,7 +49,7 @@ public class ProductDTO {
         ProductDTO dto = new ProductDTO();
         dto.id = product.getId();
         dto.name = product.getName();
-        dto.category = new CategoryDTO(product.getCategory());
+        dto.categoryId = new CategoryDTO(product.getCategory()).getId();
         dto.exist = product.isExist();
         dto.rating = product.getRating();
         dto.reviewCount = product.getReviewCount();
@@ -218,5 +220,13 @@ public class ProductDTO {
 
     public void setPackaging(Map<String, Integer> packaging) {
         this.packaging = packaging;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 }

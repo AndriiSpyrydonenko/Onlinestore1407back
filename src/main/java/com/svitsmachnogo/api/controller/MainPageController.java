@@ -8,6 +8,8 @@ import com.svitsmachnogo.api.dto.ProductDTO;
 import com.svitsmachnogo.api.service.abstractional.CategoryService;
 import com.svitsmachnogo.api.service.GiftSetServiceImpl;
 import com.svitsmachnogo.api.service.abstractional.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
+@Tag(name="Endpoints for main page")
 @RequestMapping("/api/main_page")
 public class MainPageController {
 
@@ -31,24 +34,30 @@ public class MainPageController {
     ProductService productService;
 
     @GetMapping("/categories")
-    public List<CategoryDTO> categoriesForMainPage(){
+    @Operation(summary = "returns a list of categories." +
+            " Each category has a name in Ukrainian, English (id), 2 links to icons (hower and fill)")
+    public List<CategoryDTO> categoriesForMainPage() {
         List<Category> categories = categoryService.findAllForMainPage();
         return CategoryDTO.getList(categories);
     }
 
     @GetMapping("/gift_set")
-    public GiftSet setGiftSetForMainPage(){
+    @Operation(summary = "Returns id (always 1), link to picture, discount percentage")
+    public GiftSet setGiftSetForMainPage() {
         return giftSetService.getForMainPage();
     }
 
     @GetMapping("/products")
-    public List<ProductDTO> setProductsToPriorityBlock(){
+    @Operation(summary = "Returns a list of products to display on the main page (25 items)")
+    public List<ProductDTO> setProductsToPriorityBlock() {
         List<Product> products = productService.getByPriorityForMainPage();
         return ProductDTO.getList(products);
     }
 
     @GetMapping("/discount_products")
-    public List<ProductDTO> setDiscountBlock(){
+    @Operation(summary = "returns a list of cards with id, picture, name and discount percentage." +
+            " All other fields - null")
+    public List<ProductDTO> setDiscountBlock() {
         List<Product> products = productService.getByDiscountPercentForMainPage();
         return ProductDTO.getListForDiscountBlock(products);
     }

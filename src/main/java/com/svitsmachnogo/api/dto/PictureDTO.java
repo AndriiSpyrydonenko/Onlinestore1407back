@@ -1,15 +1,19 @@
 package com.svitsmachnogo.api.dto;
 
 import com.svitsmachnogo.api.domain.entity.Picture;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+@Schema(description = "An object that stores information about the picture of the product for further transportation")
 public class PictureDTO {
 
+    @Schema(description = "Product identifier")
     private int id;
 
+    @Schema(description = "Contain a link to a picture of the product")
     private URL urlPath;
 
     private PictureDTO() {

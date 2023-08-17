@@ -7,8 +7,11 @@ import java.util.List;
 public interface ProductService {
 
     List<Product> getByPriorityForMainPage();
+
     List<Product> getByDiscountPercentForMainPage();
 
     List<Product> getByPartName(String partName);
+
+    Product getProductById(int id);
 
 }

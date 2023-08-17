@@ -101,7 +101,7 @@ public class ProductDTO {
     public static ProductDTO createForQuickView(Product product) {
         ProductDTO dto = new ProductDTO();
         dto.id = product.getId();
-        dto.category = new CategoryDTO(product.getCategory());
+        dto.categoryId = new CategoryDTO(product.getCategory()).getId();
         dto.article = product.getArticle();
         dto.name = product.getName();
         dto.description = product.getDescription();

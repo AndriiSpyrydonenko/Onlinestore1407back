@@ -5,22 +5,20 @@ import com.svitsmachnogo.api.domain.entity.GiftSet;
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.dto.CategoryDTO;
 import com.svitsmachnogo.api.dto.ProductDTO;
-import com.svitsmachnogo.api.service.abstractional.CategoryService;
 import com.svitsmachnogo.api.service.GiftSetServiceImpl;
+import com.svitsmachnogo.api.service.abstractional.CategoryService;
 import com.svitsmachnogo.api.service.abstractional.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@Tag(name="Endpoints for main page")
+@Tag(name = "Endpoints for main page")
 @RequestMapping("/api/main_page")
 public class MainPageController {
 
@@ -60,5 +58,13 @@ public class MainPageController {
     public List<ProductDTO> setDiscountBlock() {
         List<Product> products = productService.getByDiscountPercentForMainPage();
         return ProductDTO.getListForDiscountBlock(products);
+    }
+
+    @GetMapping("/quick_view/{product_id}")
+    @Operation(summary = "Returns all information about the product, for display in the quick view")
+    public ProductDTO productForQuickView(@Parameter(description = "The ID of the product that will be displayed in the quick view")
+                                          @PathVariable int product_id) {
+        Product product = productService.getProductById(product_id);
+        return ProductDTO.createForQuickView(product);
     }
 }

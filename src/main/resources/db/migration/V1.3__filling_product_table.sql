@@ -135,6 +135,29 @@ insert into products
     value ('spices', 457675, 'Суміш 10-ти овочів', true, 0, 4.2, 100, 0, sysdate(), 'Україна',
            'Склад: Морква, Цибуля сушена мелена, помідор, паприка, петрушка, селера, часник, цибуля порей, Сіль, Перець');
 
+insert into products
+(category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
+ country_producer, description)
+    value ('spices', 5557681, 'Перець Чорний Горошок', true, 0, 4.2, 100, 0, sysdate(), 'Україна',
+           'Склад: Перець горошком з плодів рослини Piper nigrum. Круглої форми. Чорного кольору з коричневим відтінком');
+
+insert into products
+(category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
+ country_producer, description)
+    value ('spices', 4658941, 'Перець Чорний Мелений', true, 0, 4.2, 100, 0, sysdate(), 'Україна',
+           'Склад: Приправа порошкоподібна із плодів рослини Piper nigrum. Темно-сірого кольору');
+
+insert into products
+(category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
+ country_producer, description)
+    value ('spices', 3645761, 'Приправа для Ухи', true, 0, 4.2, 100, 0, sysdate(), 'Україна',
+           'Склад: морква, петрушка, кріп, перець чорний мелений, коріандр, лаврове листя мелене, базилік, помідор мелений, паприка, часник.');
+
+insert into products
+(category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
+ country_producer, description)
+    value ('spices', 4576751, 'Суміш 10-ти овочів', true, 0, 4.2, 100, 0, sysdate(), 'Україна',
+           'Склад: Морква, Цибуля сушена мелена, помідор, паприка, петрушка, селера, часник, цибуля порей, Сіль, Перець');
 
 
 insert into pictures
@@ -244,6 +267,22 @@ insert into pictures
 insert into pictures
     (product_id, url_path)
     value (21, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
+
+insert into pictures
+(product_id, url_path)
+    value (22, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
+
+insert into pictures
+(product_id, url_path)
+    value (23, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
+
+insert into pictures
+(product_id, url_path)
+    value (24, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
+
+insert into pictures
+(product_id, url_path)
+    value (25, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
 
 insert into packaging(product_id, unit, cost)
     value (1, '200г', 230);
@@ -433,3 +472,39 @@ insert into packaging(product_id, unit, cost)
 
 insert into packaging(product_id, unit, cost)
     value (21, '1кг', 800);
+
+insert into packaging(product_id, unit, cost)
+    value (22, '200г', 400);
+
+insert into packaging(product_id, unit, cost)
+    value (22, '500г', 600);
+
+insert into packaging(product_id, unit, cost)
+    value (22, '1кг', 800);
+
+insert into packaging(product_id, unit, cost)
+    value (23, '200г', 500);
+
+insert into packaging(product_id, unit, cost)
+    value (23, '500г', 700);
+
+insert into packaging(product_id, unit, cost)
+    value (23, '1кг', 1010);
+
+insert into packaging(product_id, unit, cost)
+    value (24, '200г', 600);
+
+insert into packaging(product_id, unit, cost)
+    value (24, '500г', 900);
+
+insert into packaging(product_id, unit, cost)
+    value (24, '1кг', 1200);
+
+insert into packaging(product_id, unit, cost)
+    value (25, '200г', 300);
+
+insert into packaging(product_id, unit, cost)
+    value (25, '500г', 600);
+
+insert into packaging(product_id, unit, cost)
+    value (25, '1кг', 800);

@@ -35,7 +35,7 @@ public class MainPageController {
 
     @GetMapping("/categories")
     @Operation(summary = "returns a list of categories." +
-            " Each category has a name in Ukrainian, English (id), 2 links to icons (hower and fill)")
+            " Each category has a name in Ukrainian, English (id), 2 links to icons (hover and fill)")
     public List<CategoryDTO> categoriesForMainPage() {
         List<Category> categories = categoryService.findAllForMainPage();
         return CategoryDTO.getList(categories);

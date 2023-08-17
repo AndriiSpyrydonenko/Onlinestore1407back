@@ -2,6 +2,9 @@ package com.svitsmachnogo.api.dto;
 
 import com.svitsmachnogo.api.domain.entity.Product;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -17,10 +20,11 @@ public class ProductDTO {
     private CategoryDTO category;
 
     @Schema(description = "Contains the category id in string form. For example: nuts, oil")
-    private String categoryId ;
+    private String categoryId;
 
     private int article;
 
+    @NotBlank
     private String name;
 
     private String description;
@@ -34,6 +38,8 @@ public class ProductDTO {
 
     @Schema(description = "Indicates the priority of displaying the product on the main page," +
             " where 1 is the highest priority and 15 is the lowest")
+    @Min(0)
+    @Max(15)
     private int priorityScore = 0;
 
     private double rating;
@@ -41,6 +47,8 @@ public class ProductDTO {
     private int reviewCount;
 
     @Schema(description = "Contains the percentage of the product discount")
+    @Min(0)
+    @Max(100)
     private int discountPercent = 0;
 
     private Timestamp create_date;

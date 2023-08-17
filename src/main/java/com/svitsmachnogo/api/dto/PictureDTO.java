@@ -10,7 +10,7 @@ import java.util.List;
 @Schema(description = "An object that stores information about the picture of the product for further transportation")
 public class PictureDTO {
 
-    @Schema(description = "Product identifier")
+    @Schema(description = "Picture identifier")
     private int id;
 
     @Schema(description = "Contain a link to a picture of the product")

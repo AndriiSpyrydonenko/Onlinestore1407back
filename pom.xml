@@ -73,8 +73,8 @@
 
 		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.15</version>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.2.0</version>
 		</dependency>
 
 		<dependency>
@@ -82,7 +82,6 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 			<version>3.1.2</version>
 		</dependency>
-
 
 
 		<dependency>

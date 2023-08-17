@@ -35,7 +35,7 @@ public class ProductDAOImpl implements ProductDAO {
         session.setDefaultReadOnly(true);
         Query query = session.createQuery("from Product p " +
                 "join fetch p.pictures " +
-                "where p.discountPercent > 0 order by p.rating ");
+                "where p.discountPercent > 0 order by p.discountPercent ");
         return query.getResultList();
     }
 

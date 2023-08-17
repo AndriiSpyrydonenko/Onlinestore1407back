@@ -1,18 +1,22 @@
 package com.svitsmachnogo.api.dto;
 
 import com.svitsmachnogo.api.domain.entity.Product;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Schema(description = "An object that stores information about the product for further transportation")
 public class ProductDTO {
 
+    @Schema(description = "Product identifier")
     private int id;
 
     private CategoryDTO category;
 
+    @Schema(description = "Contains the category id in string form. For example: nuts, oil")
     private String categoryId ;
 
     private int article;
@@ -21,24 +25,34 @@ public class ProductDTO {
 
     private String description;
 
+    @Schema(description = "Contains information about the country of manufacture")
     private String countryProducer;
 
+    @Schema(description = "Displays the status of product availability." +
+            " If it is available, it is true, otherwise it is false")
     private boolean exist = true;
 
+    @Schema(description = "Indicates the priority of displaying the product on the main page," +
+            " where 1 is the highest priority and 15 is the lowest")
     private int priorityScore = 0;
 
     private double rating;
 
     private int reviewCount;
 
+    @Schema(description = "Contains the percentage of the product discount")
     private int discountPercent = 0;
 
     private Timestamp create_date;
 
+    @Schema(description = "Contains a link to the main image of the product." +
+            " The picture is considered the main one if it is on the first place in the list of all pictures")
     private PictureDTO mainPicture;
 
+    @Schema(description = "Contains a list that stores links to all pictures")
     private List<PictureDTO> pictures;
 
+    @Schema(description = "Contains a price map where product quantity is the key and price is the value")
     private Map<String, Integer> packaging;
 
 

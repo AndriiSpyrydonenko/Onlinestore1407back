@@ -36,4 +36,10 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getByPartName(String partName) {
         return productDAO.findByPartName(partName);
     }
+
+    @Override
+    @Transactional
+    public Product getProductById(int id) {
+        return productDAO.findById(id);
+    }
 }

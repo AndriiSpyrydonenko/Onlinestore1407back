@@ -11,7 +11,7 @@ import java.util.List;
 public class PictureDTO {
 
     @Schema(description = "Picture identifier")
-    private int id;
+    private Integer id;
 
     @Schema(description = "Contain a link to a picture of the product")
     private URL urlPath;
@@ -33,11 +33,11 @@ public class PictureDTO {
         return pictureDTOList;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -26,7 +28,7 @@ public class ProductDAOImpl implements ProductDAO {
                 "where p.priorityScore > 0 " +
                 "order by p.priorityScore");
         List<Product> products = query.getResultList();
-        return  products;
+        return products;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class ProductDAOImpl implements ProductDAO {
                 " join fetch p.pictures " +
                 " join fetch p.packaging " +
                 " where p.priorityScore = 0" +
-                " order by p.rating desc" );
+                " order by p.rating desc");
 
         return query
                 .setMaxResults(lim)
@@ -66,7 +68,19 @@ public class ProductDAOImpl implements ProductDAO {
         Session session = entityManager.unwrap(Session.class);
         session.setDefaultReadOnly(true);
         Query query = session.createQuery("from Product p where p.name like :param ")
-                .setParameter("param" , "%"+partName+"%");
+                .setParameter("param", "%" + partName + "%");
         return query.getResultList();
+    }
+
+    @Override
+    public Set<Product> findAllByCategoryId(String categoryId) {
+        Session session = entityManager.unwrap(Session.class);
+        session.setDefaultReadOnly(true);
+        Query query = session.createQuery("from Product p where p.category.id = :param ")
+                .setParameter("param", categoryId);
+
+        return (Set<Product>) query
+                .getResultStream()
+                .collect(Collectors.toSet());
     }
 }

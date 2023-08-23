@@ -9,18 +9,18 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements Comparable<Product> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private int id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @Column(name = "article",nullable = false)
+    @Column(name = "article", nullable = false)
     private int article;
 
     @Column(name = "name", nullable = false)
@@ -54,18 +54,22 @@ public class Product {
             mappedBy = "product")
     private List<Picture> pictures;
 
-
     @ElementCollection
-    @CollectionTable(name = "packaging" , joinColumns = @JoinColumn(name = "product_id"))
+    @CollectionTable(name = "packaging", joinColumns = @JoinColumn(name = "product_id"))
     @MapKeyColumn(name = "unit")
     @Column(name = "cost")
     private Map<String, Integer> packaging;
 
-    public int getId() {
+    @Override
+    public int compareTo(Product o) {
+        return Integer.compare(this.id, o.id);
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -173,6 +177,7 @@ public class Product {
         this.packaging = packaging;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -218,4 +223,6 @@ public class Product {
         result = 31 * result + (packaging != null ? packaging.hashCode() : 0);
         return result;
     }
+
+
 }

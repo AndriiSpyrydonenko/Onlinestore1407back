@@ -10,7 +10,7 @@ create table categories
     constraint categories_category_id_PK primary key (category_id)
 );
 
-create table gift_sets
+create table gift_sets_banner
 (
     gift_set_id      int auto_increment,
     url_picture      varchar(255) not null,
@@ -29,6 +29,7 @@ create table products
     description      varchar(1024) not null,
     country_producer varchar(255),
     exist            boolean       not null default true,
+    is_gift_set      boolean       not null default false,
     priority_score   int           not null default 0,
     rating           double(2, 1),
     review_count     int,

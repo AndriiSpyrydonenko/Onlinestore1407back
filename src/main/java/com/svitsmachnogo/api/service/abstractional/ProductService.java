@@ -3,6 +3,7 @@ package com.svitsmachnogo.api.service.abstractional;
 import com.svitsmachnogo.api.domain.entity.Product;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ProductService {
 
@@ -13,5 +14,7 @@ public interface ProductService {
     List<Product> getByPartName(String partName);
 
     Product getProductById(int id);
+
+    Set<Product> getAllByCategoryId(String categoryId);
 
 }

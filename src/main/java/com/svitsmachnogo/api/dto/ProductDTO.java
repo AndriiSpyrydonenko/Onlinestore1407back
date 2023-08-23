@@ -10,12 +10,14 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Schema(description = "An object that stores information about the product for further transportation")
 public class ProductDTO {
 
     @Schema(description = "Product identifier")
-    private int id;
+    private Integer id;
 
     private CategoryDTO category;
 
@@ -124,11 +126,15 @@ public class ProductDTO {
         return dtos;
     }
 
-    public int getId() {
+    public static List<ProductDTO> convertSetToList(Set<ProductDTO> productDTO){
+        return new ArrayList<>(productDTO);
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

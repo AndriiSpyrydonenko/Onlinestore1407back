@@ -1,35 +1,48 @@
 package com.svitsmachnogo.api.controller;
 
+import com.svitsmachnogo.api.component.ProductListForView;
 import com.svitsmachnogo.api.domain.entity.Product;
-import com.svitsmachnogo.api.dto.CategoryDTO;
 import com.svitsmachnogo.api.dto.ProductDTO;
-import com.svitsmachnogo.api.service.abstractional.ProductService;
+import com.svitsmachnogo.api.service.FilteringBlockServiceImpl;
+import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/category_page")
 public class CategoryPageController {
 
     @Autowired
-    ProductService productService;
+    private ProductListForView products;
+
+    @Autowired
+    private FilteringBlockService filteringBlockService;
 
 
-    @GetMapping("/product/{category_id}")
-    public List<ProductDTO> getProductsForCategoryPage(@PathVariable(name = "category_id") String categoryId){
-        Set<Product> products = productService.getAllByCategoryId(categoryId);
-        return ProductDTO.getList(convertSetToList(products));
+    @GetMapping("/products")
+    public List<ProductDTO> getProductsByCategory(){
+        List<Product> productList = products.getProductList();
+        return ProductDTO.getList(productList);
     }
 
+    public ProductListForView getProducts() {
+        return products;
+    }
 
-    private static List<Product> convertSetToList(Set<Product> products) {
-        return new ArrayList<>(products);
+    public void setProducts(ProductListForView products) {
+        this.products = products;
+    }
+
+    public FilteringBlockService getFilteringBlockService() {
+        return filteringBlockService;
+    }
+
+    public void setFilteringBlockService(FilteringBlockServiceImpl filteringBlockService) {
+        this.filteringBlockService = filteringBlockService;
     }
 }

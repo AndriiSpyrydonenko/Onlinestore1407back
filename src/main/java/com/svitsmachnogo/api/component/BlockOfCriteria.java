@@ -1,9 +1,11 @@
-package com.svitsmachnogo.api.domain.entity.embedded_entity;
+package com.svitsmachnogo.api.component;
 
 import com.svitsmachnogo.api.domain.entity.Subcategory;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class BlockOfCriteria {
 
     private String title;
@@ -14,10 +16,10 @@ public class BlockOfCriteria {
     }
 
     public static BlockOfCriteria create(String title , List<Subcategory> subcategories){
-        BlockOfCriteria list = new BlockOfCriteria();
-        list.title = title;
-        list.subcategories = subcategories;
-        return list;
+        BlockOfCriteria block = new BlockOfCriteria();
+        block.title = title;
+        block.subcategories = subcategories;
+        return block;
     }
 
     public String getTitle() {

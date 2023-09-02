@@ -21,21 +21,24 @@ public class SubcategoryDTO {
 
     private boolean clickable = true;
 
+    private boolean active = false;
+
     private Set<Integer> productsId = new TreeSet<>();
 
     private SubcategoryDTO() {
     }
 
     public static SubcategoryDTO createWithAllFields(Subcategory subcategory) {
-        SubcategoryDTO dao = new SubcategoryDTO();
+        SubcategoryDTO dto = new SubcategoryDTO();
 
-        dao.id = subcategory.getId();
-        dao.name = subcategory.getName();
-        dao.productCount = subcategory.getProductCount();
-        dao.categoryId = subcategory.getCategory().getId();
-        dao.clickable = subcategory.isClickable();
-        dao.productsId = getProductsId(subcategory);
-        return dao;
+        dto.id = subcategory.getId();
+        dto.name = subcategory.getName();
+        dto.productCount = subcategory.getProductCount();
+        dto.categoryId = subcategory.getCategory().getId();
+        dto.clickable = subcategory.isClickable();
+        dto.active = subcategory.isActive();
+        dto.productsId = getProductsId(subcategory);
+        return dto;
     }
 
     private static Set<Integer> getProductsId(Subcategory subcategory) {
@@ -99,5 +102,13 @@ public class SubcategoryDTO {
 
     public void setProductsId(Set<Integer> productsId) {
         this.productsId = productsId;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

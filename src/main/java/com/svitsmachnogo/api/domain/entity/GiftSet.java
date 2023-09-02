@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.Objects;
 
 @Entity
-@Table(name = "gift_sets_banner")
+@Table(name = "gift_sets")
 public class GiftSet {
 
     @Id

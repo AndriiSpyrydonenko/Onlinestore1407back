@@ -50,10 +50,11 @@ public class Subcategory {
     private boolean clickable = true;// todo: maybe need change after test
 
     @Transient
-    private boolean active = true;
+    private boolean active = false;
 
     public Subcategory() {
     }
+
 
     public String getId() {
         return id;

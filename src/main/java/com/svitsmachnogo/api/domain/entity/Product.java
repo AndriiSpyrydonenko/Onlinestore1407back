@@ -50,7 +50,7 @@ public class Product implements Comparable<Product> {
     @Column(name = "create_date", nullable = false)
     private Timestamp create_date;
 
-    @OneToMany(fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "product")
     private List<Picture> pictures;
 
@@ -185,13 +185,13 @@ public class Product implements Comparable<Product> {
 
         Product product = (Product) o;
 
-        if (id != product.id) return false;
         if (article != product.article) return false;
         if (exist != product.exist) return false;
         if (priorityScore != product.priorityScore) return false;
         if (Double.compare(product.rating, rating) != 0) return false;
         if (reviewCount != product.reviewCount) return false;
         if (discountPercent != product.discountPercent) return false;
+        if (!Objects.equals(id, product.id)) return false;
         if (!Objects.equals(category, product.category)) return false;
         if (!Objects.equals(name, product.name)) return false;
         if (!Objects.equals(description, product.description)) return false;
@@ -206,7 +206,7 @@ public class Product implements Comparable<Product> {
     public int hashCode() {
         int result;
         long temp;
-        result = id;
+        result = id != null ? id.hashCode() : 0;
         result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + article;
         result = 31 * result + (name != null ? name.hashCode() : 0);
@@ -223,6 +223,4 @@ public class Product implements Comparable<Product> {
         result = 31 * result + (packaging != null ? packaging.hashCode() : 0);
         return result;
     }
-
-
 }

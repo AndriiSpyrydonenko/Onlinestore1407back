@@ -1,6 +1,6 @@
 package com.svitsmachnogo.api.dto;
 
-import com.svitsmachnogo.api.domain.entity.embedded_entity.BlockOfCriteria;
+import com.svitsmachnogo.api.component.BlockOfCriteria;
 
 import java.util.List;
 import java.util.stream.Collectors;

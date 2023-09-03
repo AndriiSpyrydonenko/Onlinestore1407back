@@ -25,6 +25,8 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     @Autowired
     SubcategoryService subcategoryService;
 
+    private  List<Product> productListByCategory;
+
     private final List<CheckboxForSubcategory> checkboxes = new ArrayList<>();
 
     private  List<Subcategory> subcategories ;
@@ -36,8 +38,11 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     public void refreshStateCategoryPageByCategoryId(String categoryId){
         clearState();
         subcategories = subcategoryService.getAllSubcategoryByCategoryId(categoryId);
-        blocksOfCriteria = buildBlockForCategoryPage();
         buildProductListForView(categoryId);
+        setProductListByCategory();
+        addOtherSubcategory();
+        blocksOfCriteria = buildBlockForCategoryPage();
+
     }
 
     public void refreshStateCategoryPageByCheckBox(CheckboxForSubcategory checkbox){
@@ -46,8 +51,8 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         }else {
             checkboxes.remove(checkbox);
         }
-        System.out.println(checkboxes);
         subcategories = subcategoryService.getAllSubcategoryByCategoryId(checkbox.getCategoryId());
+        addOtherSubcategory();
         checkboxes.forEach(this::updateSubcategoriesByCheckbox);
         subcategories.forEach(s -> s.setProductCount(s.getProducts().size()));
         subcategories.stream().filter(s -> s.getProductCount() == 0)
@@ -67,7 +72,8 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     }
 
     private void removeProductFromSubcategory(Subcategory target , Subcategory example  ){
-        target.getProducts().removeIf(p -> !example.getProducts().contains(p));
+//        target.getProducts().removeIf(p -> !example.getProducts().contains(p));
+        target.getProducts().removeIf(p -> example.getProducts().stream().noneMatch(e -> e.getId().equals(p.getId())));
     }
 
     public List<BlockOfCriteria> buildBlockForCategoryPage() {
@@ -117,6 +123,70 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         checkboxes.clear();
         subcategories = null;
         blocksOfCriteria = null;
+    }
+
+    private Subcategory createPromotionalProductsSubcategory(){
+        Subcategory promotionalProducts = new Subcategory();
+        promotionalProducts.setId("promotional_products");
+        promotionalProducts.setName("Акційні товари");
+        promotionalProducts.setTitle("Інші");
+        promotionalProducts.setCategory(subcategories.get(0).getCategory());
+        Set<Product> products = productListByCategory
+                .stream()
+                .filter(s -> s.getDiscountPercent() > 0)
+                .collect(Collectors.toSet());
+        promotionalProducts.setProducts(products);
+        promotionalProducts.setProductCount(products.size());
+        return promotionalProducts;
+    }
+
+    private Subcategory createGiftSetSubcategory(){
+        Subcategory giftSet = new Subcategory();
+        giftSet.setId("gift_set");
+        giftSet.setName("Подарункові набори");
+        giftSet.setTitle("Інші");
+        giftSet.setCategory(subcategories.get(0).getCategory());
+        Set<Product> products = productListByCategory
+                .stream()
+                .filter(Product::isGiftSet)
+                .collect(Collectors.toSet());
+        giftSet.setProducts(products);
+        giftSet.setProductCount(products.size());
+        return giftSet;
+    }
+
+    private Subcategory createCountryProducerSubcategory(String countryProducerName , String countryProducerId){
+        Subcategory countryProducer = new Subcategory();
+        countryProducer.setId(countryProducerId);
+        countryProducer.setName(countryProducerName);
+        countryProducer.setTitle("Країна виробник");
+        countryProducer.setCategory(subcategories.get(0).getCategory());
+        Set<Product> products = productListByCategory
+                .stream()
+                .filter(p -> p.getCountryProducer().equals(countryProducerName))
+                .collect(Collectors.toSet());
+
+        countryProducer.setProducts(products);
+        countryProducer.setProductCount(products.size());
+        return countryProducer;
+    }
+
+    private void addOtherSubcategory() {
+        subcategories.add(0 , createPromotionalProductsSubcategory());
+        subcategories.add(1 , createGiftSetSubcategory());
+        Set<String> countries = productListByCategory
+                .stream()
+                .map(Product::getCountryProducer)
+                .collect(Collectors.toSet());
+        List<Subcategory> countriesSubcategory = countries
+                .stream()
+                .map(c -> createCountryProducerSubcategory(c , c) ).toList();
+        subcategories.addAll(subcategories.size() , countriesSubcategory);
+    }
+
+
+    private void setProductListByCategory(){
+        productListByCategory = new ArrayList<>(productListForView.getProductList());
     }
 
     public ProductListForView getProductListForView() {

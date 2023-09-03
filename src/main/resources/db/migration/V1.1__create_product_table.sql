@@ -35,6 +35,7 @@ create table products
     review_count     int,
     discount_percent int           not null default 0,
     create_date      datetime      not null,
+    unit             varchar(255)  not null default 'г',
     constraint products_priority_score_CHECK check ( priority_score between -1 and 16),
     constraint products_discount_percent_CHECK check ( discount_percent between -1 and 101),
     constraint products_categories_category_id_FK foreign key (category_id) references categories (category_id),
@@ -52,11 +53,11 @@ create table pictures
 
 create table packaging
 (
-    product_id int          not null,
-    unit       varchar(255) not null,
-    cost       int          not null default 100,
+    product_id int    not null,
+    amount     double not null,
+    cost       int    not null default 100,
     constraint packaging_products_product_id_FK foreign key (product_id) references products (product_id),
-    constraint packaging_packaging_id_PK primary key (product_id, unit)
+    constraint packaging_packaging_id_PK primary key (product_id, amount)
 );
 
 

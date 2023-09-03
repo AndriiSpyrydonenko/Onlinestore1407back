@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Schema(description = "An object that stores information about the product for further transportation")
 public class ProductDTO {
@@ -38,6 +37,8 @@ public class ProductDTO {
             " If it is available, it is true, otherwise it is false")
     private boolean exist = true;
 
+    private boolean isGiftSet = false;
+
     @Schema(description = "Indicates the priority of displaying the product on the main page," +
             " where 1 is the highest priority and 15 is the lowest")
     @Min(0)
@@ -62,8 +63,11 @@ public class ProductDTO {
     @Schema(description = "Contains a list that stores links to all pictures")
     private List<PictureDTO> pictures;
 
+    @Schema(description = "Indicates which unit of measurement is used in the package")
+    private String unit;
+
     @Schema(description = "Contains a price map where product quantity is the key and price is the value")
-    private Map<String, Integer> packaging;
+    private Map<Double, Integer> packaging;
 
 
     private ProductDTO() {
@@ -75,10 +79,17 @@ public class ProductDTO {
         dto.name = product.getName();
         dto.categoryId = new CategoryDTO(product.getCategory()).getId();
         dto.exist = product.isExist();
+        dto.isGiftSet = product.isGiftSet();
+        dto.discountPercent = product.getDiscountPercent();
         dto.rating = product.getRating();
         dto.reviewCount = product.getReviewCount();
+        dto.unit = product.getUnit();
         dto.packaging = product.getPackaging();
-        dto.mainPicture = PictureDTO.getList(product.getPictures()).get(0);
+        if(product.getPictures().isEmpty()){
+            dto.mainPicture = null;
+        }else {
+            dto.mainPicture = PictureDTO.getList(product.getPictures()).get(0);
+        }
         return dto;
     }
 
@@ -110,7 +121,13 @@ public class ProductDTO {
         dto.countryProducer = product.getCountryProducer();
         dto.rating = product.getRating();
         dto.reviewCount = product.getReviewCount();
-        dto.pictures = PictureDTO.getList(product.getPictures());
+        if(product.getPictures().isEmpty()){
+            dto.pictures = null;
+        }else {
+            dto.pictures = PictureDTO.getList(product.getPictures());
+        }
+        dto.discountPercent = product.getDiscountPercent();
+        dto.unit = product.getUnit();
         dto.packaging = product.getPackaging();
 
         return dto;
@@ -242,11 +259,27 @@ public class ProductDTO {
         this.pictures = pictures;
     }
 
-    public Map<String, Integer> getPackaging() {
+    public boolean isGiftSet() {
+        return isGiftSet;
+    }
+
+    public void setGiftSet(boolean giftSet) {
+        isGiftSet = giftSet;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public Map<Double, Integer> getPackaging() {
         return packaging;
     }
 
-    public void setPackaging(Map<String, Integer> packaging) {
+    public void setPackaging(Map<Double, Integer> packaging) {
         this.packaging = packaging;
     }
 

@@ -38,8 +38,6 @@ public class Subcategory {
     @JoinColumn(name = "category_id")
     private Category category;
 
-
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "products_subcategories",
             joinColumns = @JoinColumn(name = "subcategory_id"),
@@ -47,7 +45,7 @@ public class Subcategory {
     private Set<Product> products = new TreeSet<>();
 
     @Transient
-    private boolean clickable = true;// todo: maybe need change after test
+    private boolean clickable = true;
 
     @Transient
     private boolean active = false;

@@ -35,6 +35,9 @@ public class Product implements Comparable<Product> {
     @Column(name = "exist", nullable = false)
     private boolean exist = true;
 
+    @Column(name = "is_gift_set", nullable = false)
+    private boolean isGiftSet = false;
+
     @Column(name = "priority_score", nullable = false)
     private int priorityScore = 0;
 
@@ -54,11 +57,14 @@ public class Product implements Comparable<Product> {
             mappedBy = "product")
     private List<Picture> pictures;
 
+    @Column(name = "unit" , nullable = false)
+    private String unit ;
+
     @ElementCollection
     @CollectionTable(name = "packaging", joinColumns = @JoinColumn(name = "product_id"))
-    @MapKeyColumn(name = "unit")
+    @MapKeyColumn(name = "amount")
     @Column(name = "cost")
-    private Map<String, Integer> packaging;
+    private Map<Double, Integer> packaging;
 
     @Override
     public int compareTo(Product o) {
@@ -121,6 +127,14 @@ public class Product implements Comparable<Product> {
         this.exist = exist;
     }
 
+    public boolean isGiftSet() {
+        return isGiftSet;
+    }
+
+    public void setGiftSet(boolean giftSet) {
+        isGiftSet = giftSet;
+    }
+
     public int getPriorityScore() {
         return priorityScore;
     }
@@ -169,14 +183,21 @@ public class Product implements Comparable<Product> {
         this.pictures = pictures;
     }
 
-    public Map<String, Integer> getPackaging() {
+    public Map<Double, Integer> getPackaging() {
         return packaging;
     }
 
-    public void setPackaging(Map<String, Integer> packaging) {
+    public void setPackaging(Map<Double, Integer> packaging) {
         this.packaging = packaging;
     }
 
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -187,6 +208,7 @@ public class Product implements Comparable<Product> {
 
         if (article != product.article) return false;
         if (exist != product.exist) return false;
+        if (isGiftSet != product.isGiftSet) return false;
         if (priorityScore != product.priorityScore) return false;
         if (Double.compare(product.rating, rating) != 0) return false;
         if (reviewCount != product.reviewCount) return false;
@@ -213,6 +235,7 @@ public class Product implements Comparable<Product> {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (countryProducer != null ? countryProducer.hashCode() : 0);
         result = 31 * result + (exist ? 1 : 0);
+        result = 31 * result + (isGiftSet ? 1 : 0);
         result = 31 * result + priorityScore;
         temp = Double.doubleToLongBits(rating);
         result = 31 * result + (int) (temp ^ (temp >>> 32));

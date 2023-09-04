@@ -64,7 +64,7 @@ public class Product implements Comparable<Product> {
     @CollectionTable(name = "packaging", joinColumns = @JoinColumn(name = "product_id"))
     @MapKeyColumn(name = "amount")
     @Column(name = "cost")
-    private Map<Double, Integer> packaging;
+    private Map<Integer , Double> packaging;
 
     @Override
     public int compareTo(Product o) {
@@ -183,11 +183,11 @@ public class Product implements Comparable<Product> {
         this.pictures = pictures;
     }
 
-    public Map<Double, Integer> getPackaging() {
+    public Map<Integer, Double> getPackaging() {
         return packaging;
     }
 
-    public void setPackaging(Map<Double, Integer> packaging) {
+    public void setPackaging(Map<Integer, Double> packaging) {
         this.packaging = packaging;
     }
 

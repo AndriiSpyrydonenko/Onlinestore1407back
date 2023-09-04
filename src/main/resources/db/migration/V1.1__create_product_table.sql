@@ -54,8 +54,8 @@ create table pictures
 create table packaging
 (
     product_id int    not null,
-    amount     double not null,
-    cost       int    not null default 100,
+    amount     int not null,
+    cost       double    not null default 100,
     constraint packaging_products_product_id_FK foreign key (product_id) references products (product_id),
     constraint packaging_packaging_id_PK primary key (product_id, amount)
 );

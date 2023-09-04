@@ -67,7 +67,7 @@ public class ProductDTO {
     private String unit;
 
     @Schema(description = "Contains a price map where product quantity is the key and price is the value")
-    private Map<Double, Integer> packaging;
+    private Map<Integer ,Double> packaging;
 
 
     private ProductDTO() {
@@ -275,11 +275,11 @@ public class ProductDTO {
         this.unit = unit;
     }
 
-    public Map<Double, Integer> getPackaging() {
+    public Map<Integer, Double> getPackaging() {
         return packaging;
     }
 
-    public void setPackaging(Map<Double, Integer> packaging) {
+    public void setPackaging(Map<Integer, Double> packaging) {
         this.packaging = packaging;
     }
 

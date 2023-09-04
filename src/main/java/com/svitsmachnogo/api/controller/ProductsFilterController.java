@@ -2,10 +2,12 @@ package com.svitsmachnogo.api.controller;
 
 import com.svitsmachnogo.api.component.BlockOfCriteria;
 import com.svitsmachnogo.api.component.CheckboxForSubcategory;
+import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.component.ProductListForView;
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.dto.BlockOfCriteriaDTO;
 import com.svitsmachnogo.api.dto.ProductDTO;
+import com.svitsmachnogo.api.exceptions.WrongPriceFilterException;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import com.svitsmachnogo.api.service.abstractional.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +29,13 @@ public class ProductsFilterController {
     @Autowired
     private FilteringBlockService filteringBlockService;
 
+    @Autowired
+    private PriceFilter priceFilter;
+
 
     @GetMapping("/subcategory_block/{categoryId}")
     public List<BlockOfCriteriaDTO> defaultSubcategoryBlock(
-            @PathVariable(name = "categoryId") String categoryId){
+            @PathVariable(name = "categoryId") String categoryId) throws WrongPriceFilterException {
 
        filteringBlockService.refreshStateCategoryPageByCategoryId(categoryId);
         List<BlockOfCriteria> defaultBlock = filteringBlockService.getBlocksOfCriteria();
@@ -53,28 +58,11 @@ public class ProductsFilterController {
         return ProductDTO.getList(productList);
     }
 
-    public FilteringBlockService getFilteringBlockService() {
-        return filteringBlockService;
+    @GetMapping("/price_filter")
+    public PriceFilter getPriceFilter(){
+        return priceFilter;
     }
 
-    public void setFilteringBlockService(FilteringBlockService filteringBlockService) {
-        this.filteringBlockService = filteringBlockService;
-    }
 
-    public SubcategoryService getSubcategoryService() {
-        return subcategoryService;
-    }
-
-    public void setSubcategoryService(SubcategoryService subcategoryService) {
-        this.subcategoryService = subcategoryService;
-    }
-
-    public ProductListForView getProducts() {
-        return products;
-    }
-
-    public void setProducts(ProductListForView products) {
-        this.products = products;
-    }
 }
 

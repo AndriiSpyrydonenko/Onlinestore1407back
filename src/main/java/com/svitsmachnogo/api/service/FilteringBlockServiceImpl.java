@@ -2,19 +2,19 @@ package com.svitsmachnogo.api.service;
 
 import com.svitsmachnogo.api.component.BlockOfCriteria;
 import com.svitsmachnogo.api.component.CheckboxForSubcategory;
+import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.component.ProductListForView;
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.domain.entity.Subcategory;
+import com.svitsmachnogo.api.exceptions.WrongPriceFilterException;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import com.svitsmachnogo.api.service.abstractional.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 @Service
 public class FilteringBlockServiceImpl implements FilteringBlockService {
@@ -24,6 +24,9 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
 
     @Autowired
     SubcategoryService subcategoryService;
+
+    @Autowired
+    PriceFilter priceFilter;
 
     private  List<Product> productListByCategory;
 
@@ -35,12 +38,13 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
 
 
 
-    public void refreshStateCategoryPageByCategoryId(String categoryId){
+    public void refreshStateCategoryPageByCategoryId(String categoryId) throws WrongPriceFilterException {
         clearState();
         subcategories = subcategoryService.getAllSubcategoryByCategoryId(categoryId);
         buildProductListForView(categoryId);
         setProductListByCategory();
         addOtherSubcategory();
+        refreshPriceFilter();
         blocksOfCriteria = buildBlockForCategoryPage();
 
     }
@@ -59,6 +63,23 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
                 .forEach(s -> s.setClickable(false));
         blocksOfCriteria = buildBlockForCategoryPage();
         buildProductListForView(checkbox.getCategoryId());
+    }
+
+    public void refreshPriceFilter() throws WrongPriceFilterException {
+        Double min = productListForView.getProductList()
+                .stream()
+                .mapToDouble( p -> p.getPackaging().get(p.getPackaging().keySet().stream().min(Integer::compareTo).get()))
+                .min().getAsDouble();
+//                .mapToInt(p -> p.getPackaging().keySet().stream().min(Integer::compareTo).get())
+
+
+        Double max = productListForView.getProductList()
+                .stream()
+                .mapToDouble( p -> p.getPackaging().get(p.getPackaging().keySet().stream().min(Integer::compareTo).get()))
+                .max().getAsDouble();
+
+        priceFilter.setMinPrice(min.doubleValue());
+        priceFilter.setMaxPrice(max.doubleValue());
     }
 
     private void updateSubcategoriesByCheckbox(CheckboxForSubcategory checkbox){

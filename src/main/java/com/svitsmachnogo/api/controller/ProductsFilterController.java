@@ -63,6 +63,13 @@ public class ProductsFilterController {
         return priceFilter;
     }
 
+    @PostMapping("/price_filter")
+    public void refreshPriceFilterState(@RequestBody PriceFilter priceFilter){
+        filteringBlockService.refreshPriceFilter(priceFilter);
+        CheckboxForSubcategory checkbox = new CheckboxForSubcategory();
+        checkbox.setActive(false);
+        filteringBlockService.refreshStateCategoryPageByCheckBox(checkbox);
+    }
 
 }
 

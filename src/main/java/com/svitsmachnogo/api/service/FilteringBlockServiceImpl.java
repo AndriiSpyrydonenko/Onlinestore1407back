@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 
 @Service
 public class FilteringBlockServiceImpl implements FilteringBlockService {
@@ -28,14 +27,13 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     @Autowired
     PriceFilter priceFilter;
 
-    private  List<Product> productListByCategory;
+    private List<Product> productListByCategory;
 
     private final List<CheckboxForSubcategory> checkboxes = new ArrayList<>();
 
-    private  List<Subcategory> subcategories ;
+    private List<Subcategory> subcategories;
 
     private List<BlockOfCriteria> blocksOfCriteria;
-
 
 
     public void refreshStateCategoryPageByCategoryId(String categoryId) throws WrongPriceFilterException {
@@ -44,15 +42,18 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         buildProductListForView(categoryId);
         setProductListByCategory();
         addOtherSubcategory();
-        refreshPriceFilter();
+        buildPriceFilterState();
         blocksOfCriteria = buildBlockForCategoryPage();
 
     }
 
-    public void refreshStateCategoryPageByCheckBox(CheckboxForSubcategory checkbox){
-        if(checkbox.getActive()) {
+    public void refreshStateCategoryPageByCheckBox(CheckboxForSubcategory checkbox) {
+        Objects.requireNonNull(checkbox);
+        if (checkbox.getActive()) {
+            System.out.println("ADDDD!!!!!!!!");
             checkboxes.add(checkbox);
-        }else {
+        } else {
+            System.out.println("Remove!!!!!!!!");
             checkboxes.remove(checkbox);
         }
         subcategories = subcategoryService.getAllSubcategoryByCategoryId(checkbox.getCategoryId());
@@ -65,35 +66,53 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         buildProductListForView(checkbox.getCategoryId());
     }
 
-    public void refreshPriceFilter() throws WrongPriceFilterException {
-        Double min = productListForView.getProductList()
+    private void buildPriceFilterState() {
+        double min = productListForView.getProductList()
                 .stream()
-                .mapToDouble( p -> p.getPackaging().get(p.getPackaging().keySet().stream().min(Integer::compareTo).get()))
+                .mapToDouble(this::mapToMinPrice)
                 .min().getAsDouble();
-//                .mapToInt(p -> p.getPackaging().keySet().stream().min(Integer::compareTo).get())
 
-
-        Double max = productListForView.getProductList()
+        double max = productListForView.getProductList()
                 .stream()
-                .mapToDouble( p -> p.getPackaging().get(p.getPackaging().keySet().stream().min(Integer::compareTo).get()))
+                .mapToDouble(this::mapToMinPrice)
                 .max().getAsDouble();
 
-        priceFilter.setMinPrice(min.doubleValue());
-        priceFilter.setMaxPrice(max.doubleValue());
+        priceFilter.setMinPrice((double) min);
+        priceFilter.setMaxPrice((double) max);
     }
 
-    private void updateSubcategoriesByCheckbox(CheckboxForSubcategory checkbox){
+    public void refreshPriceFilter(PriceFilter priceFilter){
+        Objects.requireNonNull(priceFilter);
+        this.priceFilter = priceFilter;
+    }
+
+    private double mapToMinPrice(Product products) {
+        return products
+                .getPackaging()
+                .get(products
+                        .getPackaging()
+                        .keySet()
+                        .stream()
+                        .min(Integer::compareTo)
+                        .get());
+    }
+
+    private void removeProductsFromSetByPriceFilter(Set<Product> products) {
+        products.removeIf(p -> mapToMinPrice(p) >= priceFilter.getMinPrice());
+        products.removeIf(p -> mapToMinPrice(p) <= priceFilter.getMaxPrice());
+    }
+
+    private void updateSubcategoriesByCheckbox(CheckboxForSubcategory checkbox) {
         Subcategory subcategory = subcategories
                 .stream()
                 .filter(s -> s.getId().equals(checkbox.getSubcategoryId()))
                 .peek(s -> s.setActive(checkbox.getActive()))
                 .findFirst()
                 .get();
-        subcategories.forEach(s -> removeProductFromSubcategory(s , subcategory));
+        subcategories.forEach(s -> removeProductFromSubcategory(s, subcategory));
     }
 
-    private void removeProductFromSubcategory(Subcategory target , Subcategory example  ){
-//        target.getProducts().removeIf(p -> !example.getProducts().contains(p));
+    private void removeProductFromSubcategory(Subcategory target, Subcategory example) {
         target.getProducts().removeIf(p -> example.getProducts().stream().noneMatch(e -> e.getId().equals(p.getId())));
     }
 
@@ -102,11 +121,10 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         return buildBlockOfCriteria(subcategories, titles);
     }
 
-    private void buildProductListForView(String categoryId){
-        if(checkboxes==null || checkboxes.isEmpty()){
+    private void buildProductListForView(String categoryId) {
+        if (checkboxes == null || checkboxes.isEmpty()) {
             productListForView.buildByCategoryId(categoryId);
-        }
-        else{
+        } else {
             Set<Product> products = subcategories
                     .stream()
                     .filter(s -> s.getProductCount() > 0)
@@ -139,19 +157,19 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
                 .collect(Collectors.toSet());
     }
 
-    private void clearState(){
+    private void clearState() {
         productListForView.getProductList().clear();
         checkboxes.clear();
         subcategories = null;
         blocksOfCriteria = null;
     }
 
-    private Subcategory createPromotionalProductsSubcategory(){
+    private Subcategory createPromotionalProductsSubcategory() {
         Subcategory promotionalProducts = new Subcategory();
         promotionalProducts.setId("promotional_products");
         promotionalProducts.setName("Акційні товари");
         promotionalProducts.setTitle("Інші");
-        promotionalProducts.setCategory(subcategories.get(0).getCategory());
+        promotionalProducts.setCategory(subcategories.stream().findFirst().get().getCategory());
         Set<Product> products = productListByCategory
                 .stream()
                 .filter(s -> s.getDiscountPercent() > 0)
@@ -161,12 +179,12 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         return promotionalProducts;
     }
 
-    private Subcategory createGiftSetSubcategory(){
+    private Subcategory createGiftSetSubcategory() {
         Subcategory giftSet = new Subcategory();
         giftSet.setId("gift_set");
         giftSet.setName("Подарункові набори");
         giftSet.setTitle("Інші");
-        giftSet.setCategory(subcategories.get(0).getCategory());
+        giftSet.setCategory(subcategories.stream().findFirst().get().getCategory());
         Set<Product> products = productListByCategory
                 .stream()
                 .filter(Product::isGiftSet)
@@ -176,7 +194,7 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         return giftSet;
     }
 
-    private Subcategory createCountryProducerSubcategory(String countryProducerName , String countryProducerId){
+    private Subcategory createCountryProducerSubcategory(String countryProducerName, String countryProducerId) {
         Subcategory countryProducer = new Subcategory();
         countryProducer.setId(countryProducerId);
         countryProducer.setName(countryProducerName);
@@ -193,20 +211,20 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     }
 
     private void addOtherSubcategory() {
-        subcategories.add(0 , createPromotionalProductsSubcategory());
-        subcategories.add(1 , createGiftSetSubcategory());
+        subcategories.add(0, createPromotionalProductsSubcategory());
+        subcategories.add(1, createGiftSetSubcategory());
         Set<String> countries = productListByCategory
                 .stream()
                 .map(Product::getCountryProducer)
                 .collect(Collectors.toSet());
         List<Subcategory> countriesSubcategory = countries
                 .stream()
-                .map(c -> createCountryProducerSubcategory(c , c) ).toList();
-        subcategories.addAll(subcategories.size() , countriesSubcategory);
+                .map(c -> createCountryProducerSubcategory(c, c)).toList();
+        subcategories.addAll(subcategories.size(), countriesSubcategory);
     }
 
 
-    private void setProductListByCategory(){
+    private void setProductListByCategory() {
         productListByCategory = new ArrayList<>(productListForView.getProductList());
     }
 

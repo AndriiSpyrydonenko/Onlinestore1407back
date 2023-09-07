@@ -10,6 +10,8 @@ public class PriceFilter {
 
     private Double maxPrice;
 
+    private String categoryId;
+
     public PriceFilter() {
     }
 
@@ -32,6 +34,14 @@ public class PriceFilter {
 
     public void setMaxPrice(Double maxPrice) {
         this.maxPrice = maxPrice;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     //    public Double getMinPrice() {

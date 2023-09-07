@@ -6,7 +6,6 @@ import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.component.ProductListForView;
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.domain.entity.Subcategory;
-import com.svitsmachnogo.api.exceptions.WrongPriceFilterException;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import com.svitsmachnogo.api.service.abstractional.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +35,13 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     private List<BlockOfCriteria> blocksOfCriteria;
 
 
-    public void refreshStateCategoryPageByCategoryId(String categoryId) throws WrongPriceFilterException {
+    public void refreshStateCategoryPageByCategoryId(String categoryId) {
         clearState();
         subcategories = subcategoryService.getAllSubcategoryByCategoryId(categoryId);
-        buildProductListForView(categoryId);
+        productListForView.buildByCategoryId(categoryId);
         setProductListByCategory();
         addOtherSubcategory();
-        buildPriceFilterState();
+        buildPriceFilterState(categoryId);
         blocksOfCriteria = buildBlockForCategoryPage();
 
     }
@@ -50,46 +49,48 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     public void refreshStateCategoryPageByCheckBox(CheckboxForSubcategory checkbox) {
         Objects.requireNonNull(checkbox);
         if (checkbox.getActive()) {
-            System.out.println("ADDDD!!!!!!!!");
             checkboxes.add(checkbox);
         } else {
-            System.out.println("Remove!!!!!!!!");
             checkboxes.remove(checkbox);
         }
         subcategories = subcategoryService.getAllSubcategoryByCategoryId(checkbox.getCategoryId());
         addOtherSubcategory();
         checkboxes.forEach(this::updateSubcategoriesByCheckbox);
+        subcategories.forEach(s -> s.setProducts(filteringProductsByPriceFilter(s)));
         subcategories.forEach(s -> s.setProductCount(s.getProducts().size()));
         subcategories.stream().filter(s -> s.getProductCount() == 0)
                 .forEach(s -> s.setClickable(false));
         blocksOfCriteria = buildBlockForCategoryPage();
-        buildProductListForView(checkbox.getCategoryId());
+        buildProductListForView();
     }
 
-    private void buildPriceFilterState() {
-        double min = productListForView.getProductList()
+    private void buildPriceFilterState(String categoryId) {
+        double min = productListByCategory
                 .stream()
                 .mapToDouble(this::mapToMinPrice)
                 .min().getAsDouble();
 
-        double max = productListForView.getProductList()
+        double max = productListByCategory
                 .stream()
                 .mapToDouble(this::mapToMinPrice)
                 .max().getAsDouble();
 
         priceFilter.setMinPrice((double) min);
         priceFilter.setMaxPrice((double) max);
+        priceFilter.setCategoryId(categoryId);
     }
 
-    public void refreshPriceFilter(PriceFilter priceFilter){
+    public void refreshPriceFilter(PriceFilter priceFilter) {
         Objects.requireNonNull(priceFilter);
-        this.priceFilter = priceFilter;
+        this.priceFilter.setMinPrice(priceFilter.getMinPrice());
+        this.priceFilter.setMaxPrice(priceFilter.getMaxPrice());
+        this.priceFilter.setCategoryId(priceFilter.getCategoryId());
     }
 
-    private double mapToMinPrice(Product products) {
-        return products
+    private double mapToMinPrice(Product product) {
+        return product
                 .getPackaging()
-                .get(products
+                .get(product
                         .getPackaging()
                         .keySet()
                         .stream()
@@ -97,9 +98,15 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
                         .get());
     }
 
-    private void removeProductsFromSetByPriceFilter(Set<Product> products) {
-        products.removeIf(p -> mapToMinPrice(p) >= priceFilter.getMinPrice());
-        products.removeIf(p -> mapToMinPrice(p) <= priceFilter.getMaxPrice());
+    private Set<Product> filteringProductsByPriceFilter(Subcategory subcategory) {
+        Set<Product> productSet = new TreeSet<>();
+//        products.removeIf(p -> mapToMinPrice(p) >= priceFilter.getMinPrice());
+//        products.removeIf(p -> mapToMinPrice(p) <= priceFilter.getMaxPrice());
+        productSet = subcategory.getProducts().stream()
+                .filter(p -> mapToMinPrice(p) >= priceFilter.getMinPrice())
+                .filter(p -> mapToMinPrice(p) <= priceFilter.getMaxPrice())
+                .collect(Collectors.toSet());
+        return productSet;
     }
 
     private void updateSubcategoriesByCheckbox(CheckboxForSubcategory checkbox) {
@@ -121,19 +128,14 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         return buildBlockOfCriteria(subcategories, titles);
     }
 
-    private void buildProductListForView(String categoryId) {
-        if (checkboxes == null || checkboxes.isEmpty()) {
-            productListForView.buildByCategoryId(categoryId);
-        } else {
-            Set<Product> products = subcategories
-                    .stream()
-                    .filter(s -> s.getProductCount() > 0)
-                    .max(Comparator.comparing(Subcategory::getProductCount))
-                    .get()
-                    .getProducts();
+    private void buildProductListForView() {
+        Set<Product> products = new TreeSet<>();
+        subcategories
+                .stream()
+                .filter(s -> s.getProductCount() > 0)
+                .forEach(s -> s.getProducts().forEach(products::add));
 
-            productListForView.setProductList(new ArrayList<>(products));
-        }
+        productListForView.setProductList(new ArrayList<>(products));
     }
 
     private static List<BlockOfCriteria> buildBlockOfCriteria(List<Subcategory> subcategories, Set<String> titles) {
@@ -162,6 +164,9 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         checkboxes.clear();
         subcategories = null;
         blocksOfCriteria = null;
+        priceFilter.setCategoryId(null);
+        priceFilter.setMaxPrice(null);
+        priceFilter.setMinPrice(null);
     }
 
     private Subcategory createPromotionalProductsSubcategory() {

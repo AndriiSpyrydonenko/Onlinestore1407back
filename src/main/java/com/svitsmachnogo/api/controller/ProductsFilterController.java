@@ -17,14 +17,8 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/filter")
+@RequestMapping("/api/filter")
 public class ProductsFilterController {
-
-    @Autowired
-    private SubcategoryService subcategoryService;
-
-    @Autowired
-    private ProductListForView products;
 
     @Autowired
     private FilteringBlockService filteringBlockService;
@@ -33,42 +27,35 @@ public class ProductsFilterController {
     private PriceFilter priceFilter;
 
 
-    @GetMapping("/subcategory_block/{categoryId}")
-    public List<BlockOfCriteriaDTO> defaultSubcategoryBlock(
-            @PathVariable(name = "categoryId") String categoryId) throws WrongPriceFilterException {
-
-       filteringBlockService.refreshStateCategoryPageByCategoryId(categoryId);
-        List<BlockOfCriteria> defaultBlock = filteringBlockService.getBlocksOfCriteria();
-        return BlockOfCriteriaDTO.blockOfCriteriaDTOList(defaultBlock);
-    }
-
-    @PostMapping("/subcategory_block")
-    public List<BlockOfCriteriaDTO> subcategoryBlockByCheckbox(
-            @RequestBody CheckboxForSubcategory checkbox){
-        System.out.println(checkbox);
+    @PostMapping("/checkbox")
+    public void subcategoryBlockByCheckbox(
+            @RequestBody CheckboxForSubcategory checkbox) {
 
         filteringBlockService.refreshStateCategoryPageByCheckBox(checkbox);
+    }
+
+    @GetMapping("/subcategory_block")
+    public List<BlockOfCriteriaDTO> getCurrentFilterBlock() {
         List<BlockOfCriteria> block = filteringBlockService.getBlocksOfCriteria();
         return BlockOfCriteriaDTO.blockOfCriteriaDTOList(block);
     }
 
-    @GetMapping("/subcategory/products")
-    public List<ProductDTO> getProductsByCheckboxes() {
-        List<Product> productList = products.getProductList();
-        return ProductDTO.getList(productList);
-    }
-
-    @GetMapping("/price_filter")
-    public PriceFilter getPriceFilter(){
+    @GetMapping("/get_price_filter")
+    public PriceFilter getPriceFilter() {
         return priceFilter;
     }
 
-    @PostMapping("/price_filter")
-    public void refreshPriceFilterState(@RequestBody PriceFilter priceFilter){
+    @PostMapping("/put_price_filter")
+    public void refreshPriceFilterState(@RequestBody PriceFilter priceFilter) {
         filteringBlockService.refreshPriceFilter(priceFilter);
+        filteringBlockService.refreshStateCategoryPageByCheckBox(createFakeCheckbox(priceFilter));
+    }
+
+    private CheckboxForSubcategory createFakeCheckbox(PriceFilter priceFilter){
         CheckboxForSubcategory checkbox = new CheckboxForSubcategory();
         checkbox.setActive(false);
-        filteringBlockService.refreshStateCategoryPageByCheckBox(checkbox);
+        checkbox.setCategoryId(priceFilter.getCategoryId());
+        return checkbox;
     }
 
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 @Tag(name="Search")
-@RequestMapping("/search")
+@RequestMapping("/api/search")
 public class SearchController {
 
     @Autowired

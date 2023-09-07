@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/category_page")
+@RequestMapping("/api/category_page")
 public class CategoryPageController {
 
     @Autowired
@@ -21,6 +21,14 @@ public class CategoryPageController {
 
     @Autowired
     private FilteringBlockService filteringBlockService;
+
+
+    @GetMapping("/build_new_page/{categoryId}")
+    public void defaultSubcategoryBlock(
+            @PathVariable(name = "categoryId") String categoryId) {
+
+        filteringBlockService.refreshStateCategoryPageByCategoryId(categoryId);
+    }
 
     @GetMapping("/products")
     public List<ProductDTO> getProductsForCategoryPage(){

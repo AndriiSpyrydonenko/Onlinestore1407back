@@ -6,6 +6,8 @@ import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.dto.ProductDTO;
 import com.svitsmachnogo.api.service.FilteringBlockServiceImpl;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
+@Tag(name = "Endpoints for category page")
 @RequestMapping("/api/category_page")
 public class CategoryPageController {
 
@@ -23,6 +26,8 @@ public class CategoryPageController {
     private FilteringBlockService filteringBlockService;
 
 
+    @Operation(summary = "The most important endpoint that generates the output state for this category. " +
+            "It must be called first for a category page. Does not give an response.")
     @GetMapping("/build_new_page/{categoryId}")
     public void defaultSubcategoryBlock(
             @PathVariable(name = "categoryId") String categoryId) {
@@ -30,6 +35,7 @@ public class CategoryPageController {
         filteringBlockService.refreshStateCategoryPageByCategoryId(categoryId);
     }
 
+    @Operation(summary = "Returns actual product list according current category and filter criteria")
     @GetMapping("/products")
     public List<ProductDTO> getProductsForCategoryPage(){
         List<Product> productList = products.getProductList();

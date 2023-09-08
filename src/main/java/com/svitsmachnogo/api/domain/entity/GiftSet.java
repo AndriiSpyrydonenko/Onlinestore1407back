@@ -12,7 +12,7 @@ public class GiftSet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "gift_set_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "url_picture",nullable = false)
     private URL urlToPicture;
@@ -23,11 +23,11 @@ public class GiftSet {
     public GiftSet() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

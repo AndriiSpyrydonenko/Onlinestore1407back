@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @Tag(name = "Endpoints for main page")
 @RequestMapping("/api/main_page")
 public class MainPageController {

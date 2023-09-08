@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -41,5 +42,11 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Product getProductById(int id) {
         return productDAO.findById(id);
+    }
+
+    @Override
+    public Set<Product> getAllByCategoryId(String categoryId) {
+
+        return productDAO.findAllByCategoryId(categoryId);
     }
 }

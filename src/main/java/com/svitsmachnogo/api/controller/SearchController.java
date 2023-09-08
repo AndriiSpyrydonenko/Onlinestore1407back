@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @Tag(name="Search")
-@RequestMapping("/search")
+@RequestMapping("/api/search")
 public class SearchController {
 
     @Autowired

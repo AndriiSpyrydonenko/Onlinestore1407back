@@ -9,18 +9,18 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements Comparable<Product> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private int id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @Column(name = "article",nullable = false)
+    @Column(name = "article", nullable = false)
     private int article;
 
     @Column(name = "name", nullable = false)
@@ -34,6 +34,9 @@ public class Product {
 
     @Column(name = "exist", nullable = false)
     private boolean exist = true;
+
+    @Column(name = "is_gift_set", nullable = false)
+    private boolean isGiftSet = false;
 
     @Column(name = "priority_score", nullable = false)
     private int priorityScore = 0;
@@ -50,22 +53,29 @@ public class Product {
     @Column(name = "create_date", nullable = false)
     private Timestamp create_date;
 
-    @OneToMany(fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "product")
     private List<Picture> pictures;
 
+    @Column(name = "unit" , nullable = false)
+    private String unit ;
 
     @ElementCollection
-    @CollectionTable(name = "packaging" , joinColumns = @JoinColumn(name = "product_id"))
-    @MapKeyColumn(name = "unit")
+    @CollectionTable(name = "packaging", joinColumns = @JoinColumn(name = "product_id"))
+    @MapKeyColumn(name = "amount")
     @Column(name = "cost")
-    private Map<String, Integer> packaging;
+    private Map<Integer , Double> packaging;
 
-    public int getId() {
+    @Override
+    public int compareTo(Product o) {
+        return Integer.compare(this.id, o.id);
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -117,6 +127,14 @@ public class Product {
         this.exist = exist;
     }
 
+    public boolean isGiftSet() {
+        return isGiftSet;
+    }
+
+    public void setGiftSet(boolean giftSet) {
+        isGiftSet = giftSet;
+    }
+
     public int getPriorityScore() {
         return priorityScore;
     }
@@ -165,12 +183,20 @@ public class Product {
         this.pictures = pictures;
     }
 
-    public Map<String, Integer> getPackaging() {
+    public Map<Integer, Double> getPackaging() {
         return packaging;
     }
 
-    public void setPackaging(Map<String, Integer> packaging) {
+    public void setPackaging(Map<Integer, Double> packaging) {
         this.packaging = packaging;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     @Override
@@ -180,13 +206,14 @@ public class Product {
 
         Product product = (Product) o;
 
-        if (id != product.id) return false;
         if (article != product.article) return false;
         if (exist != product.exist) return false;
+        if (isGiftSet != product.isGiftSet) return false;
         if (priorityScore != product.priorityScore) return false;
         if (Double.compare(product.rating, rating) != 0) return false;
         if (reviewCount != product.reviewCount) return false;
         if (discountPercent != product.discountPercent) return false;
+        if (!Objects.equals(id, product.id)) return false;
         if (!Objects.equals(category, product.category)) return false;
         if (!Objects.equals(name, product.name)) return false;
         if (!Objects.equals(description, product.description)) return false;
@@ -201,13 +228,14 @@ public class Product {
     public int hashCode() {
         int result;
         long temp;
-        result = id;
+        result = id != null ? id.hashCode() : 0;
         result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + article;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (countryProducer != null ? countryProducer.hashCode() : 0);
         result = 31 * result + (exist ? 1 : 0);
+        result = 31 * result + (isGiftSet ? 1 : 0);
         result = 31 * result + priorityScore;
         temp = Double.doubleToLongBits(rating);
         result = 31 * result + (int) (temp ^ (temp >>> 32));

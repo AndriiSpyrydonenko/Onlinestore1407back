@@ -1,21 +1,14 @@
 package com.svitsmachnogo.api.controller;
 
-import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.component.ProductListForView;
-import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.dto.PageDataDTO;
 import com.svitsmachnogo.api.dto.ProductDTO;
-import com.svitsmachnogo.api.service.FilteringBlockServiceImpl;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -23,11 +16,14 @@ import java.util.List;
 @RequestMapping("/api/category_page")
 public class CategoryPageController {
 
-    @Autowired
-    private ProductListForView products;
+    private final ProductListForView products;
 
-    @Autowired
-    private FilteringBlockService filteringBlockService;
+    private final FilteringBlockService filteringBlockService;
+
+    public CategoryPageController(ProductListForView products, FilteringBlockService filteringBlockService) {
+        this.products = products;
+        this.filteringBlockService = filteringBlockService;
+    }
 
 
     @Operation(summary = "The most important endpoint that generates the output state for this category. " +
@@ -39,12 +35,15 @@ public class CategoryPageController {
         filteringBlockService.refreshStateCategoryPageByCategoryId(categoryId);
     }
 
-    @Operation(summary = "Returns actual product list according current category and filter criteria")
+    @Operation(summary = "Return a paginated list of products",
+            description = "Retrieve a paginated list of products with optional size and page parameters.")
     @GetMapping("/products")
     public PageDataDTO<ProductDTO> getProductsForCategoryPage(
-            @RequestParam(required = false , defaultValue = "0") int page,
-            @RequestParam(required = false , defaultValue = "2") int size
-    ){
+            @RequestParam(required = false, defaultValue = "0")
+            @Parameter(description = "Page number to display.By default 0 ") int page,
+            @RequestParam(required = false, defaultValue = "20")
+            @Parameter(description = "Number of products per page. By default 20") int size
+    ) {
         PageDataDTO<ProductDTO> dataDTO = new PageDataDTO<>();
         var pageProduct = products.getPage(PageRequest.of(page, size));
         var productDTOList = ProductDTO.getList(pageProduct.getContent());

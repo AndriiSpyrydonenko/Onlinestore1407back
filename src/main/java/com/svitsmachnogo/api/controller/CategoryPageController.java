@@ -9,6 +9,9 @@ import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,8 +40,11 @@ public class CategoryPageController {
 
     @Operation(summary = "Returns actual product list according current category and filter criteria")
     @GetMapping("/products")
-    public List<ProductDTO> getProductsForCategoryPage(){
-        List<Product> productList = products.getProductList();
+    public List<ProductDTO> getProductsForCategoryPage(
+            @RequestParam(required = false , defaultValue = "0") int page,
+            @RequestParam(required = false , defaultValue = "2") int size
+    ){
+        List<Product> productList = products.getPage(PageRequest.of(page, size));
         return ProductDTO.getList(productList);
     }
 

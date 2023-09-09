@@ -786,6 +786,11 @@ VALUES (25, '500', 949);
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (25, '1000', 590);
 
+UPDATE products
+SET number_of_orders = FLOOR(RAND() * 100) + 1
+WHERE product_id BETWEEN 1 AND 75;
+
+
 -- Початкове значення id
 SET @product_id = 26;
 

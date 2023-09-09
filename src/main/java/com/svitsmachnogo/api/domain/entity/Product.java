@@ -44,8 +44,11 @@ public class Product implements Comparable<Product> {
     @Column(name = "rating")
     private double rating;
 
-    @Column(name = "review_count")
+    @Column(name = "review_count", nullable = false)
     private int reviewCount;
+
+    @Column(name = "number_of_orders", nullable = false)
+    private int numberOfOrders;
 
     @Column(name = "discount_percent", nullable = false)
     private int discountPercent = 0;

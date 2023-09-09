@@ -3,6 +3,7 @@ package com.svitsmachnogo.api.domain.dao.abstractional;
 import com.svitsmachnogo.api.domain.entity.Product;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ProductDAO {
 
@@ -15,4 +16,6 @@ public interface ProductDAO {
     Product findById(int id);
 
     List<Product> findByPartName(String partName);
+
+    Set<Product> findAllByCategoryId(String categoryId);
 }

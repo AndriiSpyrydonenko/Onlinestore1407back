@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -42,13 +43,15 @@ public class CategoryPageController {
             @RequestParam(required = false, defaultValue = "0")
             @Parameter(description = "Page number to display.By default 0 ") int page,
             @RequestParam(required = false, defaultValue = "20")
-            @Parameter(description = "Number of products per page. By default 20") int size
+            @Parameter(description = "Number of products per page. By default 20") int size,
+            @RequestParam(required = false, defaultValue = "id")
+            @Parameter(description = "Criteria of sorting") String sort
     ) {
         PageDataDTO<ProductDTO> dataDTO = new PageDataDTO<>();
-        var pageProduct = products.getPage(PageRequest.of(page, size));
+        var pageProduct = products.getPage(PageRequest.of(page, size , Sort.by(sort)));
         var productDTOList = ProductDTO.getList(pageProduct.getContent());
         dataDTO.setData(productDTOList);
-        dataDTO.setTotal(pageProduct.getTotalElements());
+        dataDTO.setPageCount(pageProduct.getTotalPages());
         return dataDTO;
     }
 

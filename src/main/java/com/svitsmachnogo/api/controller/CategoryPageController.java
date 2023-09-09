@@ -3,6 +3,7 @@ package com.svitsmachnogo.api.controller;
 import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.component.ProductListForView;
 import com.svitsmachnogo.api.domain.entity.Product;
+import com.svitsmachnogo.api.dto.PageDataDTO;
 import com.svitsmachnogo.api.dto.ProductDTO;
 import com.svitsmachnogo.api.service.FilteringBlockServiceImpl;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
@@ -40,12 +41,16 @@ public class CategoryPageController {
 
     @Operation(summary = "Returns actual product list according current category and filter criteria")
     @GetMapping("/products")
-    public List<ProductDTO> getProductsForCategoryPage(
+    public PageDataDTO<ProductDTO> getProductsForCategoryPage(
             @RequestParam(required = false , defaultValue = "0") int page,
             @RequestParam(required = false , defaultValue = "2") int size
     ){
-        List<Product> productList = products.getPage(PageRequest.of(page, size));
-        return ProductDTO.getList(productList);
+        PageDataDTO<ProductDTO> dataDTO = new PageDataDTO<>();
+        var pageProduct = products.getPage(PageRequest.of(page, size));
+        var productDTOList = ProductDTO.getList(pageProduct.getContent());
+        dataDTO.setData(productDTOList);
+        dataDTO.setTotal(pageProduct.getTotalElements());
+        return dataDTO;
     }
 
 }

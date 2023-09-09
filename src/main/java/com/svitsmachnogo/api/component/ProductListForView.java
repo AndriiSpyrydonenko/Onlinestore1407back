@@ -40,14 +40,8 @@ public class ProductListForView {
                  .collect(Collectors.toList());
      }
 
-     private String buildInBasedIdList(List<Integer> idList){
-          StringBuilder builder = new StringBuilder();
-          idList.forEach(i -> builder.append(i).append(","));
-          builder.deleteCharAt(builder.length()-1);
-          return builder.toString();
-     }
 
-     public List<Product> getPage(PageRequest pageRequest){
+     public Page<Product> getPage(PageRequest pageRequest){
            return productPaginationService.getProducts(getIdList() , pageRequest);
      }
 

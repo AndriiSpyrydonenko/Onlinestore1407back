@@ -19,8 +19,8 @@ public class ProductPaginationServiceImpl  implements ProductPaginationService {
         this.productPaginationDAO = productPaginationDAO;
     }
 
-    public List<Product> getProducts(List<Integer> idList, PageRequest pageRequest){
-        Page<Product> productPage = productPaginationDAO.getAll(idList , pageRequest);
-        return productPage.getContent();
+    public Page<Product> getProducts(List<Integer> idList, PageRequest pageRequest){
+        return productPaginationDAO.getAll(idList , pageRequest);
+
     }
 }

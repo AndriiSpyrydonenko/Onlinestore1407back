@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ProductPaginationDAO  extends JpaRepository<Product, Integer> {
 
-    @Query("from Product where id in(:idList)")
+    @Query("select p from Product p where p.id in(:idList)")
     Page<Product> getAll(List<Integer> idList , PageRequest pageRequest);
 
 }

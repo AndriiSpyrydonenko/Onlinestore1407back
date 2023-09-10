@@ -54,7 +54,7 @@ public class ProductDTO {
     @Max(100)
     private int discountPercent = 0;
 
-    private Timestamp create_date;
+    private Timestamp createDate;
 
     @Schema(description = "Contains a link to the main image of the product." +
             " The picture is considered the main one if it is on the first place in the list of all pictures")
@@ -235,12 +235,12 @@ public class ProductDTO {
         this.discountPercent = discountPercent;
     }
 
-    public Timestamp getCreate_date() {
-        return create_date;
+    public Timestamp getCreateDate() {
+        return createDate;
     }
 
     public void setCreate_date(Timestamp create_date) {
-        this.create_date = create_date;
+        this.createDate = create_date;
     }
 
     public PictureDTO getMainPicture() {

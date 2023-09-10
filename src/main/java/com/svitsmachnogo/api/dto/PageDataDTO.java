@@ -6,7 +6,7 @@ public class PageDataDTO<T> {
 
     private List<T> data;
 
-    private long total;
+    private int pageCount;
 
     public List<T> getData() {
         return data;
@@ -16,11 +16,11 @@ public class PageDataDTO<T> {
         this.data = data;
     }
 
-    public long getTotal() {
-        return total;
+    public int getPageCount() {
+        return pageCount;
     }
 
-    public void setTotal(long total) {
-        this.total = total;
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
     }
 }

@@ -44,27 +44,33 @@ public class Product implements Comparable<Product> {
     @Column(name = "rating")
     private double rating;
 
-    @Column(name = "review_count")
+    @Column(name = "review_count", nullable = false)
     private int reviewCount;
+
+    @Column(name = "number_of_orders", nullable = false)
+    private int numberOfOrders;
 
     @Column(name = "discount_percent", nullable = false)
     private int discountPercent = 0;
 
     @Column(name = "create_date", nullable = false)
-    private Timestamp create_date;
+    private Timestamp createDate;
 
     @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "product")
     private List<Picture> pictures;
 
-    @Column(name = "unit" , nullable = false)
-    private String unit ;
+    @Column(name = "unit", nullable = false)
+    private String unit;
+
+    @Column(name = "min_price", nullable = false)
+    private double minPrice = 0.0;
 
     @ElementCollection
     @CollectionTable(name = "packaging", joinColumns = @JoinColumn(name = "product_id"))
     @MapKeyColumn(name = "amount")
     @Column(name = "cost")
-    private Map<Integer , Double> packaging;
+    private Map<Integer, Double> packaging;
 
     @Override
     public int compareTo(Product o) {
@@ -167,12 +173,12 @@ public class Product implements Comparable<Product> {
         this.discountPercent = discountPercent;
     }
 
-    public Timestamp getCreate_date() {
-        return create_date;
+    public Timestamp getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Timestamp create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
     }
 
     public List<Picture> getPictures() {
@@ -199,6 +205,22 @@ public class Product implements Comparable<Product> {
         this.unit = unit;
     }
 
+    public int getNumberOfOrders() {
+        return numberOfOrders;
+    }
+
+    public void setNumberOfOrders(int numberOfOrders) {
+        this.numberOfOrders = numberOfOrders;
+    }
+
+    public double getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(double minPrice) {
+        this.minPrice = minPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -212,15 +234,18 @@ public class Product implements Comparable<Product> {
         if (priorityScore != product.priorityScore) return false;
         if (Double.compare(product.rating, rating) != 0) return false;
         if (reviewCount != product.reviewCount) return false;
+        if (numberOfOrders != product.numberOfOrders) return false;
         if (discountPercent != product.discountPercent) return false;
+        if (Double.compare(product.minPrice, minPrice) != 0) return false;
         if (!Objects.equals(id, product.id)) return false;
         if (!Objects.equals(category, product.category)) return false;
         if (!Objects.equals(name, product.name)) return false;
         if (!Objects.equals(description, product.description)) return false;
         if (!Objects.equals(countryProducer, product.countryProducer))
             return false;
-        if (!Objects.equals(create_date, product.create_date)) return false;
+        if (!Objects.equals(createDate, product.createDate)) return false;
         if (!Objects.equals(pictures, product.pictures)) return false;
+        if (!Objects.equals(unit, product.unit)) return false;
         return Objects.equals(packaging, product.packaging);
     }
 
@@ -240,9 +265,13 @@ public class Product implements Comparable<Product> {
         temp = Double.doubleToLongBits(rating);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + reviewCount;
+        result = 31 * result + numberOfOrders;
         result = 31 * result + discountPercent;
-        result = 31 * result + (create_date != null ? create_date.hashCode() : 0);
+        result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
         result = 31 * result + (pictures != null ? pictures.hashCode() : 0);
+        result = 31 * result + (unit != null ? unit.hashCode() : 0);
+        temp = Double.doubleToLongBits(minPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (packaging != null ? packaging.hashCode() : 0);
         return result;
     }

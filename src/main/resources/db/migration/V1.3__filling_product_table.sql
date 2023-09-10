@@ -401,7 +401,7 @@ insert into products
 (category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
  country_producer, description)
     value ('spices', 268357, 'Перець чорний', true, 0, 4.8, 80, 0, '2021-12-31 13:25:00', 'Вєтнам',
-       'Чорний перець для страв.');
+           'Чорний перець для страв.');
 
 -- Запит 36
 insert into products
@@ -507,7 +507,6 @@ insert into products
  country_producer, description)
     value ('spices', 434902, 'Сіль', true, 0, 4.7, 60, 0, '2022-12-19 15:50:00', 'Україна',
            'Сіль для основних страв.');
-
 
 
 
@@ -790,7 +789,6 @@ UPDATE products
 SET number_of_orders = FLOOR(RAND() * 100) + 1
 WHERE product_id BETWEEN 1 AND 75;
 
-
 -- Початкове значення id
 SET @product_id = 26;
 
@@ -800,7 +798,8 @@ CREATE PROCEDURE InsertPackagingData()
 BEGIN
     DECLARE i INT DEFAULT 1;
 
-    WHILE i <= 50 DO
+    WHILE i <= 50
+        DO
             INSERT INTO packaging(product_id, amount, cost)
             VALUES (@product_id, '200', FLOOR(RAND() * (1000 - 100 + 1) + 100));
 
@@ -819,3 +818,13 @@ DELIMITER ;
 -- Виклик процедури для генерації запитів
 CALL InsertPackagingData();
 
+# UPDATE products p
+# SET min_price = (select min(pac.cost) from packaging pac where pac.product_id = p.product_id)
+# where p.product_id > 0;
+
+UPDATE products p
+SET min_price = (select pac.cost
+                 from packaging pac
+                 where pac.product_id = p.product_id
+                   and amount = (select min(amount) from packaging pg where pg.product_id = p.product_id))
+where p.product_id > 0;

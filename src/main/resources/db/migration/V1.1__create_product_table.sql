@@ -36,6 +36,7 @@ create table products
     number_of_orders int           not null default 0,
     discount_percent int           not null default 0,
     create_date      datetime      not null,
+    min_price        double        not null default 0,
     unit             varchar(255)  not null default 'г',
     constraint products_priority_score_CHECK check ( priority_score between -1 and 16),
     constraint products_discount_percent_CHECK check ( discount_percent between -1 and 101),

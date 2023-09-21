@@ -20,7 +20,7 @@ jobs:
       - name: Login to docker hub
         run: docker login -u onlinestore1407 -p svitsmachnogo
       - name: Build docker image
-        run: docker build -t onlinestore1407/svitsmachnogo .
+        run: docker build -t onlinestore1407/svitsmachnogo
       - name: Publish image to docker hub
         run: docker push onlinestore1407/svitsmachnogo:latest
   deploy:

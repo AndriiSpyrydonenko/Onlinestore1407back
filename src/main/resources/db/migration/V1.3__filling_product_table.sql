@@ -801,10 +801,10 @@ BEGIN
     WHILE i <= 50
         DO
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '200', FLOOR(RAND() * (1000 - 100 + 1) + 100));
+            VALUES (@product_id, '200', FLOOR(RAND() * (500 - 100 + 1) + 100));
 
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '500', FLOOR(RAND() * (1000 - 100 + 1) + 100));
+            VALUES (@product_id, '500', FLOOR(RAND() * (750 - 100 + 1) + 100));
 
             INSERT INTO packaging(product_id, amount, cost)
             VALUES (@product_id, '1000', FLOOR(RAND() * (1000 - 100 + 1) + 100));

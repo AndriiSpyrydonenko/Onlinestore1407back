@@ -28,7 +28,7 @@ jobs:
     runs-on: [aws-ec2]
     steps:
       - name: Pull image from docker hub
-        run: sudo docker pull in onlinestore1407/svitsmachnogo:latest
+        run: sudo docker pull onlinestore1407/svitsmachnogo:latest
       - name: Delete old container
         run: sudo docker rm -f svitsmachnogo-container
       - name: Run docker container

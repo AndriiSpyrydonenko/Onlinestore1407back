@@ -17,3 +17,5 @@ services:
       - MYSQL_DATABASE=svitsmachnogo
       - MYSQL_USERNAME=svitsmachnogo
       - MYSQL_PASSWORD=onlinestore1407
+
+#Test info

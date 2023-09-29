@@ -808,10 +808,10 @@ BEGIN
             VALUES (@product_id, '200', FLOOR(RAND() * (500 - 100 + 1) + 100));
 
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '500', FLOOR(RAND() * (750 - 100 + 1) + 501));
+            VALUES (@product_id, '500', FLOOR(RAND() * (750 - 501 + 1) + 500));
 
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '1000', FLOOR(RAND() * (1000 - 100 + 1) + 751));
+            VALUES (@product_id, '1000', FLOOR(RAND() * (1000 - 751 + 1) + 750));
 
             SET @product_id = @product_id + 1;
             SET i = i + 1;

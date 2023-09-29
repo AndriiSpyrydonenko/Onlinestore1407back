@@ -684,10 +684,10 @@ INSERT INTO packaging(product_id, amount, cost)
 VALUES (8, '1000', 743);
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (9, '200', 723);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (9, '500', 950);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (9, '1000', 546);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (9, '500', 950);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (9, '1000', 546);
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (10, '200', 856);
 INSERT INTO packaging(product_id, amount, cost)

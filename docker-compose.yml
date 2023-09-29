@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  svitsmachnogo:
+  svitsmachnogo-container:
     image: onlinestore1407/svitsmachnogo:latest
     restart: always
     ports:

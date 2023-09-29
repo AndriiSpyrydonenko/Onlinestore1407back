@@ -6,17 +6,5 @@ services:
     restart: always
     ports:
       - 8080:8080
-    depends_on:
-      - mysqldb
-  mysqldb:
-    image: mysql:8
-    restart: always
-    ports:
-      - 3306:3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=onlinestore1407
-      - MYSQL_DATABASE=svitsmachnogo
-      - MYSQL_USERNAME=svitsmachnogo
-      - MYSQL_PASSWORD=onlinestore1407
 
 #Test info

@@ -16,7 +16,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       - name: Build Project
-        run: mvn clean install -Dskiptests
+        run: mvn clean install -DskipTests
       - name: Login to docker hub
         run: docker login -u onlinestore1407 -p svitsmachnogo
       - name: Build docker image
@@ -25,13 +25,15 @@ jobs:
         run: docker push onlinestore1407/svitsmachnogo:latest
   deploy:
     needs: build
-    runs-on: [ubuntu]
+    runs-on: [netx]
     steps:
-      - name: Pull image from docker hub
-        run: docker pull onlinestore1407/svitsmachnogo:latest
+      - name: Delete old docker compose file
+        run: sudo rm docker-compose.yml
+      - name: Download docker compose file
+        run: sudo curl -O -L https://github.com/AndriiSpyrydonenko/Onlinestore1407back/raw/stage/docker-compose.yml
       - name: Delete old container
-        run: docker rm -f svitsmachnogo-container
+        run: sodu docker rm -f svitsmachnogo-container
       - name: Run docker container
-        run: docker run -d -p 8080:8080 --name svitsmachnogo-container onlinestore1407/svitsmachnogo:latest
+        run: sudo docker compose up -d
 
 

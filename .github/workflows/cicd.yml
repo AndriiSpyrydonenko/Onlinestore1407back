@@ -28,7 +28,7 @@ jobs:
     runs-on: [netx]
     steps:
       - name: Delete old docker compose file
-        run: sudo rm docker-compose.yml
+        run: sudo rm -f docker-compose.yml
       - name: Download docker compose file
         run: sudo curl -O -L https://github.com/AndriiSpyrydonenko/Onlinestore1407back/raw/stage/docker-compose.yml
       - name: Delete old container

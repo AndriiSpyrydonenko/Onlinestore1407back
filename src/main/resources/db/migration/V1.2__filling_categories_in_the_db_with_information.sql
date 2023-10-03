@@ -22,4 +22,4 @@ insert into categories(category_id, name, fill_picture_url, hover_picture_url)
            'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Spices+Status%3DHover.svg');
 
 insert into gift_sets(url_picture, discount_percent)
-value ('https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/form_for_pic.png' , 50);
+value ('https://svitsmachnogo.space/apps/photos/api/v1/preview/156?etag=c4195f20515569d476a73f46f420dd81&x=512&y=512' , 50);

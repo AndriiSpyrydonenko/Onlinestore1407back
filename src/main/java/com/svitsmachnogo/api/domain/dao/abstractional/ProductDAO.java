@@ -1,5 +1,6 @@
 package com.svitsmachnogo.api.domain.dao.abstractional;
 
+import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.domain.entity.Product;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface ProductDAO {
     List<Product> findByPartName(String partName);
 
     Set<Product> findAllByCategoryId(String categoryId);
+
+    PriceFilter findMinAndMaxPrice(String categoryId);
 }

@@ -2,10 +2,7 @@ package com.svitsmachnogo.api.controller;
 
 import com.svitsmachnogo.api.component.CategoryPage;
 import com.svitsmachnogo.api.component.ProductListForView;
-import com.svitsmachnogo.api.dto.CategoryPageDTO;
-import com.svitsmachnogo.api.dto.CategoryPageRequestDTO;
-import com.svitsmachnogo.api.dto.PageDataDTO;
-import com.svitsmachnogo.api.dto.ProductDTO;
+import com.svitsmachnogo.api.dto.*;
 import com.svitsmachnogo.api.exceptions.IncorrectSortingCriteriaException;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -46,8 +43,9 @@ public class CategoryPageController {
         products.setData(ProductDTO.getList(categoryPage.getPageOfProducts().getContent()));
         products.setPageCount(categoryPage.getPageOfProducts().getTotalPages());
 
-
-
+        pageAndFilterBlock.setPageOfProducts(products);
+        pageAndFilterBlock
+                .setBlockOfCriteria(BlockOfCriteriaDTO.blockOfCriteriaDTOList(filteringBlockService.getBlocksOfCriteria()));
         return pageAndFilterBlock;
     }
 

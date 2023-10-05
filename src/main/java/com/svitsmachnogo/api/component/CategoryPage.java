@@ -29,7 +29,7 @@ public class CategoryPage {
                                int page, int size,
                                String criteriaOfSorting) throws IncorrectSortingCriteriaException {
 
-        if(checkboxes.size() == 0 ){
+        if((checkboxes== null || checkboxes.size() == 0 ) && (priceFilter == null || priceFilter.getMinPrice() == null) ){
             filteringBlockService.refreshStateCategoryPageByCategoryId(categoryId);
         }else {
             filteringBlockService.refreshStateCategoryPageByCheckBox(categoryId , checkboxes , priceFilter);

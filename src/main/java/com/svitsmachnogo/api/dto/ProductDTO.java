@@ -18,8 +18,6 @@ public class ProductDTO {
     @Schema(description = "Product identifier")
     private Integer id;
 
-    private CategoryDTO category;
-
     @Schema(description = "Contains the category id in string form. For example: nuts, oil")
     private String categoryId;
 
@@ -154,15 +152,6 @@ public class ProductDTO {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public CategoryDTO getCategory() {
-        return category;
-    }
-
-    public void setCategory(CategoryDTO category) {
-        this.category = category;
-    }
-
     public int getArticle() {
         return article;
     }

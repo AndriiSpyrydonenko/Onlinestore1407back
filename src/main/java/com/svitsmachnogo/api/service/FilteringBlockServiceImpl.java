@@ -1,13 +1,14 @@
 package com.svitsmachnogo.api.service;
 
-import com.svitsmachnogo.api.component.BlockOfCriteria;
-import com.svitsmachnogo.api.component.CheckboxForSubcategory;
-import com.svitsmachnogo.api.component.PriceFilter;
-import com.svitsmachnogo.api.component.ProductListForView;
+import com.svitsmachnogo.api.component.*;
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.domain.entity.Subcategory;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
+import com.svitsmachnogo.api.service.abstractional.ProductService;
 import com.svitsmachnogo.api.service.abstractional.SubcategoryService;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,27 +16,25 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class FilteringBlockServiceImpl implements FilteringBlockService {
 
     private final ProductListForView productListForView;
 
     private final SubcategoryService subcategoryService;
 
-    private final PriceFilter priceFilter;
+    private final ProductService productService;
+
+//    private PriceFilter priceFilter;
 
     private List<Product> productListByCategory;
-
-    private final List<CheckboxForSubcategory> checkboxes = new ArrayList<>();
 
     private List<Subcategory> subcategories;
 
     private List<BlockOfCriteria> blocksOfCriteria;
 
-    public FilteringBlockServiceImpl(ProductListForView productListForView, SubcategoryService subcategoryService, PriceFilter priceFilter) {
-        this.productListForView = productListForView;
-        this.subcategoryService = subcategoryService;
-        this.priceFilter = priceFilter;
-    }
 
     /**
      * The most important method in this class.
@@ -52,21 +51,21 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         productListForView.buildByCategoryId(categoryId);
         setProductListByCategory();
         addOtherSubcategory();
-        buildPriceFilter(categoryId);
         blocksOfCriteria = buildBlockOfFilters();
-
     }
 
     /**
-     * @param checkbox
+     * @param categoryId
      */
-    public void refreshStateCategoryPageByCheckBox(CheckboxForSubcategory checkbox) {
-        Objects.requireNonNull(checkbox);
-        actionForCheckbox(checkbox);
-        subcategories = subcategoryService.getAllSubcategoryByCategoryId(checkbox.getCategoryId());
+    public void refreshStateCategoryPageByCheckBox(String categoryId,
+                                                   List<CheckboxForSubcategory> checkboxes,
+                                                   PriceFilter priceFilter) {
+        productListForView.buildByCategoryId(categoryId);
+        setProductListByCategory();
+        subcategories = subcategoryService.getAllSubcategoryByCategoryId(categoryId);
         addOtherSubcategory();
         checkboxes.forEach(this::updateSubcategoriesByCheckbox);
-        subcategories.forEach(s -> s.setProducts(filteringProductsByPriceFilter(s)));
+        subcategories.forEach(s -> s.setProducts(filteringProductsByPriceFilter(s , priceFilter)));
         subcategories.forEach(s -> s.setProductCount(s.getProducts().size()));
         subcategories.stream().filter(s -> s.getProductCount() == 0)
                 .forEach(s -> s.setClickable(false));
@@ -74,46 +73,15 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         buildProductListForView();
     }
 
-    private void actionForCheckbox(CheckboxForSubcategory checkbox) {
-        if (checkbox.getActive()) {
-            checkboxes.add(checkbox);
-        } else {
-            checkboxes.remove(checkbox);
-        }
-    }
+//    public void refreshPriceFilter(PriceFilter priceFilter) {
+//        this.priceFilter.setMinPrice(priceFilter.getMinPrice());
+//        this.priceFilter.setMaxPrice(priceFilter.getMaxPrice());
+//        this.priceFilter.setCategoryId(priceFilter.getCategoryId());
+//    }
 
-    public void refreshPriceFilter(PriceFilter priceFilter) {
-        Objects.requireNonNull(priceFilter);
-        this.priceFilter.setMinPrice(priceFilter.getMinPrice());
-        this.priceFilter.setMaxPrice(priceFilter.getMaxPrice());
-        this.priceFilter.setCategoryId(priceFilter.getCategoryId());
-    }
-
-    private void buildPriceFilter(String categoryId) {
-        double min = getMinPriceFromCategory();
-        double max = getMaxPriceFromCategory();
-        setValuesForPriceFilter(categoryId, (double) min, (double) max);
-    }
-
-    private double getMaxPriceFromCategory() {
-        return productListByCategory
-                .stream()
-                .mapToDouble(this::mapToMinPrice)
-                .max().getAsDouble();
-    }
-
-    private double getMinPriceFromCategory() {
-        return productListByCategory
-                .stream()
-                .mapToDouble(this::mapToMinPrice)
-                .min().getAsDouble();
-    }
-
-    private void setValuesForPriceFilter(String categoryId, double min, double max) {
-        priceFilter.setMinPrice(min);
-        priceFilter.setMaxPrice(max);
-        priceFilter.setCategoryId(categoryId);
-    }
+//    private void buildPriceFilter(String categoryId) {
+//        priceFilter = productService.getDefaultPriceFilterByCategoryId(categoryId);
+//    }
 
     public List<BlockOfCriteria> buildBlockOfFilters() {
         Set<String> titles = getTitleFromSubcategory(subcategories);
@@ -131,7 +99,7 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
                         .get());
     }
 
-    private Set<Product> filteringProductsByPriceFilter(Subcategory subcategory) {
+    private Set<Product> filteringProductsByPriceFilter(Subcategory subcategory , PriceFilter priceFilter) {
         return subcategory.getProducts().stream()
                 .filter(p -> mapToMinPrice(p) >= priceFilter.getMinPrice())
                 .filter(p -> mapToMinPrice(p) <= priceFilter.getMaxPrice())
@@ -264,14 +232,14 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         return blocksOfCriteria;
     }
 
-    private void clearState() {
+    @Override
+    public void clearState() {
         productListForView.getProductList().clear();
-        checkboxes.clear();
-        subcategories = null;
         subcategories = null;
         blocksOfCriteria = null;
-        priceFilter.setCategoryId(null);
-        priceFilter.setMaxPrice(null);
-        priceFilter.setMinPrice(null);
+        System.out.println("cleeeeeen");
+//        priceFilter.setCategoryId(null);
+//        priceFilter.setMaxPrice(null);
+//        priceFilter.setMinPrice(null);
     }
 }

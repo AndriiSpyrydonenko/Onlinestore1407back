@@ -2,7 +2,6 @@ package com.svitsmachnogo.api.controller;
 
 import com.svitsmachnogo.api.component.CategoryPage;
 import com.svitsmachnogo.api.component.PriceFilter;
-import com.svitsmachnogo.api.component.ProductListForView;
 import com.svitsmachnogo.api.dto.*;
 import com.svitsmachnogo.api.exceptions.IncorrectSortingCriteriaException;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
@@ -19,15 +18,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/category_page")
 public class CategoryPageController {
 
-    private final ProductListForView productListForView;
-
     private final FilteringBlockService filteringBlockService;
 
     private final ProductService productService;
 
     private final CategoryPage categoryPage;
 
-    //todo: create some controller than return a price range for a price filter based on a categoryId
     @GetMapping("/price_filter/{categoryId}")
     public PriceFilter getPriceFilterByCategoryId(@PathVariable String categoryId) {
         return productService.getDefaultPriceFilterByCategoryId(categoryId);

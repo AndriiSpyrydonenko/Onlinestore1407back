@@ -509,130 +509,130 @@ insert into products
            'Сіль для основних страв.');
 
 
-
-insert into pictures
-    (product_id, url_path)
-    value (1, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/red_beans.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (2, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/white_quinoa.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (3, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/red_quinoa.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (4, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/%D1%82urkish_lentils.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (5, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/ukrain_lentils.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (6, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/white_chia.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (7, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cranberry.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (8, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/dried_apricots.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit2.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit3.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (10, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/prunes.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (11, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/smoked_prunes.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (12, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/walnut_halves.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (13, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/macadamia.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (13, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/macadamia_with_key.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto_with_heap.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto_with_big_heap.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (15, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cashew.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (15, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cashew2.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (16, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/roasted_cashew.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (17, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/dressing_for_borscht.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (18, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (19, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (20, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (21, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (22, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (23, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (24, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (25, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (1, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/red_beans.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (2, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/white_quinoa.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (3, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/red_quinoa.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (4, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/%D1%82urkish_lentils.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (5, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/ukrain_lentils.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (6, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/white_chia.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (7, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cranberry.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (8, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/dried_apricots.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit2.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit3.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (10, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/prunes.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (11, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/smoked_prunes.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (12, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/walnut_halves.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (13, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/macadamia.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (13, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/macadamia_with_key.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto_with_heap.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto_with_big_heap.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (15, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cashew.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (15, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cashew2.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (16, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/roasted_cashew.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (17, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/dressing_for_borscht.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (18, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (19, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (20, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (21, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (22, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (23, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (24, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
+#
+# insert into pictures
+#     (product_id, url_path)
+#     value (25, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
 
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (1, '200', 159);
@@ -684,10 +684,10 @@ INSERT INTO packaging(product_id, amount, cost)
 VALUES (8, '1000', 743);
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (9, '200', 723);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (9, '500', 950);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (9, '1000', 546);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (9, '500', 950);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (9, '1000', 546);
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (10, '200', 856);
 INSERT INTO packaging(product_id, amount, cost)
@@ -785,6 +785,10 @@ VALUES (25, '500', 949);
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (25, '1000', 590);
 
+update packaging
+set amount = 250
+where amount = 200;
+
 UPDATE products
 SET number_of_orders = FLOOR(RAND() * 100) + 1
 WHERE product_id BETWEEN 1 AND 75;
@@ -801,13 +805,13 @@ BEGIN
     WHILE i <= 50
         DO
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '200', FLOOR(RAND() * (1000 - 100 + 1) + 100));
+            VALUES (@product_id, '200', FLOOR(RAND() * (500 - 100 + 1) + 100));
 
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '500', FLOOR(RAND() * (1000 - 100 + 1) + 100));
+            VALUES (@product_id, '500', FLOOR(RAND() * (750 - 501 + 1) + 500));
 
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '1000', FLOOR(RAND() * (1000 - 100 + 1) + 100));
+            VALUES (@product_id, '1000', FLOOR(RAND() * (1000 - 751 + 1) + 750));
 
             SET @product_id = @product_id + 1;
             SET i = i + 1;

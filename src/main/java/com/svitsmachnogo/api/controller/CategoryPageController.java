@@ -38,14 +38,18 @@ public class CategoryPageController {
             @Parameter(description = "Number of products per page. By default 20") int size,
             @RequestParam(required = false, defaultValue = "by_popularity")
             @Parameter(description = "Criteria of sorting") String sort,
-            @RequestBody CategoryPageRequestDTO requestBody
+            @RequestBody(required = false) CategoryPageRequestDTO requestBody
     ) throws IncorrectSortingCriteriaException {
         CategoryPageDTO pageAndFilterBlock = new CategoryPageDTO();
         PageDataDTO<ProductDTO> products = new PageDataDTO<>();
 
-        categoryPage.generatePage(categoryId, requestBody.getCheckboxes(), requestBody.getPriceFilter(),
-                page, size, sort);
-
+        if(requestBody != null) {
+            categoryPage.generatePage(categoryId, requestBody.getCheckboxes(), requestBody.getPriceFilter(),
+                    page, size, sort);
+        }else {
+            categoryPage.generatePage(categoryId, null, null,
+                    page, size, sort);
+        }
         products.setData(ProductDTO.getList(categoryPage.getPageOfProducts().getContent()));
         products.setPageCount(categoryPage.getPageOfProducts().getTotalPages());
 

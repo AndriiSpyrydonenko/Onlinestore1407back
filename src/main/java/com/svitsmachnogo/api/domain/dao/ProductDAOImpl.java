@@ -1,5 +1,6 @@
 package com.svitsmachnogo.api.domain.dao;
 
+import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.domain.dao.abstractional.ProductDAO;
 import com.svitsmachnogo.api.domain.entity.Product;
 import jakarta.persistence.EntityManager;
@@ -82,5 +83,25 @@ public class ProductDAOImpl implements ProductDAO {
         return (Set<Product>) query
                 .getResultStream()
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public PriceFilter findMinAndMaxPrice(String categoryId) {
+        Session session = entityManager.unwrap(Session.class);
+        session.setDefaultReadOnly(true);
+        PriceFilter priceFilter = new PriceFilter();
+
+        double min = (double) session.createQuery(
+                "select min(p.minPrice) from Product p where category.id = :param")
+                .setParameter("param", categoryId)
+                .uniqueResult();
+        double max = (double) session.createQuery(
+                "select max(p.minPrice) from Product p where category.id = :param")
+                .setParameter("param", categoryId)
+                .uniqueResult();
+        priceFilter.setCategoryId(categoryId);
+        priceFilter.setMinPrice(min);
+        priceFilter.setMaxPrice(max);
+        return priceFilter;
     }
 }

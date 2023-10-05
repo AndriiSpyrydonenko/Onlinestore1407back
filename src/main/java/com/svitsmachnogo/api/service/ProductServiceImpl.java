@@ -1,5 +1,6 @@
 package com.svitsmachnogo.api.service;
 
+import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.domain.dao.abstractional.ProductDAO;
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.service.abstractional.ProductService;
@@ -48,5 +49,10 @@ public class ProductServiceImpl implements ProductService {
     public Set<Product> getAllByCategoryId(String categoryId) {
 
         return productDAO.findAllByCategoryId(categoryId);
+    }
+
+    @Override
+    public PriceFilter getDefaultPriceFilterByCategoryId(String categoryId) {
+        return productDAO.findMinAndMaxPrice(categoryId);
     }
 }

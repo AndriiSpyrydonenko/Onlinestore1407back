@@ -634,163 +634,163 @@ insert into pictures
     (product_id, url_path)
     value (25, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
 
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (1, '200', 159);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (1, '500', 688);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (1, '1000', 283);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (2, '200', 436);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (2, '500', 322);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (2, '1000', 812);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (3, '200', 768);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (3, '500', 865);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (3, '1000', 112);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (4, '200', 853);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (4, '500', 925);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (4, '1000', 563);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (5, '200', 137);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (5, '500', 245);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (5, '1000', 587);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (6, '200', 913);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (6, '500', 517);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (6, '1000', 199);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (7, '200', 122);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (7, '500', 734);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (7, '1000', 607);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (8, '200', 617);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (8, '500', 843);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (8, '1000', 743);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (9, '200', 723);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (9, '500', 950);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (9, '1000', 546);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (10, '200', 856);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (10, '500', 382);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (10, '1000', 615);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (11, '200', 215);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (11, '500', 530);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (11, '1000', 314);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (12, '200', 415);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (12, '500', 381);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (12, '1000', 209);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (13, '200', 816);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (13, '500', 295);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (13, '1000', 968);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (14, '200', 762);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (14, '500', 872);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (14, '1000', 502);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (15, '200', 214);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (15, '500', 108);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (15, '1000', 921);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (16, '200', 244);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (16, '500', 292);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (16, '1000', 690);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (17, '200', 810);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (17, '500', 854);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (17, '1000', 409);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (18, '200', 245);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (18, '500', 543);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (18, '1000', 829);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (19, '200', 208);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (19, '500', 369);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (19, '1000', 800);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (20, '200', 581);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (20, '500', 237);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (20, '1000', 993);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (21, '200', 287);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (21, '500', 241);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (21, '1000', 256);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (22, '200', 917);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (22, '500', 609);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (22, '1000', 682);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (23, '200', 455);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (23, '500', 202);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (23, '1000', 956);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (24, '200', 738);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (24, '500', 802);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (24, '1000', 122);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (25, '200', 758);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (25, '500', 949);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (25, '1000', 590);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (1, '200', 159);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (1, '500', 688);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (1, '1000', 283);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (2, '200', 436);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (2, '500', 322);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (2, '1000', 812);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (3, '200', 768);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (3, '500', 865);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (3, '1000', 112);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (4, '200', 853);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (4, '500', 925);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (4, '1000', 563);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (5, '200', 137);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (5, '500', 245);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (5, '1000', 587);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (6, '200', 913);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (6, '500', 517);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (6, '1000', 199);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (7, '200', 122);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (7, '500', 734);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (7, '1000', 607);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (8, '200', 617);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (8, '500', 843);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (8, '1000', 743);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (9, '200', 723);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (9, '500', 950);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (9, '1000', 546);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (10, '200', 856);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (10, '500', 382);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (10, '1000', 615);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (11, '200', 215);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (11, '500', 530);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (11, '1000', 314);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (12, '200', 415);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (12, '500', 381);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (12, '1000', 209);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (13, '200', 816);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (13, '500', 295);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (13, '1000', 968);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (14, '200', 762);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (14, '500', 872);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (14, '1000', 502);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (15, '200', 214);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (15, '500', 108);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (15, '1000', 921);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (16, '200', 244);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (16, '500', 292);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (16, '1000', 690);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (17, '200', 810);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (17, '500', 854);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (17, '1000', 409);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (18, '200', 245);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (18, '500', 543);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (18, '1000', 829);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (19, '200', 208);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (19, '500', 369);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (19, '1000', 800);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (20, '200', 581);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (20, '500', 237);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (20, '1000', 993);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (21, '200', 287);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (21, '500', 241);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (21, '1000', 256);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (22, '200', 917);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (22, '500', 609);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (22, '1000', 682);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (23, '200', 455);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (23, '500', 202);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (23, '1000', 956);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (24, '200', 738);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (24, '500', 802);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (24, '1000', 122);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (25, '200', 758);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (25, '500', 949);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (25, '1000', 590);
 
 UPDATE products
 SET number_of_orders = FLOOR(RAND() * 100) + 1
 WHERE product_id BETWEEN 1 AND 75;
 
 -- Початкове значення id
-SET @product_id = 26;
+SET @product_id = 1;
 
 -- Генерація 150 запитів
 DELIMITER //
@@ -798,7 +798,7 @@ CREATE PROCEDURE InsertPackagingData()
 BEGIN
     DECLARE i INT DEFAULT 1;
 
-    WHILE i <= 50
+    WHILE i <= 75
         DO
             INSERT INTO packaging(product_id, amount, cost)
             VALUES (@product_id, '200', FLOOR(RAND() * (1000 - 100 + 1) + 100));

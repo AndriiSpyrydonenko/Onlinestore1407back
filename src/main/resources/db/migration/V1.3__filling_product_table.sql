@@ -509,130 +509,130 @@ insert into products
            'Сіль для основних страв.');
 
 
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (1, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/red_beans.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (2, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/white_quinoa.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (3, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/red_quinoa.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (4, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/%D1%82urkish_lentils.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (5, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/ukrain_lentils.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (6, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/white_chia.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (7, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cranberry.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (8, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/dried_apricots.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit2.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit3.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (10, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/prunes.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (11, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/smoked_prunes.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (12, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/walnut_halves.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (13, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/macadamia.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (13, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/macadamia_with_key.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto_with_heap.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto_with_big_heap.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (15, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cashew.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (15, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cashew2.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (16, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/roasted_cashew.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (17, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/dressing_for_borscht.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (18, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (19, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (20, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (21, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (22, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (23, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (24, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (25, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (1, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9A%D0%B2%D0%B0%D1%81%D0%BE%D0%BB%D1%8F+%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (2, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0+%D0%B1%D1%96%D0%BB%D0%B0.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (3, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0+%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (4, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%A7%D0%B5%D1%87%D0%B5%D0%B2%D0%B8%D1%86%D1%8F+%D0%A2%D1%83%D1%80%D0%B5%D1%87%D1%87%D0%B8%D0%BD%D0%B0.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (5, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%A7%D0%B5%D1%87%D0%B5%D0%B2%D0%B8%D1%86%D1%8F+%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (6, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%A7%D1%96%D0%B0+%D0%B1%D1%96%D0%BB%D0%B0.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (7, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0+%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (8, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9A%D1%83%D1%80%D0%B0%D0%B3%D0%B0+%D0%B4%D0%B6%D0%B0%D0%BC%D0%B1%D0%BE.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (9, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA+%D0%B2+%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96_1.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (9, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA+%D0%B2+%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96_1.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (9, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA+%D0%B2+%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (10, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D1%87%D0%BE%D1%80%D0%BD%D0%BE%D1%81%D0%BB%D0%B8%D0%B2+%D0%B2%D1%8F%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (11, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D1%87%D0%BE%D1%80%D0%BD%D0%BE%D1%81%D0%BB%D0%B8%D0%B2+%D0%BA%D0%BE%D0%BF%D1%87%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (12, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/caf7d1fde344b318f1bc619ac84104af.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (13, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9C%D0%B0%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%D1%96.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (13, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9C%D0%B0%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%D1%96%2B+%D1%87%D0%BB%D1%8E%D1%87%D0%B8%D0%BA.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (14, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/IMG_0123.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (14, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/IMG_0123%2B.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (14, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/IMG_0123%2B%2B.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (15, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D0%BD%D0%B5+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9+2.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (15, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D0%BD%D0%B5+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (16, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (17, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/dressing_for_borscht.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (18, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C+%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9+%D0%B3%D0%BE%D1%80%D0%BE%D1%88%D0%BE%D0%BA.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (19, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C+%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9+%D0%BC%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (20, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BF%D1%80%D0%B8%D0%BF%D1%80%D0%B0%D0%B2%D0%B0+%D0%B4%D0%BB%D1%8F+%D1%83%D1%85%D0%B8.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (21, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%A1%D0%BC%D0%B5%D1%81%D1%8C+10+%D0%BE%D0%B2%D0%BE%D1%87%D0%B5%D0%B9+110%D0%B3%D1%80.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (22, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (23, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (24, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (25, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
 
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (1, '200', 159);
@@ -684,10 +684,10 @@ INSERT INTO packaging(product_id, amount, cost)
 VALUES (8, '1000', 743);
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (9, '200', 723);
-# INSERT INTO packaging(product_id, amount, cost)
-# VALUES (9, '500', 950);
-# INSERT INTO packaging(product_id, amount, cost)
-# VALUES (9, '1000', 546);
+INSERT INTO packaging(product_id, amount, cost)
+VALUES (9, '500', 950);
+INSERT INTO packaging(product_id, amount, cost)
+VALUES (9, '1000', 546);
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (10, '200', 856);
 INSERT INTO packaging(product_id, amount, cost)
@@ -785,10 +785,6 @@ VALUES (25, '500', 949);
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (25, '1000', 590);
 
-update packaging
-set amount = 250
-where amount = 200;
-
 UPDATE products
 SET number_of_orders = FLOOR(RAND() * 100) + 1
 WHERE product_id BETWEEN 1 AND 75;
@@ -805,13 +801,13 @@ BEGIN
     WHILE i <= 50
         DO
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '200', FLOOR(RAND() * (500 - 100 + 1) + 100));
+            VALUES (@product_id, '200', FLOOR(RAND() * (1000 - 100 + 1) + 100));
 
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '500', FLOOR(RAND() * (750 - 501 + 1) + 500));
+            VALUES (@product_id, '500', FLOOR(RAND() * (1000 - 100 + 1) + 100));
 
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '1000', FLOOR(RAND() * (1000 - 751 + 1) + 750));
+            VALUES (@product_id, '1000', FLOOR(RAND() * (1000 - 100 + 1) + 100));
 
             SET @product_id = @product_id + 1;
             SET i = i + 1;

@@ -29,6 +29,7 @@ public class CategoryPageController {
         return productService.getDefaultPriceFilterByCategoryId(categoryId);
     }
 
+    //todo: rebase a logic from controller to service.
     @PostMapping("/data/{categoryId}")
     public CategoryPageDTO getProductsForCategoryPageWithFilterBlock(
             @PathVariable(name = "categoryId") String categoryId,
@@ -40,25 +41,8 @@ public class CategoryPageController {
             @Parameter(description = "Criteria of sorting") String sort,
             @RequestBody(required = false) CategoryPageRequestDTO requestBody
     ) throws IncorrectSortingCriteriaException {
-        CategoryPageDTO pageAndFilterBlock = new CategoryPageDTO();
-        PageDataDTO<ProductDTO> products = new PageDataDTO<>();
 
-        if(requestBody != null) {
-            categoryPage.generatePage(categoryId, requestBody.getCheckboxes(), requestBody.getPriceFilter(),
-                    page, size, sort);
-        }else {
-            categoryPage.generatePage(categoryId, null, null,
-                    page, size, sort);
-        }
-        products.setData(ProductDTO.getList(categoryPage.getPageOfProducts().getContent()));
-        products.setPageCount(categoryPage.getPageOfProducts().getTotalPages());
-
-        pageAndFilterBlock.setPageOfProducts(products);
-        pageAndFilterBlock
-                .setBlockOfCriteria(BlockOfCriteriaDTO
-                        .blockOfCriteriaDTOList(filteringBlockService.getBlocksOfCriteria()));
-        filteringBlockService.clearState();
-        return pageAndFilterBlock;
+        return categoryPage.getCategoryPage(categoryId, page, size, sort, requestBody);
     }
 
 }

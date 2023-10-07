@@ -25,10 +25,6 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
 
     private final SubcategoryService subcategoryService;
 
-    private final ProductService productService;
-
-//    private PriceFilter priceFilter;
-
     private List<Product> productListByCategory;
 
     private List<Subcategory> subcategories;
@@ -37,15 +33,12 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
 
 
     /**
-     * The most important method in this class.
-     * This method sources the global state for the category by {@categoryId}, clears the state
-     * of the objects involved in generating the page state, and assigns them new values relevant
-     * to the given category.
      *
+     * @author Vanya Demydenko
      * @param categoryId
      */
 
-    public void refreshStateCategoryPageByCategoryId(String categoryId) {
+    public void buildDefaultFilteringBlockByCategoryId(String categoryId) {
         clearState();
         subcategories = subcategoryService.getAllSubcategoryByCategoryId(categoryId);
         productListForView.buildByCategoryId(categoryId);
@@ -57,7 +50,7 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     /**
      * @param categoryId
      */
-    public void refreshStateCategoryPageByCheckBox(String categoryId,
+    public void buildFilteringBlockByFilterAspects(String categoryId,
                                                    List<CheckboxForSubcategory> checkboxes,
                                                    PriceFilter priceFilter) {
         productListForView.buildByCategoryId(categoryId);
@@ -72,16 +65,6 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         blocksOfCriteria = buildBlockOfFilters();
         buildProductListForView();
     }
-
-//    public void refreshPriceFilter(PriceFilter priceFilter) {
-//        this.priceFilter.setMinPrice(priceFilter.getMinPrice());
-//        this.priceFilter.setMaxPrice(priceFilter.getMaxPrice());
-//        this.priceFilter.setCategoryId(priceFilter.getCategoryId());
-//    }
-
-//    private void buildPriceFilter(String categoryId) {
-//        priceFilter = productService.getDefaultPriceFilterByCategoryId(categoryId);
-//    }
 
     public List<BlockOfCriteria> buildBlockOfFilters() {
         Set<String> titles = getTitleFromSubcategory(subcategories);
@@ -237,9 +220,5 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         productListForView.getProductList().clear();
         subcategories = null;
         blocksOfCriteria = null;
-        System.out.println("cleeeeeen");
-//        priceFilter.setCategoryId(null);
-//        priceFilter.setMaxPrice(null);
-//        priceFilter.setMinPrice(null);
     }
 }

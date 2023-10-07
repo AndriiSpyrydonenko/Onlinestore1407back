@@ -5,6 +5,7 @@ import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.domain.entity.Subcategory;
 import com.svitsmachnogo.api.service.abstractional.SubcategoryService;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,11 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class SubcategoryServiceImpl implements SubcategoryService {
 
-    @Autowired
-    private SubcategoryDAO subcategoryDAO;
+
+    private final SubcategoryDAO subcategoryDAO;
 
     @Override
     @Transactional

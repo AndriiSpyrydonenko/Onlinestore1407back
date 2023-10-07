@@ -6,6 +6,7 @@ import com.svitsmachnogo.api.domain.entity.Subcategory;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import com.svitsmachnogo.api.service.abstractional.ProductService;
 import com.svitsmachnogo.api.service.abstractional.SubcategoryService;
+import com.svitsmachnogo.api.utils.BlockOfCriteriaUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -14,7 +15,14 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
+/**
+ * Implementation of the {@link FilteringBlockService} interface.
+ * This class receives a list of subcategories from the {@link SubcategoryService}
+ * and generates a list of filters based on these categories.
+ * It also generates a list of products based on these filters.
+ *
+ * @author Vanya Demydenko
+ */
 @Service
 @RequiredArgsConstructor
 @Getter
@@ -25,6 +33,8 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
 
     private final SubcategoryService subcategoryService;
 
+    private final BlockOfCriteriaUtil blockOfCriteriaUtil;
+
     private List<Product> productListByCategory;
 
     private List<Subcategory> subcategories;
@@ -32,23 +42,33 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     private List<BlockOfCriteria> blocksOfCriteria;
 
 
+
+
     /**
+     * Builds a default filtering block for a specified category based on its ID. This method is called to generate the initial page
+     * corresponding to the given category ID.
      *
      * @author Vanya Demydenko
-     * @param categoryId
+     * @param categoryId The ID of the category for which the default filtering block is generated.
      */
 
     public void buildDefaultFilteringBlockByCategoryId(String categoryId) {
         clearState();
-        subcategories = subcategoryService.getAllSubcategoryByCategoryId(categoryId);
+        setSubcategories(subcategoryService.getAllSubcategoryByCategoryId(categoryId));
         productListForView.buildByCategoryId(categoryId);
         setProductListByCategory();
         addOtherSubcategory();
-        blocksOfCriteria = buildBlockOfFilters();
+        setBlocksOfCriteria(blockOfCriteriaUtil.buildBlockOfFilters(subcategories));
     }
 
     /**
-     * @param categoryId
+     * Builds a filtering block and filters products based on the specified filter aspects.
+     *
+     * @author Vanya Demydenko
+     * @param categoryId   The ID of the category of products for which lists are being loaded.
+     * @param checkboxes   A list of checkboxes representing subcategories
+     *                     for which filtering is to be applied.
+     * @param priceFilter  The price filter specifying the price range for filtering products.
      */
     public void buildFilteringBlockByFilterAspects(String categoryId,
                                                    List<CheckboxForSubcategory> checkboxes,
@@ -62,13 +82,8 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         subcategories.forEach(s -> s.setProductCount(s.getProducts().size()));
         subcategories.stream().filter(s -> s.getProductCount() == 0)
                 .forEach(s -> s.setClickable(false));
-        blocksOfCriteria = buildBlockOfFilters();
+        blocksOfCriteria = blockOfCriteriaUtil.buildBlockOfFilters(subcategories);
         buildProductListForView();
-    }
-
-    public List<BlockOfCriteria> buildBlockOfFilters() {
-        Set<String> titles = getTitleFromSubcategory(subcategories);
-        return buildBlockOfCriteria(subcategories, titles);
     }
 
     private double mapToMinPrice(Product product) {
@@ -93,7 +108,7 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         Subcategory subcategory = subcategories
                 .stream()
                 .filter(s -> s.getId().equals(checkbox.getSubcategoryId()))
-                .peek(s -> s.setActive(checkbox.getActive()))
+                .peek(s -> s.setActive(true))
                 .findFirst()
                 .get();
         subcategories.forEach(s -> removeProductFromSubcategory(s, subcategory));
@@ -114,27 +129,6 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
                 .stream()
                 .filter(s -> s.getProductCount() > 0)
                 .forEach(s -> products.addAll(s.getProducts()));
-    }
-
-    private List<BlockOfCriteria> buildBlockOfCriteria(List<Subcategory> subcategories, Set<String> titles) {
-        return titles
-                .stream()
-                .map(t -> BlockOfCriteria.create(t, getSubcategoriesByTitle(subcategories, t)))
-                .collect(Collectors.toList());
-    }
-
-    private List<Subcategory> getSubcategoriesByTitle(List<Subcategory> subcategories, String t) {
-        return subcategories
-                .stream()
-                .filter(s -> s.getTitle().equals(t))
-                .collect(Collectors.toList());
-    }
-
-    private Set<String> getTitleFromSubcategory(List<Subcategory> subcategories) {
-        return subcategories
-                .stream()
-                .map(Subcategory::getTitle)
-                .collect(Collectors.toSet());
     }
 
     private Subcategory createPromotionalProductsSubcategory() {
@@ -211,6 +205,11 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         productListByCategory = new ArrayList<>(productListForView.getProductList());
     }
 
+    /**
+     * Returns the actual filters block
+     *
+     * @return {@link BlockOfCriteria}
+     */
     public List<BlockOfCriteria> getBlocksOfCriteria() {
         return blocksOfCriteria;
     }

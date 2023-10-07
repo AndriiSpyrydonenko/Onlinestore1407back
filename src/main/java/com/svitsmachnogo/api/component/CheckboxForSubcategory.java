@@ -11,6 +11,4 @@ public class CheckboxForSubcategory {
 
     private String subcategoryId;
 
-    private Boolean active;
-
 }

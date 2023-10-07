@@ -6,6 +6,7 @@ import com.svitsmachnogo.api.dto.*;
 import com.svitsmachnogo.api.exceptions.IncorrectSortingCriteriaException;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import com.svitsmachnogo.api.service.abstractional.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,19 +19,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/category_page")
 public class CategoryPageController {
 
-    private final FilteringBlockService filteringBlockService;
-
     private final ProductService productService;
 
     private final CategoryPage categoryPage;
 
+
     @GetMapping("/price_filter/{categoryId}")
+    @Operation(summary = "returns a min and max price for the specify category")
     public PriceFilter getPriceFilterByCategoryId(@PathVariable String categoryId) {
         return productService.getDefaultPriceFilterByCategoryId(categoryId);
     }
 
-    //todo: rebase a logic from controller to service.
+
     @PostMapping("/data/{categoryId}")
+    @Operation(summary = "returns a list of subcategory and product page with amount of pages ")
     public CategoryPageDTO getProductsForCategoryPageWithFilterBlock(
             @PathVariable(name = "categoryId") String categoryId,
             @RequestParam(required = false, defaultValue = "0")

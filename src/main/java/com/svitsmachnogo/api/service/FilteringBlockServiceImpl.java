@@ -4,7 +4,6 @@ import com.svitsmachnogo.api.component.*;
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.domain.entity.Subcategory;
 import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
-import com.svitsmachnogo.api.service.abstractional.ProductService;
 import com.svitsmachnogo.api.service.abstractional.SubcategoryService;
 import com.svitsmachnogo.api.utils.BlockOfCriteriaUtil;
 import lombok.Getter;
@@ -35,7 +34,7 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
 
     private final BlockOfCriteriaUtil blockOfCriteriaUtil;
 
-    private List<Product> productListByCategory;
+    private List<Product> targetProducts;
 
     private List<Subcategory> subcategories;
 
@@ -54,11 +53,10 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
 
     public void buildDefaultFilteringBlockByCategoryId(String categoryId) {
         clearState();
-        setSubcategories(subcategoryService.getAllSubcategoryByCategoryId(categoryId));
-        productListForView.buildByCategoryId(categoryId);
-        setProductListByCategory();
+        subcategories = subcategoryService.getAllSubcategoryByCategoryId(categoryId);
+        setCurrentProducts(categoryId);
         addOtherSubcategory();
-        setBlocksOfCriteria(blockOfCriteriaUtil.buildBlockOfFilters(subcategories));
+        blocksOfCriteria = blockOfCriteriaUtil.buildBlockOfFilters(subcategories);
     }
 
     /**
@@ -73,17 +71,29 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     public void buildFilteringBlockByFilterAspects(String categoryId,
                                                    List<CheckboxForSubcategory> checkboxes,
                                                    PriceFilter priceFilter) {
-        productListForView.buildByCategoryId(categoryId);
-        setProductListByCategory();
-        subcategories = subcategoryService.getAllSubcategoryByCategoryId(categoryId);
-        addOtherSubcategory();
+        setCurrentProducts(categoryId);
+        getTotalSubcategory(categoryId);
         checkboxes.forEach(this::updateSubcategoriesByCheckbox);
+        buildSubcategoriesForFilteringBlock(priceFilter);
+        blocksOfCriteria = blockOfCriteriaUtil.buildBlockOfFilters(subcategories);
+        buildProductListForView();
+    }
+
+    private void buildSubcategoriesForFilteringBlock(PriceFilter priceFilter) {
         subcategories.forEach(s -> s.setProducts(filteringProductsByPriceFilter(s , priceFilter)));
         subcategories.forEach(s -> s.setProductCount(s.getProducts().size()));
         subcategories.stream().filter(s -> s.getProductCount() == 0)
                 .forEach(s -> s.setClickable(false));
-        blocksOfCriteria = blockOfCriteriaUtil.buildBlockOfFilters(subcategories);
-        buildProductListForView();
+    }
+
+    private void getTotalSubcategory(String categoryId) {
+        subcategories = subcategoryService.getAllSubcategoryByCategoryId(categoryId);
+        addOtherSubcategory();
+    }
+
+    private void setCurrentProducts(String categoryId) {
+        productListForView.buildByCategoryId(categoryId);
+        setTargetProducts();
     }
 
     private double mapToMinPrice(Product product) {
@@ -158,7 +168,7 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     }
 
     private Set<Product> getProductsByPredicate(Predicate<Product> predicate) {
-        return productListByCategory
+        return targetProducts
                 .stream()
                 .filter(predicate)
                 .collect(Collectors.toSet());
@@ -170,7 +180,7 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         countryProducer.setName(countryProducerName);
         countryProducer.setTitle("Країна виробник");
         countryProducer.setCategory(subcategories.get(0).getCategory());
-        Set<Product> products = productListByCategory
+        Set<Product> products = targetProducts
                 .stream()
                 .filter(p -> p.getCountryProducer().equals(countryProducerName))
                 .collect(Collectors.toSet());
@@ -194,15 +204,15 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
     }
 
     private Set<String> extractCountryNamesFromProducts() {
-        return productListByCategory
+        return targetProducts
                 .stream()
                 .map(Product::getCountryProducer)
                 .collect(Collectors.toSet());
     }
 
 
-    private void setProductListByCategory() {
-        productListByCategory = new ArrayList<>(productListForView.getProductList());
+    private void setTargetProducts() {
+        targetProducts = new ArrayList<>(productListForView.getProductList());
     }
 
     /**

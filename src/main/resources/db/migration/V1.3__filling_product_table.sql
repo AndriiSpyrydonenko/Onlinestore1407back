@@ -828,3 +828,4 @@ SET min_price = (select pac.cost
                  where pac.product_id = p.product_id
                    and amount = (select min(amount) from packaging pg where pg.product_id = p.product_id))
 where p.product_id > 0;
+# some

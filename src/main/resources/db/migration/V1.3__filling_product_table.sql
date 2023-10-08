@@ -634,14 +634,14 @@ insert into pictures
     (product_id, url_path)
     value (25, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
 
-# INSERT INTO packaging(product_id, amount, cost)
-# VALUES (1, '200', 159);
+INSERT INTO packaging(product_id, amount, cost)
+VALUES (1, '200', 159);
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (1, '500', 688);
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (1, '1000', 283);
-# INSERT INTO packaging(product_id, amount, cost)
-# VALUES (2, '200', 436);
+INSERT INTO packaging(product_id, amount, cost)
+VALUES (2, '200', 436);
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (2, '500', 322);
 # INSERT INTO packaging(product_id, amount, cost)
@@ -790,7 +790,7 @@ SET number_of_orders = FLOOR(RAND() * 100) + 1
 WHERE product_id BETWEEN 1 AND 75;
 
 -- Початкове значення id
-SET @product_id = 1;
+SET @product_id = 3;
 
 -- Генерація 150 запитів
 DELIMITER //

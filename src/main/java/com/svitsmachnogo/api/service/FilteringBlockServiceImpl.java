@@ -224,6 +224,11 @@ public class FilteringBlockServiceImpl implements FilteringBlockService {
         return blocksOfCriteria;
     }
 
+
+    /**
+     * Clears the internal state of the filtering service.
+     * This method resets the list of products, subcategories, and criteria blocks.
+     */
     @Override
     public void clearState() {
         productListForView.getProductList().clear();

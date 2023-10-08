@@ -789,9 +789,8 @@ UPDATE products
 SET number_of_orders = FLOOR(RAND() * 100) + 1
 WHERE product_id BETWEEN 1 AND 75;
 
--- Початкове значення id
-SET @product_id = 3;
--- Генерація 150 запитів
+SET @product_id = 1;
+
 DELIMITER //
 CREATE PROCEDURE InsertPackagingData()
 BEGIN
@@ -814,7 +813,6 @@ BEGIN
 END //
 DELIMITER ;
 
--- Виклик процедури для генерації запитів
 CALL InsertPackagingData();
 
 

@@ -600,7 +600,7 @@ insert into pictures
 
 insert into pictures
     (product_id, url_path)
-    value (17, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/dressing_for_borscht.jpg');
+    value (17, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
 insert into pictures
     (product_id, url_path)
@@ -620,19 +620,19 @@ insert into pictures
 
 insert into pictures
     (product_id, url_path)
-    value (22, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
+    value (22, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (23, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
+    value (23, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (24, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
+    value (24, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (25, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
+    value (25, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
 INSERT INTO packaging(product_id, amount, cost)
 VALUES (1, '200', 159);

@@ -1,5 +1,8 @@
-package com.svitsmachnogo.api.component;
+package com.svitsmachnogo.api.service;
 
+import com.svitsmachnogo.api.component.CheckboxForSubcategory;
+import com.svitsmachnogo.api.component.PriceFilter;
+import com.svitsmachnogo.api.component.ProductListForView;
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.dto.*;
 import com.svitsmachnogo.api.exceptions.IncorrectSortingCriteriaException;
@@ -7,13 +10,13 @@ import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import lombok.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 @RequiredArgsConstructor
-public class CategoryPage {
+public class CategoryPageService {
 
     private final ProductListForView products;
 
@@ -21,9 +24,12 @@ public class CategoryPage {
 
     private Page<Product> pageOfProducts;
 
-    public CategoryPageDTO getCategoryPage(String categoryId, int page, int size, String sort, CategoryPageRequestDTO requestBody) throws IncorrectSortingCriteriaException {
-        CategoryPageDTO pageAndFilterBlock = new CategoryPageDTO();
+    public CategoryPageResponseDTO getCategoryPage(String categoryId, int page, int size, String sort,
+                                                   CategoryPageRequestDTO requestBody) throws IncorrectSortingCriteriaException {
+
         PageDataDTO<ProductDTO> products = new PageDataDTO<>();
+        CategoryPageResponseDTO pageAndFilterBlock = new CategoryPageResponseDTO();
+
 
         if(requestBody != null) {
             generatePage(categoryId, requestBody.getCheckboxes(), requestBody.getPriceFilter(),

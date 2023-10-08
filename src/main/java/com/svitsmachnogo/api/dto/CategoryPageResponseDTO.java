@@ -1,13 +1,12 @@
 package com.svitsmachnogo.api.dto;
 
 
-import com.svitsmachnogo.api.component.PriceFilter;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class CategoryPageDTO {
+public class CategoryPageResponseDTO {
 
     private List<BlockOfCriteriaDTO> blockOfCriteria;
 

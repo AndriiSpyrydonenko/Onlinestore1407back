@@ -1,10 +1,9 @@
 package com.svitsmachnogo.api.controller;
 
-import com.svitsmachnogo.api.component.CategoryPage;
+import com.svitsmachnogo.api.service.CategoryPageService;
 import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.dto.*;
 import com.svitsmachnogo.api.exceptions.IncorrectSortingCriteriaException;
-import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import com.svitsmachnogo.api.service.abstractional.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,8 +20,7 @@ public class CategoryPageController {
 
     private final ProductService productService;
 
-    private final CategoryPage categoryPage;
-
+    private final CategoryPageService categoryPageService;
 
     @GetMapping("/price_filter/{categoryId}")
     @Operation(summary = "returns a min and max price for the specify category")
@@ -33,7 +31,7 @@ public class CategoryPageController {
 
     @PostMapping("/data/{categoryId}")
     @Operation(summary = "returns a list of subcategory and product page with amount of pages ")
-    public CategoryPageDTO getProductsForCategoryPageWithFilterBlock(
+    public CategoryPageResponseDTO getProductsForCategoryPageWithFilterBlock(
             @PathVariable(name = "categoryId") String categoryId,
             @RequestParam(required = false, defaultValue = "0")
             @Parameter(description = "Page number to display.By default 0 ") int page,
@@ -44,7 +42,7 @@ public class CategoryPageController {
             @RequestBody(required = false) CategoryPageRequestDTO requestBody
     ) throws IncorrectSortingCriteriaException {
 
-        return categoryPage.getCategoryPage(categoryId, page, size, sort, requestBody);
+        return categoryPageService.getCategoryPage(categoryId, page, size, sort, requestBody);
     }
 
 }

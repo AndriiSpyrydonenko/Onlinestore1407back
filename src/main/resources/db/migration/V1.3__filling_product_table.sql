@@ -3,13 +3,13 @@ use svitsmachnogo;
 insert into products
 (category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
  country_producer, description)
-    value ('grocery', 123456, 'Квасоля червона', true, 0, 4.2, 50, 20, sysdate(), 'Україна',
+    value ('grocery', 123456, 'Квасоля червона', true, 10, 4.2, 50, 20, sysdate(), 'Україна',
            'Склад: Квасоля червона "Рубін" - вона є чудовою альтернативою м''ясу для вегетаріанців і тих, хто поститься. Червона квасоля містить до 25% білка, який за своєю харчовою цінністю не поступається білку м''яса. До того ж білок квасолі засвоюється на 70 – 80%.');
 
 insert into products
 (category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
  country_producer, description)
-    value ('grocery', 548712, 'Кіноа Біла', true, 0, 3.2, 278, 0, sysdate(), 'Перу',
+    value ('grocery', 548712, 'Кіноа Біла', true, 11, 3.2, 278, 0, sysdate(), 'Перу',
            'Склад: Кіноа Біла - зернова культура з сімейства мареві, яка росте на гірських схилах Анд. Батьківщиною білої кіноа прийнято вважати берега озера Тітікака в Південній Америці.');
 
 insert into products

@@ -1,6 +1,9 @@
 package com.svitsmachnogo.api.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 import java.util.Set;
@@ -18,6 +21,9 @@ import java.util.TreeSet;
  */
 
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode
 @Table(name = "subcategories")
 public class Subcategory {
 
@@ -51,92 +57,5 @@ public class Subcategory {
     private boolean active = false;
 
     public Subcategory() {
-    }
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
-
-    public boolean isClickable() {
-        return clickable;
-    }
-
-    public void setClickable(boolean clickable) {
-        this.clickable = clickable;
-    }
-
-    public int getProductCount() {
-        return productCount;
-    }
-
-    public void setProductCount(int productCount) {
-        this.productCount = productCount;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Subcategory that = (Subcategory) o;
-
-        if (!Objects.equals(id, that.id)) return false;
-        if (!Objects.equals(name, that.name)) return false;
-        if (!Objects.equals(title, that.title)) return false;
-        return Objects.equals(category, that.category);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (category != null ? category.hashCode() : 0);
-        return result;
     }
 }

@@ -791,7 +791,6 @@ WHERE product_id BETWEEN 1 AND 75;
 
 -- Початкове значення id
 SET @product_id = 3;
-
 -- Генерація 150 запитів
 DELIMITER //
 CREATE PROCEDURE InsertPackagingData()
@@ -818,9 +817,6 @@ DELIMITER ;
 -- Виклик процедури для генерації запитів
 CALL InsertPackagingData();
 
-# UPDATE products p
-# SET min_price = (select min(pac.cost) from packaging pac where pac.product_id = p.product_id)
-# where p.product_id > 0;
 
 UPDATE products p
 SET min_price = (select pac.cost

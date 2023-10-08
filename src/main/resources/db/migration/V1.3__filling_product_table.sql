@@ -634,14 +634,14 @@ insert into pictures
     (product_id, url_path)
     value (25, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (1, '200', 159);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (1, '200', 159);
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (1, '500', 688);
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (1, '1000', 283);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (2, '200', 436);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (2, '200', 436);
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (2, '500', 322);
 # INSERT INTO packaging(product_id, amount, cost)
@@ -828,4 +828,3 @@ SET min_price = (select pac.cost
                  where pac.product_id = p.product_id
                    and amount = (select min(amount) from packaging pg where pg.product_id = p.product_id))
 where p.product_id > 0;
-# some

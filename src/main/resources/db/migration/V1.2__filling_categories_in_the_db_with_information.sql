@@ -3,7 +3,7 @@ use svitsmachnogo;
 
 insert into categories(category_id, name, fill_picture_url, hover_picture_url)
 value ('grocery' ,'Бакалія', 'https://storage.googleapis.com/svsmach/categories/Bakalija%20Status%3DFill.svg',
-       'https://storage.googleapis.com/svsmach/categories/Bakalija+Status%3DHover.svg');
+       'https://storage.googleapis.com/svsmach/categories/Bakalija%20Status%3DHover.svg');
 insert into categories(category_id, name, fill_picture_url, hover_picture_url)
     value ('dried_fruits', 'Сухофрукти' , 'https://storage.googleapis.com/svsmach/categories/Dry%20fruits%20Status%3DFill.svg',
            'https://storage.googleapis.com/svsmach/categories/Dry%20fruits%20%20Status%3DHover.svg');

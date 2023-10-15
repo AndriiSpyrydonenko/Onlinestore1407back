@@ -512,127 +512,126 @@ insert into products
 
 insert into pictures
     (product_id, url_path)
-    value (1, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9A%D0%B2%D0%B0%D1%81%D0%BE%D0%BB%D1%8F+%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
+    value (1, 'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0%20%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (2, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0+%D0%B1%D1%96%D0%BB%D0%B0.jpg');
+    value (2, 'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0%20%D0%B1%D1%96%D0%BB%D0%B0.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (3, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0+%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
+    value (3, 'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0%20%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
+insert into pictures
+    (product_id, url_path)
+    value (4, 'https://storage.googleapis.com/svsmach/products/%D0%A7%D0%B5%D1%87%D0%B5%D0%B2%D0%B8%D1%86%D1%8F%20%D0%A2%D1%83%D1%80%D0%B5%D1%87%D1%87%D0%B8%D0%BD%D0%B0.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (4, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%A7%D0%B5%D1%87%D0%B5%D0%B2%D0%B8%D1%86%D1%8F+%D0%A2%D1%83%D1%80%D0%B5%D1%87%D1%87%D0%B8%D0%BD%D0%B0.jpg');
+    value (5, 'https://storage.googleapis.com/svsmach/%D0%A7%D0%B5%D1%87%D0%B5%D0%B2%D0%B8%D1%86%D1%8F%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (5, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%A7%D0%B5%D1%87%D0%B5%D0%B2%D0%B8%D1%86%D1%8F+%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.jpg');
+    value (6, 'https://storage.googleapis.com/svsmach/products/%D0%A7%D1%96%D0%B0%20%D0%B1%D1%96%D0%BB%D0%B0.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (6, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%A7%D1%96%D0%B0+%D0%B1%D1%96%D0%BB%D0%B0.jpg');
+    value (7, 'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0%20%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (7, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0+%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
+    value (8, 'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%83%D1%80%D0%B0%D0%B3%D0%B0%20%D0%B4%D0%B6%D0%B0%D0%BC%D0%B1%D0%BE.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (8, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9A%D1%83%D1%80%D0%B0%D0%B3%D0%B0+%D0%B4%D0%B6%D0%B0%D0%BC%D0%B1%D0%BE.jpg');
+    value (9, 'https://storage.googleapis.com/svsmach/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA%20%D0%B2%20%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96_1.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (9, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA+%D0%B2+%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96_1.jpg');
+    value (9, 'https://storage.googleapis.com/svsmach/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA%20%D0%B2%20%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96_1.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (9, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA+%D0%B2+%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96_1.jpg');
+    value (9, 'https://storage.googleapis.com/svsmach/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA%20%D0%B2%20%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (9, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA+%D0%B2+%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96.jpg');
+    value (10, 'https://storage.googleapis.com/svsmach/products/%D1%87%D0%BE%D1%80%D0%BD%D0%BE%D1%81%D0%BB%D0%B8%D0%B2%20%D0%B2%D1%8F%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (10, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D1%87%D0%BE%D1%80%D0%BD%D0%BE%D1%81%D0%BB%D0%B8%D0%B2+%D0%B2%D1%8F%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+    value (11, 'https://storage.googleapis.com/svsmach/products/%D1%87%D0%BE%D1%80%D0%BD%D0%BE%D1%81%D0%BB%D0%B8%D0%B2%20%D0%BA%D0%BE%D0%BF%D1%87%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (11, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D1%87%D0%BE%D1%80%D0%BD%D0%BE%D1%81%D0%BB%D0%B8%D0%B2+%D0%BA%D0%BE%D0%BF%D1%87%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+    value (12, 'https://storage.googleapis.com/svsmach/products/caf7d1fde344b318f1bc619ac84104af.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (12, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/caf7d1fde344b318f1bc619ac84104af.jpg');
+    value (13, 'https://storage.googleapis.com/svsmach/products/%D0%9C%D0%B0%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%D1%96.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (13, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9C%D0%B0%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%D1%96.jpg');
+    value (13, 'https://storage.googleapis.com/svsmach/products/%D0%9C%D0%B0%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%D1%96%2B%20%D1%87%D0%BB%D1%8E%D1%87%D0%B8%D0%BA.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (13, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%9C%D0%B0%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%D1%96%2B+%D1%87%D0%BB%D1%8E%D1%87%D0%B8%D0%BA.jpg');
+    value (14, 'https://storage.googleapis.com/svsmach/products/IMG_0123.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (14, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/IMG_0123.jpg');
+    value (14, 'https://storage.googleapis.com/svsmach/products/IMG_0123%2B.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (14, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/IMG_0123%2B.jpg');
+    value (14, 'https://storage.googleapis.com/svsmach/products/IMG_0123%2B%2B.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (14, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/IMG_0123%2B%2B.jpg');
+    value (15, 'https://storage.googleapis.com/svsmach/products/%D0%BA%D0%B5%D1%88%D1%8E%20%D0%BD%D0%B5%20%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9%202.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (15, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D0%BD%D0%B5+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9+2.jpg');
+    value (15, 'https://storage.googleapis.com/svsmach/products/%D0%BA%D0%B5%D1%88%D1%8E%20%D0%BD%D0%B5%20%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (15, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D0%BD%D0%B5+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+    value (16, 'https://storage.googleapis.com/svsmach/products/%D0%BA%D0%B5%D1%88%D1%8E%20%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (16, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BA%D0%B5%D1%88%D1%8E+%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+    value (17, 'https://storage.googleapis.com/svsmach/products/%D0%B7%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%B1%D0%BE%D1%80%D1%89%D1%83%20100%D0%B3%D1%80.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (17, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/dressing_for_borscht.jpg');
+    value (18, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C%20%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9%20%D0%B3%D0%BE%D1%80%D0%BE%D1%88%D0%BE%D0%BA.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (18, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C+%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9+%D0%B3%D0%BE%D1%80%D0%BE%D1%88%D0%BE%D0%BA.jpg');
+    value (19, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C%20%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9%20%D0%BC%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (19, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C+%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9+%D0%BC%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+    value (20, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D1%80%D0%B8%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%83%D1%85%D0%B8.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (20, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%BF%D1%80%D0%B8%D0%BF%D1%80%D0%B0%D0%B2%D0%B0+%D0%B4%D0%BB%D1%8F+%D1%83%D1%85%D0%B8.jpg');
+    value (21, 'https://storage.googleapis.com/svsmach/products/%D0%A1%D0%BC%D0%B5%D1%81%D1%8C%2010%20%D0%BE%D0%B2%D0%BE%D1%87%D0%B5%D0%B9%20110%D0%B3%D1%80.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (21, 'https://vidronuts.s3.eu-north-1.amazonaws.com/products/%D0%A1%D0%BC%D0%B5%D1%81%D1%8C+10+%D0%BE%D0%B2%D0%BE%D1%87%D0%B5%D0%B9+110%D0%B3%D1%80.jpg');
+    value (22, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C%20%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9%20%D0%B3%D0%BE%D1%80%D0%BE%D1%88%D0%BE%D0%BA.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (22, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
+    value (23, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C%20%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9%20%D0%BC%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (23, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
+    value (24, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D1%80%D0%B8%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%83%D1%85%D0%B8.jpg');
 
 insert into pictures
     (product_id, url_path)
-    value (24, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
-
-insert into pictures
-    (product_id, url_path)
-    value (25, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
+    value (25, 'https://storage.googleapis.com/svsmach/products/%D0%A1%D0%BC%D0%B5%D1%81%D1%8C%2010%20%D0%BE%D0%B2%D0%BE%D1%87%D0%B5%D0%B9%20110%D0%B3%D1%80.jpg');
 
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (1, '200', 159);

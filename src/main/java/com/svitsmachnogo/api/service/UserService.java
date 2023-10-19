@@ -43,8 +43,14 @@ public class UserService implements UserDetailsService {
     }
 
     public void createNewUser(User user) throws UserAlreadyExistException {
-//        repository.findByEmail(user.getEmail()).ifPresent( u -> exist.set(true));
-        //todo: add user
+        if(isExist(user)){  // if such user exist then throw exception
+            throwException(user.getEmail());
+        }
+        repository.save(user);
+    }
+
+    private boolean isExist(User user){
+            return repository.findByEmail(user.getEmail()).isPresent();
     }
 
     private void throwException(String email) throws UserAlreadyExistException {

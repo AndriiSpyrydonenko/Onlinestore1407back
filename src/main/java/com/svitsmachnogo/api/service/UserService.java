@@ -12,26 +12,31 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
     private final RoleService roleService;
 
-    public Optional<User> findByEmail(String email){
-        return repository.findByEmail(email);
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException(
-                String.format("User with '%s' email not found!!!", username)
+        return loadUserByEmail(username);
+    }
+
+    private UserDetails loadUserByEmail(String email) {
+        User user = findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(
+                String.format("User with '%s' email not found!!!", email)
         ));
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
@@ -43,14 +48,15 @@ public class UserService implements UserDetailsService {
     }
 
     public void createNewUser(User user) throws UserAlreadyExistException {
-        if(isExist(user)){  // if such user exist then throw exception
+        if (isExist(user)) {  // if such a user exist , throw an exception
             throwException(user.getEmail());
         }
-        repository.save(user);
+        user.setRoles(List.of(roleService.findByName("ROLE_USER").get()));
+        userRepository.save(user);
     }
 
-    private boolean isExist(User user){
-            return repository.findByEmail(user.getEmail()).isPresent();
+    private boolean isExist(User user) {
+        return userRepository.findByEmail(user.getEmail()).isPresent();
     }
 
     private void throwException(String email) throws UserAlreadyExistException {

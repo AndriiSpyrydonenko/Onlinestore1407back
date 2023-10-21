@@ -2,11 +2,15 @@ package com.svitsmachnogo.api.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Data
+@EqualsAndHashCode
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 

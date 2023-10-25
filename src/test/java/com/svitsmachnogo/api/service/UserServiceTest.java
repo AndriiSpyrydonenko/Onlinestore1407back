@@ -1,9 +1,12 @@
 package com.svitsmachnogo.api.service;
 
+import com.svitsmachnogo.api.domain.dao.abstractional.RoleRepository;
 import com.svitsmachnogo.api.domain.dao.abstractional.UserRepository;
 import com.svitsmachnogo.api.domain.entity.Role;
 import com.svitsmachnogo.api.domain.entity.User;
 import com.svitsmachnogo.api.exceptions.UserAlreadyExistException;
+import com.svitsmachnogo.api.service.abstractional.RoleService;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +22,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -30,6 +32,9 @@ class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private RoleService roleService;
 
     User user = new User();
 
@@ -73,10 +78,6 @@ class UserServiceTest {
     public void loadUserByUsernameReturnUserDetails(){
         Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.of(user));
 
-        Role adminRole = new Role();
-        adminRole.setName("ADMIN ROLE");
-        user.setRoles(List.of(role, adminRole));
-
         UserDetails userDetails = userService.loadUserByUsername("user@mail.com");
 
         Assertions.assertEquals(user.getEmail(), userDetails.getUsername());
@@ -99,6 +100,7 @@ class UserServiceTest {
     public void createNewUserSaveUserWhenUserDoseNotExist() {
 
         Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.empty());
+        Mockito.when(roleService.findByName("ROLE_USER")).thenReturn(Optional.of(role));
 
         userService.createNewUser(user);
 

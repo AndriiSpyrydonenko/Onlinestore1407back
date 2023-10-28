@@ -1,13 +1,10 @@
 package com.svitsmachnogo.api.service;
 
-import com.svitsmachnogo.api.domain.dao.abstractional.RoleRepository;
 import com.svitsmachnogo.api.domain.dao.abstractional.UserRepository;
 import com.svitsmachnogo.api.domain.entity.Role;
 import com.svitsmachnogo.api.domain.entity.User;
-import com.svitsmachnogo.api.exceptions.UserAlreadyExistException;
+import com.svitsmachnogo.api.dto.RegistrationUserDTO;
 import com.svitsmachnogo.api.service.abstractional.RoleService;
-import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,9 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +25,7 @@ import java.util.Optional;
 class UserServiceTest {
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Mock
     private UserRepository userRepository;
@@ -36,23 +33,64 @@ class UserServiceTest {
     @Mock
     private RoleService roleService;
 
-    User user = new User();
+    @Mock
+    private PasswordEncoder encoder;
 
-    Role role = new Role();
+    private User user = new User();
+
+    private Role userRole = new Role();
+
+    private Role adminRole = new Role();
+
+    private RegistrationUserDTO userDTO = new RegistrationUserDTO();
 
     @BeforeEach
-    public void createTestUser(){
-        role.setId(1);
-        role.setName("USER ROLE");
+    public void createTestUser() {
+        userRole.setId(1);
+        userRole.setName("ROLE_USER");
         user.setId(1L);
         user.setEmail("user@mail.com");
         user.setPassword("123");
         user.setName("Bob");
-        user.setRoles(List.of(role));
+        user.setRoles(List.of(userRole));
+    }
+
+
+    private void createTestAdmin() {
+        adminRole.setId(2);
+        adminRole.setName("ROLE_ADMIN");
+        user.setId(2L);
+        user.setEmail("admin@mail.com");
+        user.setPassword("123");
+        user.setName("Tom");
+        user.setRoles(List.of(userRole, adminRole));
+    }
+
+    private void createUserDTO(){
+        userDTO.setName("Bob");
+        userDTO.setEmail("user@mail.com");
+        userDTO.setPassword("123");
+        userDTO.setConfirmPassword("123");
     }
 
     @Test
-    public void loadUserByUsernameIfUserNotFoundThrowException(){
+    public void findByEmailIfNoSuchUserExist() {
+        Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.empty());
+
+        Optional<User> userOptional = userService.findByEmail("user@mail.com");
+        Assertions.assertFalse(userOptional.isPresent());
+    }
+
+    @Test
+    public void findByEmailIfUserExist() {
+        Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.of(user));
+
+        Optional<User> userOptional = userService.findByEmail("user@mail.com");
+        Assertions.assertTrue(userOptional.isPresent());
+    }
+
+    @Test
+    public void loadUserByUsernameIfUserNotFoundThrowException() {
 
         Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.empty());
 
@@ -60,52 +98,109 @@ class UserServiceTest {
     }
 
     @Test
-    public void loadUserByUsernameThrowExceptionWithEmail(){
+    public void loadUserByUsernameThrowExceptionWithEmail() {
 
         Mockito.when(userRepository.findByEmail("cleanBob@mail.com")).thenReturn(Optional.empty());
 
         String message = "";
-        try{
+        try {
             userService.loadUserByUsername("cleanBob@mail.com");
-        }catch (UsernameNotFoundException e){
-           message =  e.getMessage();
+        } catch (UsernameNotFoundException e) {
+            message = e.getMessage();
         }
 
         Assertions.assertTrue(message.contains("cleanBob@mail.com"));
     }
 
     @Test
-    public void loadUserByUsernameReturnUserDetails(){
+    public void loadUserByUsernameShouldReturnUserDetailsWhenUserHasOneRole() {
         Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.of(user));
 
         UserDetails userDetails = userService.loadUserByUsername("user@mail.com");
 
-        Assertions.assertEquals(user.getEmail(), userDetails.getUsername());
-        Assertions.assertEquals(user.getPassword(), userDetails.getPassword());
-        Assertions.assertLinesMatch(user.getRoles().stream().map(Role::getName),
-                userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority));
+        Assertions.assertEquals("user@mail.com", userDetails.getUsername());
+        Assertions.assertEquals("123", userDetails.getPassword());
+        Assertions.assertEquals("ROLE_USER",
+                userDetails.getAuthorities().stream().findFirst().get().toString());
 
     }
 
     @Test
-    public void createNewUserThrowExceptionWhenUserExist() {
+    public void loadUserByUsernameShouldReturnUserDetailsWhenUserHasTwoRole() {
+        createTestAdmin();
 
-        Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.of(user));
+        Mockito.when(userRepository.findByEmail("admin@mail.com")).thenReturn(Optional.of(user));
 
-        Assertions.assertThrows(UserAlreadyExistException.class, () -> userService.createNewUser(user));
+        UserDetails userDetails = userService.loadUserByUsername("admin@mail.com");
+
+        assertionsWhenUserHasTwoRoles(userDetails);
     }
 
-    @SneakyThrows
     @Test
-    public void createNewUserSaveUserWhenUserDoseNotExist() {
+    public void convertToUserDetailsShouldReturnSameUserDetails(){
+        UserDetails userDetails = userService.convertToUserDetails(user);
 
-        Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.empty());
-        Mockito.when(roleService.findByName("ROLE_USER")).thenReturn(Optional.of(role));
-
-        userService.createNewUser(user);
-
-        Mockito.verify(userRepository, Mockito.times(1)).save(user);
+        Assertions.assertEquals("user@mail.com", userDetails.getUsername());
+        Assertions.assertEquals("123", userDetails.getPassword());
+        Assertions.assertEquals("ROLE_USER",
+                userDetails.getAuthorities().stream().findFirst().get().toString());
     }
+
+    @Test
+    public void convertToUserDetailsShouldReturnSameUserDetailsWhenUserHasTwoRoles(){
+        createTestAdmin();
+
+        UserDetails userDetails = userService.convertToUserDetails(user);
+
+        assertionsWhenUserHasTwoRoles(userDetails);
+    }
+
+    private static void assertionsWhenUserHasTwoRoles(UserDetails userDetails) {
+        String[] roles = {"ROLE_ADMIN", "ROLE_USER"};
+        Object[] grantAuthorities = userDetails.getAuthorities().toArray();
+
+        Assertions.assertEquals("admin@mail.com", userDetails.getUsername());
+        Assertions.assertEquals("123", userDetails.getPassword());
+        for (int i = 0; i < roles.length; i++) {
+            Assertions.assertEquals(roles[i], grantAuthorities[i].toString());
+        }
+    }
+
+    @Test
+    public void createNewUserShouldReturnSavedUser(){
+        createUserDTO();
+        user.setId(null);
+
+        Mockito.when(encoder.encode(userDTO.getPassword())).thenReturn("123");
+        Mockito.when(roleService.findByName("ROLE_USER")).thenReturn(Optional.of(userRole));
+        Mockito.when(userRepository.save(user)).thenReturn(user);
+
+        User returnedUser = userService.createNewUser(userDTO);
+
+        Assertions.assertEquals(user ,returnedUser );
+
+    }
+
+
+//    @Test
+//    public void createNewUserThrowExceptionWhenUserExist() {
+//
+//        Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.of(user));
+//
+//        Assertions.assertThrows(UserAlreadyExistException.class, () -> userService.createNewUser(user));
+//    }
+//
+//    @SneakyThrows
+//    @Test
+//    public void createNewUserSaveUserWhenUserDoseNotExist() {
+//
+//        Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.empty());
+//        Mockito.when(roleService.findByName("ROLE_USER")).thenReturn(Optional.of(role));
+//
+//        userService.createNewUser(user);
+//
+//        Mockito.verify(userRepository, Mockito.times(1)).save(user);
+//    }
 
     //todo: crate tests for private methods
 

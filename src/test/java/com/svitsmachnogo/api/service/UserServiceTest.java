@@ -37,13 +37,13 @@ class UserServiceTest {
     @Mock
     private PasswordEncoder encoder;
 
-    private User user = new User();
+    private  final User user = new User();
 
-    private Role userRole = new Role();
+    private final Role userRole = new Role();
 
-    private Role adminRole = new Role();
+    private final Role adminRole = new Role();
 
-    private RegistrationUserDTO userDTO = new RegistrationUserDTO();
+    private final RegistrationUserDTO userDTO = new RegistrationUserDTO();
 
     @BeforeEach
     public void createTestUser() {

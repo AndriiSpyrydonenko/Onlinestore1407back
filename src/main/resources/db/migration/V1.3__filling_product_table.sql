@@ -527,7 +527,7 @@ insert into pictures
 
 insert into pictures
     (product_id, url_path)
-    value (5, 'https://storage.googleapis.com/svsmach/%D0%A7%D0%B5%D1%87%D0%B5%D0%B2%D0%B8%D1%86%D1%8F%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.jpg');
+    value (5, 'https://storage.googleapis.com/svsmach/products/%D0%A7%D0%B5%D1%87%D0%B5%D0%B2%D0%B8%D1%86%D1%8F%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.jpg');
 
 insert into pictures
     (product_id, url_path)

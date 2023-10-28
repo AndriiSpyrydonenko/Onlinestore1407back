@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -90,7 +91,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void loadUserByUsernameIfUserNotFoundThrowException() {
+    public void loadUserByUsernameIfUserNotFoundThrowsException() {
 
         Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.empty());
 
@@ -98,7 +99,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void loadUserByUsernameThrowExceptionWithEmail() {
+    public void loadUserByUsernameThrowsExceptionWithEmail() {
 
         Mockito.when(userRepository.findByEmail("cleanBob@mail.com")).thenReturn(Optional.empty());
 
@@ -181,27 +182,15 @@ class UserServiceTest {
 
     }
 
+    @Test
+    public void createNewUserShouldThrowsExceptionIfRoleDoseNotExist(){
 
-//    @Test
-//    public void createNewUserThrowExceptionWhenUserExist() {
-//
-//        Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.of(user));
-//
-//        Assertions.assertThrows(UserAlreadyExistException.class, () -> userService.createNewUser(user));
-//    }
-//
-//    @SneakyThrows
-//    @Test
-//    public void createNewUserSaveUserWhenUserDoseNotExist() {
-//
-//        Mockito.when(userRepository.findByEmail("user@mail.com")).thenReturn(Optional.empty());
-//        Mockito.when(roleService.findByName("ROLE_USER")).thenReturn(Optional.of(role));
-//
-//        userService.createNewUser(user);
-//
-//        Mockito.verify(userRepository, Mockito.times(1)).save(user);
-//    }
+        createUserDTO();
 
-    //todo: crate tests for private methods
+        Mockito.when(encoder.encode(userDTO.getPassword())).thenReturn("123");
+        Mockito.when(roleService.findByName("ROLE_USER")).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(NoSuchElementException.class, () -> userService.createNewUser(userDTO));
+    }
 
 }

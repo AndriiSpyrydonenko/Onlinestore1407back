@@ -3,8 +3,6 @@ package com.svitsmachnogo.api.service;
 import com.svitsmachnogo.api.domain.dao.abstractional.UserRepository;
 import com.svitsmachnogo.api.domain.entity.User;
 import com.svitsmachnogo.api.dto.RegistrationUserDTO;
-import com.svitsmachnogo.api.exceptions.DifferentPasswordsExceptions;
-import com.svitsmachnogo.api.exceptions.UserAlreadyExistException;
 import com.svitsmachnogo.api.service.abstractional.RoleService;
 import com.svitsmachnogo.api.service.abstractional.UserService;
 import jakarta.transaction.Transactional;
@@ -16,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository         userRepository;
+    private final UserRepository userRepository;
 
     private final RoleService roleService;
 
@@ -60,10 +59,9 @@ public class UserServiceImpl implements UserService {
      *
      * @param email The email address of the user to be loaded.
      * @return {@link UserDetails} object representing the user.
-     * @throws {@link UsernameNotFoundException} If the user with the given email is not found.
      * @author Vanya Demydenko
      */
-    private UserDetails loadUserByEmail(String email) {
+    private UserDetails loadUserByEmail(String email) throws UsernameNotFoundException {
         User user = findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(
                 String.format("User with '%s' email not found!!!", email)
         ));
@@ -76,16 +74,14 @@ public class UserServiceImpl implements UserService {
      *
      * @param userDTO The {@link RegistrationUserDTO} object containing the new user's data.
      * @return ResponseEntity with the generated token.
-     * @throws {@link DifferentPasswordsExceptions} If the passwords do not match.
-     * @throws {@link UserAlreadyExistException} If a user with the same name already exists.
      * @author Vanya Demydenko
      */
-    public User createNewUser(RegistrationUserDTO userDTO){
+    public User createNewUser(RegistrationUserDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setRoles(List.of(roleService.findByName("ROLE_USER").get()));
+        user.setRoles(List.of(roleService.findByName("ROLE_USER").orElseThrow(NoSuchElementException::new)));
         return userRepository.save(user);
     }
 
@@ -96,7 +92,7 @@ public class UserServiceImpl implements UserService {
      * @return A {@link org.springframework.security.core.userdetails.User} object representing the user.
      * @author Vanya Demydenko
      */
-    public org.springframework.security.core.userdetails.User convertToUserDetails(User user){
+    public org.springframework.security.core.userdetails.User convertToUserDetails(User user) {
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class AuthError {
+public class AppError {
 
     private int status;
 
@@ -13,7 +13,7 @@ public class AuthError {
 
     private Date timestamp;
 
-    public AuthError(int status, String message) {
+    public AppError(int status, String message) {
         this.status = status;
         this.message = message;
         this.timestamp = new Date();

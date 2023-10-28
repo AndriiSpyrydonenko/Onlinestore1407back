@@ -16,7 +16,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
      * @throws BadCredentialsException
      * @author Vanya Demydenko
      */
-    public ResponseEntity<?> createJwtForUser(JwtRequestDTO authRequest) {
+    public ResponseEntity<JwtResponseDTO> createJwtForUser(JwtRequestDTO authRequest) throws BadCredentialsException {
         authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
         return ResponseEntity.ok(generateTokenByUserDetails(userService.loadUserByUsername(authRequest.getEmail())));
@@ -54,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
      * @throws UserAlreadyExistException   If a user with the same name already exists.
      * @author Vanya Demydenko
      */
-    public ResponseEntity<?> createNewUser(@RequestBody RegistrationUserDTO userDTO) throws DifferentPasswordsExceptions, UserAlreadyExistException {
+    public ResponseEntity<JwtResponseDTO> createNewUser(RegistrationUserDTO userDTO) throws DifferentPasswordsExceptions, UserAlreadyExistException {
         verification(userDTO);
         User user = userService.createNewUser(userDTO);
         return ResponseEntity.ok(generateTokenByUserDetails(userService.convertToUserDetails(user)));
@@ -72,7 +71,7 @@ public class AuthServiceImpl implements AuthService {
         if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
             throw new DifferentPasswordsExceptions("Different password");
         }
-        if (isExist(userDTO.getEmail())) {  // if such a user exist , throw an exception
+        if (isExist(userDTO.getEmail())) {
             throw new UserAlreadyExistException(String.format("User with '%s' email already exist!!!", userDTO.getEmail()));
         }
     }

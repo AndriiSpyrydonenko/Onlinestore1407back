@@ -1,5 +1,6 @@
 package com.svitsmachnogo.api.utils;
 
+import com.svitsmachnogo.api.dto.RegistrationUserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -36,17 +37,29 @@ public class JwtTokenUtils {
         Date issuedDate = new Date();
         Date expiredDate = new Date(issuedDate.getTime() + jwtLifetime.toMillis());
 
-        return Jwts.builder()
-                .claims(claims)
-                .subject(userDetails.getUsername())
-                .issuedAt(issuedDate)
-                .expiration(expiredDate)
-                .signWith(getSigningKey())
-                .compact();
+        return buildJwt(userDetails.getUsername(), claims, issuedDate, expiredDate);
+    }
+
+    public String generateConfirmLink(RegistrationUserDTO userDTO){
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("name", userDTO.getName());
+        claims.put("password", userDTO.getPassword());
+        Date issuedDate = new Date();
+        Date expiredDate = new Date(issuedDate.getTime() + jwtLifetime.toMillis());
+
+        return buildJwt(userDTO.getEmail(), claims, issuedDate, expiredDate);
     }
 
     public String getUserEmail(String token){
         return getAllClaimsFromToken(token).getSubject();
+    }
+
+    public String getPassword(String token){
+        return getAllClaimsFromToken(token).get("password",String.class);
+    }
+
+    public String getName(String token){
+        return getAllClaimsFromToken(token).get("name",String.class);
     }
 
     public List<String> getRoles(String token){
@@ -63,5 +76,15 @@ public class JwtTokenUtils {
 
     private SecretKey getSigningKey(){
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private String buildJwt(String subject, Map<String, Object> claims, Date issuedDate, Date expiredDate) {
+        return Jwts.builder()
+                .claims(claims)
+                .subject(subject)
+                .issuedAt(issuedDate)
+                .expiration(expiredDate)
+                .signWith(getSigningKey())
+                .compact();
     }
 }

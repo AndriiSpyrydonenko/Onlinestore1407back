@@ -37,7 +37,7 @@ class UserServiceTest {
     @Mock
     private PasswordEncoder encoder;
 
-    private  final User user = new User();
+    private final User user = new User();
 
     private final Role userRole = new Role();
 
@@ -67,7 +67,7 @@ class UserServiceTest {
         user.setRoles(List.of(userRole, adminRole));
     }
 
-    private void createUserDTO(){
+    private void createUserDTO() {
         userDTO.setName("Bob");
         userDTO.setEmail("user@mail.com");
         userDTO.setPassword("123");
@@ -138,7 +138,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void convertToUserDetailsShouldReturnSameUserDetails(){
+    public void convertToUserDetailsShouldReturnSameUserDetails() {
         UserDetails userDetails = userService.convertToUserDetails(user);
 
         Assertions.assertEquals("user@mail.com", userDetails.getUsername());
@@ -148,7 +148,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void convertToUserDetailsShouldReturnSameUserDetailsWhenUserHasTwoRoles(){
+    public void convertToUserDetailsShouldReturnSameUserDetailsWhenUserHasTwoRoles() {
         createTestAdmin();
 
         UserDetails userDetails = userService.convertToUserDetails(user);
@@ -168,7 +168,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void createNewUserShouldReturnSavedUser(){
+    public void createNewUserShouldReturnSavedUser() {
         createUserDTO();
         user.setId(null);
 
@@ -178,12 +178,12 @@ class UserServiceTest {
 
         User returnedUser = userService.createNewUser(userDTO);
 
-        Assertions.assertEquals(user ,returnedUser );
+        Assertions.assertEquals(user, returnedUser);
 
     }
 
     @Test
-    public void createNewUserShouldThrowsExceptionIfRoleDoseNotExist(){
+    public void createNewUserShouldThrowsExceptionIfRoleDoseNotExist() {
 
         createUserDTO();
 

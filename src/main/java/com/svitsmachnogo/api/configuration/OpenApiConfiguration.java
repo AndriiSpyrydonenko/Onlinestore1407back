@@ -20,23 +20,26 @@ public class OpenApiConfiguration {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        Server server = new Server();
-        PathItem item = new PathItem();
-        Info info = createInfo();
-        item.$ref("/swagger-ui.html");
-        server.setUrl("https://svitsmachnogo.space");
         return new OpenAPI()
-                .servers(List.of(server))
-                .path("/swagger-ui.html", item)
-                .info(info);
+                .path("/swagger-ui.html", new PathItem().$ref("/swagger-ui.html"))
+                .servers(server())
+                .info(info());
     }
 
-    private Info createInfo(){
+    private Info info(){
         return new Info()
-                .title("Title")
+                .title("Svitsmachnogo API")
                 .version("Super-puper beta")
-                .summary("Svitsmachnogo API")
                 .description("Documentation for API of Svitsmachnogo online store.")
-                .contact(new Contact().email(email));
+                .contact(new Contact()
+                        .email(email)
+                        .name("Vanya Demydenko")
+                        .url("https://projectonline-store.slack.com/archives/C05H7AC7VT4"));
+    }
+
+    private List<Server> server(){
+        return List.of(new Server()
+                .url("https://svitsmachnogo.space")
+                .description("Default"));
     }
 }

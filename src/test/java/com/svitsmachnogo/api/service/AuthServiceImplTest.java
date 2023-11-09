@@ -9,7 +9,6 @@ import com.svitsmachnogo.api.exceptions.DifferentPasswordsExceptions;
 import com.svitsmachnogo.api.exceptions.UserAlreadyExistException;
 import com.svitsmachnogo.api.service.abstractional.UserService;
 import com.svitsmachnogo.api.utils.JwtTokenUtils;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +29,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-@RequiredArgsConstructor
+
 @ExtendWith(MockitoExtension.class)
 class AuthServiceImplTest {
 

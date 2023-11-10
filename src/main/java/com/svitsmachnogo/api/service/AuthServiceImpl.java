@@ -53,10 +53,15 @@ public class AuthServiceImpl implements AuthService {
      * @throws UserAlreadyExistException   If a user with the same name already exists.
      * @author Vanya Demydenko
      */
-    public ResponseEntity<JwtResponseDTO> createNewUser(RegistrationUserDTO userDTO) throws DifferentPasswordsExceptions, UserAlreadyExistException {
+    public ResponseEntity<JwtResponseDTO> registration(RegistrationUserDTO userDTO) throws DifferentPasswordsExceptions, UserAlreadyExistException {
         verification(userDTO);
         User user = userService.createNewUser(userDTO);
         return ResponseEntity.ok(generateTokenByUserDetails(userService.convertToUserDetails(user)));
+    }
+
+    @Override
+    public ResponseEntity<?> confirmation(String jwtUser) {
+        return null;
     }
 
     /**

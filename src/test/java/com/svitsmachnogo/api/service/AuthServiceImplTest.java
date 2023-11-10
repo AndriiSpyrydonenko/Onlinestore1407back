@@ -113,14 +113,14 @@ class AuthServiceImplTest {
     @Test
     public void createNewUserShouldThrowsExceptionIfRequestHasDiffPassword() {
         registrationUser.setConfirmPassword("1234");
-        Assertions.assertThrows(DifferentPasswordsExceptions.class, () -> authService.createNewUser(registrationUser));
+        Assertions.assertThrows(DifferentPasswordsExceptions.class, () -> authService.registration(registrationUser));
     }
 
     @SneakyThrows
     @Test
     public void createNewUserShouldThrowsExceptionIfSuchUserExist() {
         Mockito.when(userService.findByEmail("user@gmail.com")).thenReturn(Optional.of(new User()));
-        Assertions.assertThrows(UserAlreadyExistException.class, () -> authService.createNewUser(registrationUser));
+        Assertions.assertThrows(UserAlreadyExistException.class, () -> authService.registration(registrationUser));
     }
 
     @SneakyThrows
@@ -131,7 +131,7 @@ class AuthServiceImplTest {
         Mockito.when(userService.convertToUserDetails(user)).thenReturn(suser);
         Mockito.when(jwtTokenUtils.generateToken(suser)).thenReturn("mocked_token");
 
-        Assertions.assertEquals(200, authService.createNewUser(registrationUser).getStatusCode().value());
-        Assertions.assertEquals("mocked_token", Objects.requireNonNull(authService.createNewUser(registrationUser).getBody()).getToken());
+        Assertions.assertEquals(200, authService.registration(registrationUser).getStatusCode().value());
+        Assertions.assertEquals("mocked_token", Objects.requireNonNull(authService.registration(registrationUser).getBody()).getToken());
     }
 }

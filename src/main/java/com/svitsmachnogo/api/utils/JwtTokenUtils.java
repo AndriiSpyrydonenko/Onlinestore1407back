@@ -29,6 +29,9 @@ public class JwtTokenUtils {
     @Value("${jwt.lifetime}")
     private Duration jwtLifetime;
 
+    @Value("${jwt.confirm.lifetime}")
+    private Duration jwtConfirmLifetime;
+
     /**
      * Generates a JWT token for the provided UserDetails object, typically representing
      * user authentication information.
@@ -63,7 +66,7 @@ public class JwtTokenUtils {
         claims.put("name", userDTO.getName());
         claims.put("password", userDTO.getPassword());
         Date issuedDate = new Date();
-        Date expiredDate = new Date(issuedDate.getTime() + jwtLifetime.toMillis());
+        Date expiredDate = new Date(issuedDate.getTime() + jwtConfirmLifetime.toMillis());
 
         return buildJwt(userDTO.getEmail(), claims, issuedDate, expiredDate);
     }

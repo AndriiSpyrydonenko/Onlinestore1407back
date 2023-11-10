@@ -8,15 +8,13 @@ import java.util.List;
 
 public interface FilteringBlockService {
 
-    void refreshStateCategoryPageByCategoryId(String categoryId);
+    void buildDefaultFilteringBlockByCategoryId(String categoryId);
 
-    void refreshStateCategoryPageByCheckBox(String categoryId,
+    void buildFilteringBlockByFilterAspects(String categoryId,
                                             List<CheckboxForSubcategory> checkboxes ,
                                             PriceFilter priceFilter);
 
     List<BlockOfCriteria> getBlocksOfCriteria();
-
-//    void refreshPriceFilter(PriceFilter priceFilter);
 
     void clearState();
 

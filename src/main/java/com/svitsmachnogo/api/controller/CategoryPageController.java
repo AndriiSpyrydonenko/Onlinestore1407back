@@ -1,11 +1,11 @@
 package com.svitsmachnogo.api.controller;
 
-import com.svitsmachnogo.api.component.CategoryPage;
+import com.svitsmachnogo.api.service.CategoryPageService;
 import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.dto.*;
 import com.svitsmachnogo.api.exceptions.IncorrectSortingCriteriaException;
-import com.svitsmachnogo.api.service.abstractional.FilteringBlockService;
 import com.svitsmachnogo.api.service.abstractional.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,19 +18,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/category_page")
 public class CategoryPageController {
 
-    private final FilteringBlockService filteringBlockService;
-
     private final ProductService productService;
 
-    private final CategoryPage categoryPage;
+    private final CategoryPageService categoryPageService;
 
     @GetMapping("/price_filter/{categoryId}")
+    @Operation(summary = "returns a min and max price for the specify category")
     public PriceFilter getPriceFilterByCategoryId(@PathVariable String categoryId) {
         return productService.getDefaultPriceFilterByCategoryId(categoryId);
     }
 
+
     @PostMapping("/data/{categoryId}")
-    public CategoryPageDTO getProductsForCategoryPageWithFilterBlock(
+    @Operation(summary = "returns a list of subcategory and product page with amount of pages ")
+    public CategoryPageResponseDTO getProductsForCategoryPageWithFilterBlock(
             @PathVariable(name = "categoryId") String categoryId,
             @RequestParam(required = false, defaultValue = "0")
             @Parameter(description = "Page number to display.By default 0 ") int page,
@@ -40,25 +41,8 @@ public class CategoryPageController {
             @Parameter(description = "Criteria of sorting") String sort,
             @RequestBody(required = false) CategoryPageRequestDTO requestBody
     ) throws IncorrectSortingCriteriaException {
-        CategoryPageDTO pageAndFilterBlock = new CategoryPageDTO();
-        PageDataDTO<ProductDTO> products = new PageDataDTO<>();
 
-        if(requestBody != null) {
-            categoryPage.generatePage(categoryId, requestBody.getCheckboxes(), requestBody.getPriceFilter(),
-                    page, size, sort);
-        }else {
-            categoryPage.generatePage(categoryId, null, null,
-                    page, size, sort);
-        }
-        products.setData(ProductDTO.getList(categoryPage.getPageOfProducts().getContent()));
-        products.setPageCount(categoryPage.getPageOfProducts().getTotalPages());
-
-        pageAndFilterBlock.setPageOfProducts(products);
-        pageAndFilterBlock
-                .setBlockOfCriteria(BlockOfCriteriaDTO
-                        .blockOfCriteriaDTOList(filteringBlockService.getBlocksOfCriteria()));
-        filteringBlockService.clearState();
-        return pageAndFilterBlock;
+        return categoryPageService.getCategoryPage(categoryId, page, size, sort, requestBody);
     }
 
 }

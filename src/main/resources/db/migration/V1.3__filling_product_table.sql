@@ -508,282 +508,280 @@ insert into products
     value ('spices', 434902, 'Сіль', true, 0, 4.7, 60, 0, '2022-12-19 15:50:00', 'Україна',
            'Сіль для основних страв.');
 
+insert into pictures
+    (product_id, url_path)
+    value (1, 'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0%20%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
 
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (1, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/red_beans.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (2, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/white_quinoa.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (3, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/red_quinoa.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (4, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/%D1%82urkish_lentils.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (5, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/ukrain_lentils.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (6, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/white_chia.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (7, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cranberry.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (8, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/dried_apricots.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit2.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (9, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/date_fruit3.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (10, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/prunes.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (11, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/smoked_prunes.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (12, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/walnut_halves.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (13, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/macadamia.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (13, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/macadamia_with_key.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto_with_heap.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (14, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/alesto_with_big_heap.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (15, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cashew.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (15, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/cashew2.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (16, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/roasted_cashew.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (17, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/dressing_for_borscht.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (18, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (19, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (20, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (21, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (22, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/black_pepper.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (23, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/grind_black_pepper.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (24, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/for_fish.jpg');
-#
-# insert into pictures
-#     (product_id, url_path)
-#     value (25, 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/products/vegetables_mix.jpg');
+insert into pictures
+    (product_id, url_path)
+    value (2, 'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0%20%D0%B1%D1%96%D0%BB%D0%B0.jpg');
 
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (1, '200', 159);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (1, '500', 688);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (1, '1000', 283);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (2, '200', 436);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (2, '500', 322);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (2, '1000', 812);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (3, '200', 768);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (3, '500', 865);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (3, '1000', 112);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (4, '200', 853);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (4, '500', 925);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (4, '1000', 563);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (5, '200', 137);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (5, '500', 245);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (5, '1000', 587);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (6, '200', 913);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (6, '500', 517);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (6, '1000', 199);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (7, '200', 122);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (7, '500', 734);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (7, '1000', 607);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (8, '200', 617);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (8, '500', 843);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (8, '1000', 743);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (9, '200', 723);
+insert into pictures
+    (product_id, url_path)
+    value (3, 'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0%20%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
+insert into pictures
+    (product_id, url_path)
+    value (4, 'https://storage.googleapis.com/svsmach/products/%D0%A7%D0%B5%D1%87%D0%B5%D0%B2%D0%B8%D1%86%D1%8F%20%D0%A2%D1%83%D1%80%D0%B5%D1%87%D1%87%D0%B8%D0%BD%D0%B0.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (5, 'https://storage.googleapis.com/svsmach/products/%D0%A7%D0%B5%D1%87%D0%B5%D0%B2%D0%B8%D1%86%D1%8F%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (6, 'https://storage.googleapis.com/svsmach/products/%D0%A7%D1%96%D0%B0%20%D0%B1%D1%96%D0%BB%D0%B0.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (7, 'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0%20%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (8, 'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%83%D1%80%D0%B0%D0%B3%D0%B0%20%D0%B4%D0%B6%D0%B0%D0%BC%D0%B1%D0%BE.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (9, 'https://storage.googleapis.com/svsmach/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA%20%D0%B2%20%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96_1.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (9, 'https://storage.googleapis.com/svsmach/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA%20%D0%B2%20%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96_1.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (9, 'https://storage.googleapis.com/svsmach/products/%D1%84%D1%96%D0%BD%D1%96%D0%BA%20%D0%B2%20%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D1%86%D1%96.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (10, 'https://storage.googleapis.com/svsmach/products/%D1%87%D0%BE%D1%80%D0%BD%D0%BE%D1%81%D0%BB%D0%B8%D0%B2%20%D0%B2%D1%8F%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (11, 'https://storage.googleapis.com/svsmach/products/%D1%87%D0%BE%D1%80%D0%BD%D0%BE%D1%81%D0%BB%D0%B8%D0%B2%20%D0%BA%D0%BE%D0%BF%D1%87%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (12, 'https://storage.googleapis.com/svsmach/products/caf7d1fde344b318f1bc619ac84104af.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (13, 'https://storage.googleapis.com/svsmach/products/%D0%9C%D0%B0%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%D1%96.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (13, 'https://storage.googleapis.com/svsmach/products/%D0%9C%D0%B0%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%D1%96%2B%20%D1%87%D0%BB%D1%8E%D1%87%D0%B8%D0%BA.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (14, 'https://storage.googleapis.com/svsmach/products/IMG_0123.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (14, 'https://storage.googleapis.com/svsmach/products/IMG_0123%2B.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (14, 'https://storage.googleapis.com/svsmach/products/IMG_0123%2B%2B.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (15, 'https://storage.googleapis.com/svsmach/products/%D0%BA%D0%B5%D1%88%D1%8E%20%D0%BD%D0%B5%20%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9%202.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (15, 'https://storage.googleapis.com/svsmach/products/%D0%BA%D0%B5%D1%88%D1%8E%20%D0%BD%D0%B5%20%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (16, 'https://storage.googleapis.com/svsmach/products/%D0%BA%D0%B5%D1%88%D1%8E%20%D1%81%D0%BC%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (17, 'https://storage.googleapis.com/svsmach/products/%D0%B7%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%B1%D0%BE%D1%80%D1%89%D1%83%20100%D0%B3%D1%80.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (18, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C%20%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9%20%D0%B3%D0%BE%D1%80%D0%BE%D1%88%D0%BE%D0%BA.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (19, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C%20%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9%20%D0%BC%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (20, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D1%80%D0%B8%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%83%D1%85%D0%B8.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (21, 'https://storage.googleapis.com/svsmach/products/%D0%A1%D0%BC%D0%B5%D1%81%D1%8C%2010%20%D0%BE%D0%B2%D0%BE%D1%87%D0%B5%D0%B9%20110%D0%B3%D1%80.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (22, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C%20%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9%20%D0%B3%D0%BE%D1%80%D0%BE%D1%88%D0%BE%D0%BA.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (23, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D0%B5%D1%80%D0%B5%D1%86%D1%8C%20%D1%87%D0%BE%D1%80%D0%BD%D0%B8%D0%B9%20%D0%BC%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (24, 'https://storage.googleapis.com/svsmach/products/%D0%BF%D1%80%D0%B8%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%83%D1%85%D0%B8.jpg');
+
+insert into pictures
+    (product_id, url_path)
+    value (25, 'https://storage.googleapis.com/svsmach/products/%D0%A1%D0%BC%D0%B5%D1%81%D1%8C%2010%20%D0%BE%D0%B2%D0%BE%D1%87%D0%B5%D0%B9%20110%D0%B3%D1%80.jpg');
+
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (1, '200', 159);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (1, '500', 688);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (1, '1000', 283);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (2, '200', 436);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (2, '500', 322);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (2, '1000', 812);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (3, '200', 768);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (3, '500', 865);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (3, '1000', 112);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (4, '200', 853);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (4, '500', 925);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (4, '1000', 563);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (5, '200', 137);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (5, '500', 245);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (5, '1000', 587);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (6, '200', 913);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (6, '500', 517);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (6, '1000', 199);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (7, '200', 122);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (7, '500', 734);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (7, '1000', 607);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (8, '200', 617);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (8, '500', 843);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (8, '1000', 743);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (9, '200', 723);
+
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (9, '500', 950);
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (9, '1000', 546);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (10, '200', 856);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (10, '500', 382);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (10, '1000', 615);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (11, '200', 215);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (11, '500', 530);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (11, '1000', 314);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (12, '200', 415);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (12, '500', 381);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (12, '1000', 209);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (13, '200', 816);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (13, '500', 295);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (13, '1000', 968);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (14, '200', 762);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (14, '500', 872);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (14, '1000', 502);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (15, '200', 214);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (15, '500', 108);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (15, '1000', 921);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (16, '200', 244);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (16, '500', 292);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (16, '1000', 690);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (17, '200', 810);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (17, '500', 854);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (17, '1000', 409);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (18, '200', 245);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (18, '500', 543);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (18, '1000', 829);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (19, '200', 208);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (19, '500', 369);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (19, '1000', 800);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (20, '200', 581);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (20, '500', 237);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (20, '1000', 993);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (21, '200', 287);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (21, '500', 241);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (21, '1000', 256);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (22, '200', 917);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (22, '500', 609);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (22, '1000', 682);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (23, '200', 455);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (23, '500', 202);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (23, '1000', 956);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (24, '200', 738);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (24, '500', 802);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (24, '1000', 122);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (25, '200', 758);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (25, '500', 949);
-INSERT INTO packaging(product_id, amount, cost)
-VALUES (25, '1000', 590);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (10, '200', 856);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (10, '500', 382);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (10, '1000', 615);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (11, '200', 215);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (11, '500', 530);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (11, '1000', 314);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (12, '200', 415);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (12, '500', 381);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (12, '1000', 209);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (13, '200', 816);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (13, '500', 295);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (13, '1000', 968);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (14, '200', 762);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (14, '500', 872);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (14, '1000', 502);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (15, '200', 214);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (15, '500', 108);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (15, '1000', 921);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (16, '200', 244);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (16, '500', 292);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (16, '1000', 690);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (17, '200', 810);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (17, '500', 854);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (17, '1000', 409);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (18, '200', 245);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (18, '500', 543);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (18, '1000', 829);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (19, '200', 208);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (19, '500', 369);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (19, '1000', 800);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (20, '200', 581);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (20, '500', 237);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (20, '1000', 993);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (21, '200', 287);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (21, '500', 241);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (21, '1000', 256);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (22, '200', 917);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (22, '500', 609);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (22, '1000', 682);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (23, '200', 455);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (23, '500', 202);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (23, '1000', 956);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (24, '200', 738);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (24, '500', 802);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (24, '1000', 122);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (25, '200', 758);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (25, '500', 949);
+# INSERT INTO packaging(product_id, amount, cost)
+# VALUES (25, '1000', 590);
 
 update packaging
 set amount = 250
@@ -794,7 +792,7 @@ SET number_of_orders = FLOOR(RAND() * 100) + 1
 WHERE product_id BETWEEN 1 AND 75;
 
 -- Початкове значення id
-SET @product_id = 26;
+SET @product_id = 1;
 
 -- Генерація 150 запитів
 DELIMITER //
@@ -802,7 +800,7 @@ CREATE PROCEDURE InsertPackagingData()
 BEGIN
     DECLARE i INT DEFAULT 1;
 
-    WHILE i <= 50
+    WHILE i <= 75
         DO
             INSERT INTO packaging(product_id, amount, cost)
             VALUES (@product_id, '200', FLOOR(RAND() * (500 - 100 + 1) + 100));

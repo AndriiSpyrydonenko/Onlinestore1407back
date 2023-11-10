@@ -1,10 +1,14 @@
 package com.svitsmachnogo.api.dto;
 
 import com.svitsmachnogo.api.component.BlockOfCriteria;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
 public class BlockOfCriteriaDTO {
     private String title;
 
@@ -25,21 +29,5 @@ public class BlockOfCriteriaDTO {
                 .stream()
                 .map(BlockOfCriteriaDTO::create)
                 .collect(Collectors.toList());
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<SubcategoryDTO> getSubcategories() {
-        return subcategories;
-    }
-
-    public void setSubcategories(List<SubcategoryDTO> subcategories) {
-        this.subcategories = subcategories;
     }
 }

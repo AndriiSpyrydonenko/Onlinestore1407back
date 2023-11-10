@@ -1,25 +1,24 @@
 use svitsmachnogo;
 
 
-
 insert into categories(category_id, name, fill_picture_url, hover_picture_url)
-value ('grocery' ,'Бакалія', 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Bakalija+Status%3DFill.svg',
-       'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Bakalija+Status%3DHover.svg');
+value ('grocery' ,'Бакалія', 'https://storage.googleapis.com/svsmach/categories/Bakalija%20Status%3DFill.svg',
+       'https://storage.googleapis.com/svsmach/categories/Bakalija%20Status%3DHover.svg');
 insert into categories(category_id, name, fill_picture_url, hover_picture_url)
-    value ('dried_fruits', 'Сухофрукти' , 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Dry+fruits+Status%3DFill.svg',
-           'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Dry+fruits++Status%3DHover.svg');
+    value ('dried_fruits', 'Сухофрукти' , 'https://storage.googleapis.com/svsmach/categories/Dry%20fruits%20Status%3DFill.svg',
+           'https://storage.googleapis.com/svsmach/categories/Dry%20fruits%20%20Status%3DHover.svg');
 insert into categories(category_id, name, fill_picture_url, hover_picture_url)
-    value ('honey', 'Мед' , 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Honey+Status%3DFill.svg',
-           'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Honey+Status%3DHover.svg');
+    value ('honey', 'Мед' , 'https://storage.googleapis.com/svsmach/categories/Honey%20Status%3DFill.svg',
+           'https://storage.googleapis.com/svsmach/categories/Honey%20Status%3DHover.svg');
 insert into categories(category_id, name, fill_picture_url, hover_picture_url)
-    value ('nuts', 'Горіхи' , 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Nuts+Status%3DFill.svg',
-           'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Nuts+Status%3DHover.svg');
+    value ('nuts', 'Горіхи' , 'https://storage.googleapis.com/svsmach/categories/Nuts%20Status%3DFill.svg',
+           'https://storage.googleapis.com/svsmach/categories/Nuts%20Status%3DHover.svg');
 insert into categories(category_id, name, fill_picture_url, hover_picture_url)
-    value ('oil', 'Олія' , 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Oil+Status%3DFill.svg',
-           'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Oil+Status%3DHover.svg');
+    value ('oil', 'Олія' , 'https://storage.googleapis.com/svsmach/categories/Oil%20Status%3DFill.svg',
+           'https://storage.googleapis.com/svsmach/categories/Oil%20Status%3DHover.svg');
 insert into categories(category_id, name, fill_picture_url, hover_picture_url)
-    value ('spices', 'Спеції' , 'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Spices++Status%3DFill.svg',
-           'https://svitsmachnogo.s3.eu-central-1.amazonaws.com/categories/Spices+Status%3DHover.svg');
+    value ('spices', 'Спеції' , 'https://storage.googleapis.com/svsmach/categories/Spices%20%20Status%3DFill.svg',
+           'https://storage.googleapis.com/svsmach/categories/Spices%20Status%3DHover.svg');
 
 insert into gift_sets(url_picture, discount_percent)
-value ('https://svitsmachnogo.space/apps/photos/api/v1/preview/156?etag=c4195f20515569d476a73f46f420dd81&x=512&y=512' , 50);
+value ('https://storage.googleapis.com/svsmach/categories/Form_for_pic.png' , 50);

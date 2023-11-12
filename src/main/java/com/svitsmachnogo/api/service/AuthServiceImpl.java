@@ -52,13 +52,15 @@ public class AuthServiceImpl implements AuthService {
     }
 
     /**
-     * Creates a new user based on the provided data and returns a ResponseEntity
-     * with a generated token.
+     * Handles the user registration process.
      *
-     * @param userDTO The RegistrationUserDTO object containing the new user's data.
-     * @return ResponseEntity with the generated token.
-     * @throws DifferentPasswordsExceptions If the passwords do not match.
-     * @throws UserAlreadyExistException    If a user with the same name already exists.
+     * <p>This method validates the provided user data, sends a confirmation email,
+     * and returns an HTTP response indicating the success of the registration process.
+     *
+     * @param userDTO The RegistrationUserDTO containing user information for registration.
+     * @return A ResponseEntity indicating the success of the registration process.
+     * @throws DifferentPasswordsExceptions If the provided passwords in the RegistrationUserDTO do not match.
+     * @throws UserAlreadyExistException If a user with the specified email already exists.
      * @author Vanya Demydenko
      */
     public ResponseEntity<?> registration(RegistrationUserDTO userDTO) throws DifferentPasswordsExceptions, UserAlreadyExistException {
@@ -154,7 +156,8 @@ public class AuthServiceImpl implements AuthService {
                 "Підтвердження реєстрації",
                 "Привіт " + userDTO.getName() +
                         "!\nДля підтвердження реєстрації натисни тут " + createConfirmLink(userDTO) +
-                        "\n Це посилання стане неактивним через 1 годину (до " + generateDateOfExpiredLink() + ").");
+                        "\n Це посилання стане неактивним через 1 годину" +
+                        " (до " + timeByPattern(LocalDateTime.now().plusHours(1)) + ").");
     }
 
     /**
@@ -163,9 +166,9 @@ public class AuthServiceImpl implements AuthService {
      * @return A formatted string representing the expiration date and time.
      * @author Vanya Demydenko
      */
-    private static String generateDateOfExpiredLink() {
+    private String timeByPattern(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM uuuu hh:mm:ss");
-        return formatter.format(LocalDateTime.now().plusHours(1));
+        return formatter.format(dateTime);
     }
 
     /**

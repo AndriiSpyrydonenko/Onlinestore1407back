@@ -10,7 +10,9 @@ public interface AuthService {
 
     ResponseEntity<?> createJwtForUser(JwtRequestDTO authRequest);
 
-    ResponseEntity<?> createNewUser(RegistrationUserDTO userDTO)
+    ResponseEntity<?> registration(RegistrationUserDTO userDTO)
             throws DifferentPasswordsExceptions, UserAlreadyExistException;
+
+    ResponseEntity<?> confirmation(String jwtUser) throws UserAlreadyExistException;
 
 }

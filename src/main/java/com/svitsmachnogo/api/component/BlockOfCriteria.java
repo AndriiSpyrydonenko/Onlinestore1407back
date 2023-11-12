@@ -1,13 +1,10 @@
 package com.svitsmachnogo.api.component;
 
 import com.svitsmachnogo.api.domain.entity.Subcategory;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Is a block of subcategories grouped by title
@@ -15,8 +12,7 @@ import java.util.stream.Collectors;
  * @author Vanya Demydenko
  */
 @Component
-@Getter
-@Setter
+@Data
 public class BlockOfCriteria {
 
     private String title;
@@ -26,7 +22,7 @@ public class BlockOfCriteria {
     private BlockOfCriteria() {
     }
 
-    public static BlockOfCriteria create(String title, List<Subcategory> subcategories){
+    public static BlockOfCriteria of(String title, List<Subcategory> subcategories) {
         BlockOfCriteria block = new BlockOfCriteria();
         block.title = title;
         block.subcategories = subcategories;

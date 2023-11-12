@@ -18,16 +18,21 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.lang.reflect.Method;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -47,6 +52,9 @@ class AuthServiceImplTest {
 
     @Mock
     private UserDetails userDetails;
+
+    @Mock
+    private MailSenderServiceImpl mailSenderService;
 
     private org.springframework.security.core.userdetails.User suser;
 
@@ -73,6 +81,7 @@ class AuthServiceImplTest {
         registrationUser.setEmail("user@gmail.com");
         registrationUser.setPassword("123");
         registrationUser.setConfirmPassword("123");
+        registrationUser.setRedirectTo("/link");
 
         Role role = new Role();
         role.setId(1);
@@ -111,27 +120,108 @@ class AuthServiceImplTest {
 
     @SneakyThrows
     @Test
-    public void createNewUserShouldThrowsExceptionIfRequestHasDiffPassword() {
+    public void registrationShouldThrowsExceptionIfRequestHasDiffPassword() {
         registrationUser.setConfirmPassword("1234");
-        Assertions.assertThrows(DifferentPasswordsExceptions.class, () -> authService.createNewUser(registrationUser));
+        Assertions.assertThrows(DifferentPasswordsExceptions.class, () -> authService.registration(registrationUser));
     }
 
     @SneakyThrows
     @Test
-    public void createNewUserShouldThrowsExceptionIfSuchUserExist() {
+    public void registrationShouldThrowsExceptionIfSuchUserExist() {
         Mockito.when(userService.findByEmail("user@gmail.com")).thenReturn(Optional.of(new User()));
-        Assertions.assertThrows(UserAlreadyExistException.class, () -> authService.createNewUser(registrationUser));
+        Assertions.assertThrows(UserAlreadyExistException.class, () -> authService.registration(registrationUser));
     }
 
     @SneakyThrows
     @Test
-    public void createNewUserShouldReturnResponseEntity() {
-        Mockito.when(userService.findByEmail("user@gmail.com")).thenReturn(Optional.empty());
-        Mockito.when(userService.createNewUser(registrationUser)).thenReturn(user);
-        Mockito.when(userService.convertToUserDetails(user)).thenReturn(suser);
-        Mockito.when(jwtTokenUtils.generateToken(suser)).thenReturn("mocked_token");
+    public void registrationShouldCallSendMailOnce() {
 
-        Assertions.assertEquals(200, authService.createNewUser(registrationUser).getStatusCode().value());
-        Assertions.assertEquals("mocked_token", Objects.requireNonNull(authService.createNewUser(registrationUser).getBody()).getToken());
+        authService.registration(registrationUser);
+
+        Mockito.verify(mailSenderService, times(1))
+                .sendMail(any());
+    }
+
+    @SneakyThrows
+    @Test
+    public void registrationShouldReturnResponseEntityWithOKStatus() {
+        ResponseEntity<?> expectedResponse = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<?> actualResponse = authService.registration(registrationUser);
+
+        Assertions.assertEquals(expectedResponse.getStatusCode(), actualResponse.getStatusCode());
+    }
+
+    @Test
+    public void registrationShouldSendValidMessage() {
+
+        Mockito.when(jwtTokenUtils.generateConfirmKey(registrationUser)).thenReturn("encryptedUser");
+        Mockito.when(mailSenderService.createMessage(any(), any(), any())).thenCallRealMethod();
+
+        String expectedText = "Привіт " + registrationUser.getName() +
+                "!\nДля підтвердження реєстрації натисни тут " + "/link/encryptedUser" +
+                "\n Це посилання стане неактивним через 1 годину" +
+                " (до " + timeByPattern(LocalDateTime.now().plusHours(1)) + ").";
+
+        SimpleMailMessage actualMessage = buildConfirmMessage(registrationUser);
+
+        SimpleMailMessage expectedMessage = new SimpleMailMessage();
+        expectedMessage.setTo(registrationUser.getEmail());
+        expectedMessage.setSubject("Підтвердження реєстрації");
+        expectedMessage.setText(expectedText);
+
+
+        Assertions.assertEquals(Arrays.stream(expectedMessage.getTo()).findFirst().get(), Arrays.stream(actualMessage.getTo()).findFirst().get());
+        Assertions.assertEquals(expectedMessage.getSubject(), actualMessage.getSubject());
+        Assertions.assertEquals(expectedMessage.getText(), actualMessage.getText());
+    }
+
+    @Test
+    public void confirmationShouldThrowExceptionIfUserExist() {
+        Mockito.when(jwtTokenUtils.parseUserFromJwt(any())).thenReturn(registrationUser);
+        Mockito.when(userService.findByEmail(registrationUser.getEmail())).thenReturn(Optional.of(new User()));
+
+        Assertions.assertThrows(UserAlreadyExistException.class,
+                () -> authService.confirmation("encrypted user"));
+    }
+
+    @Test
+    public void confirmationShouldThrowExceptionWithUserEmail() {
+        Mockito.when(jwtTokenUtils.parseUserFromJwt(any())).thenReturn(registrationUser);
+        Mockito.when(userService.findByEmail(registrationUser.getEmail())).thenReturn(Optional.of(new User()));
+        String exceptionsMessage = "";
+
+        try {
+            authService.confirmation("encrypted user");
+        } catch (UserAlreadyExistException e) {
+            exceptionsMessage = e.getMessage();
+        }
+
+        Assertions.assertTrue(exceptionsMessage.contains(registrationUser.getEmail()));
+    }
+
+    @SneakyThrows
+    @Test
+    public void confirmationShouldReturnJwtInResponseEntity() {
+        Mockito.when(jwtTokenUtils.parseUserFromJwt(any())).thenReturn(registrationUser);
+        Mockito.when(userService.findByEmail(registrationUser.getEmail())).thenReturn(Optional.empty());
+        Mockito.when(userService.createNewUser(registrationUser)).thenReturn(user);
+        Mockito.when(jwtTokenUtils.generateToken(any())).thenReturn("someToken");
+
+        ResponseEntity<?> response = authService.confirmation("encryptedUser");
+
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertEquals("someToken", ((JwtResponseDTO) response.getBody()).getToken());
+    }
+
+    @SneakyThrows
+    private SimpleMailMessage buildConfirmMessage(RegistrationUserDTO userDTO) {
+        Method method = AuthServiceImpl.class.getDeclaredMethod("buildConfirmMessage", RegistrationUserDTO.class);
+        method.setAccessible(true);
+        return (SimpleMailMessage) method.invoke(authService, userDTO);
+    }
+
+    private String timeByPattern(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM uuuu hh:mm:ss");
+        return formatter.format(dateTime);
     }
 }

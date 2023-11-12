@@ -18,7 +18,7 @@ public class BlockOfCriteriaUtil {
     private List<BlockOfCriteria> buildBlockOfCriteria(List<Subcategory> subcategories, Set<String> titles) {
         return titles
                 .stream()
-                .map(t -> BlockOfCriteria.create(t, getSubcategoriesByTitle(subcategories, t)))
+                .map(t -> BlockOfCriteria.of(t, getSubcategoriesByTitle(subcategories, t)))
                 .collect(Collectors.toList());
     }
 

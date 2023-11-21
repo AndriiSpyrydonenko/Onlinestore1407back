@@ -2,11 +2,12 @@ package com.svitsmachnogo.api.dto;
 
 import com.svitsmachnogo.api.domain.entity.Picture;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
+@Data
 @Schema(description = "An object that stores information about the picture of the product for further transportation")
 public class PictureDTO {
 
@@ -19,33 +20,20 @@ public class PictureDTO {
     private PictureDTO() {
     }
 
-    public PictureDTO(Picture picture) {
+    private PictureDTO(Picture picture) {
         this.id = picture.getId();
         this.urlPath = picture.getUrlPath();
     }
 
+    public static PictureDTO of(Picture picture){
+        return new PictureDTO(picture);
+    }
+
     public static List<PictureDTO> getList(List<Picture> pictures) {
         List<PictureDTO> pictureDTOList = new ArrayList<>();
-        for (Picture picture : pictures) {
-            PictureDTO dto = new PictureDTO(picture);
-            pictureDTOList.add(dto);
-        }
+
+        pictures.forEach(picture -> pictureDTOList.add(of(picture)));
+
         return pictureDTOList;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public URL getUrlPath() {
-        return urlPath;
-    }
-
-    public void setUrlPath(URL urlPath) {
-        this.urlPath = urlPath;
     }
 }

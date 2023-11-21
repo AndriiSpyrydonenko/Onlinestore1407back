@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@Data
 @Schema(description = "An object that stores information about the product for further transportation")
 public class ProductDTO {
 
@@ -145,138 +147,4 @@ public class ProductDTO {
         return new ArrayList<>(productDTO);
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public int getArticle() {
-        return article;
-    }
-
-    public void setArticle(int article) {
-        this.article = article;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCountryProducer() {
-        return countryProducer;
-    }
-
-    public void setCountryProducer(String countryProducer) {
-        this.countryProducer = countryProducer;
-    }
-
-    public boolean isExist() {
-        return exist;
-    }
-
-    public void setExist(boolean exist) {
-        this.exist = exist;
-    }
-
-    public int getPriorityScore() {
-        return priorityScore;
-    }
-
-    public void setPriorityScore(int priorityScore) {
-        this.priorityScore = priorityScore;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public int getReviewCount() {
-        return reviewCount;
-    }
-
-    public void setReviewCount(int reviewCount) {
-        this.reviewCount = reviewCount;
-    }
-
-    public int getDiscountPercent() {
-        return discountPercent;
-    }
-
-    public void setDiscountPercent(int discountPercent) {
-        this.discountPercent = discountPercent;
-    }
-
-    public Timestamp getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreate_date(Timestamp create_date) {
-        this.createDate = create_date;
-    }
-
-    public PictureDTO getMainPicture() {
-        return mainPicture;
-    }
-
-    public void setMainPicture(PictureDTO mainPicture) {
-        this.mainPicture = mainPicture;
-    }
-
-    public List<PictureDTO> getPictures() {
-        return pictures;
-    }
-
-    public void setPictures(List<PictureDTO> pictures) {
-        this.pictures = pictures;
-    }
-
-    public boolean isGiftSet() {
-        return isGiftSet;
-    }
-
-    public void setGiftSet(boolean giftSet) {
-        isGiftSet = giftSet;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public Map<Integer, Double> getPackaging() {
-        return packaging;
-    }
-
-    public void setPackaging(Map<Integer, Double> packaging) {
-        this.packaging = packaging;
-    }
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
 }

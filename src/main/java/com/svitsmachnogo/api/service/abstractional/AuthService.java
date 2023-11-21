@@ -1,6 +1,6 @@
 package com.svitsmachnogo.api.service.abstractional;
 
-import com.svitsmachnogo.api.dto.JwtRequestDTO;
+import com.svitsmachnogo.api.dto.jwt.JwtRequestDTO;
 import com.svitsmachnogo.api.dto.RegistrationUserDTO;
 import com.svitsmachnogo.api.exceptions.DifferentPasswordsExceptions;
 import com.svitsmachnogo.api.exceptions.UserAlreadyExistException;

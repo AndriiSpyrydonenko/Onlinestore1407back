@@ -1,8 +1,8 @@
 package com.svitsmachnogo.api.controller;
 
-import com.svitsmachnogo.api.dto.JwtRequestDTO;
-import com.svitsmachnogo.api.dto.JwtResponseDTO;
-import com.svitsmachnogo.api.dto.JwtUser;
+import com.svitsmachnogo.api.dto.jwt.JwtRequestDTO;
+import com.svitsmachnogo.api.dto.jwt.JwtResponseDTO;
+import com.svitsmachnogo.api.dto.jwt.JwtUser;
 import com.svitsmachnogo.api.dto.RegistrationUserDTO;
 import com.svitsmachnogo.api.exceptions.AppError;
 import com.svitsmachnogo.api.exceptions.DifferentPasswordsExceptions;

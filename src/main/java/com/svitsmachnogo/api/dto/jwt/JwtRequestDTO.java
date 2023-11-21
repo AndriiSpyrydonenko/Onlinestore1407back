@@ -1,4 +1,4 @@
-package com.svitsmachnogo.api.dto;
+package com.svitsmachnogo.api.dto.jwt;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Data;

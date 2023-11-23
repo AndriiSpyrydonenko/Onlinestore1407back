@@ -10,6 +10,8 @@ public interface UserService extends UserDetailsService {
 
     Optional<User> findByEmail(String email);
 
+    Optional<User> findById(Long id);
+
     User createNewUser(RegistrationUserDTO userDTO);
 
     org.springframework.security.core.userdetails.User convertToUserDetails(User user);

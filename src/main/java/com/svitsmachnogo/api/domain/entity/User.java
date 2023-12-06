@@ -3,14 +3,12 @@ package com.svitsmachnogo.api.domain.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Data
 @EqualsAndHashCode
-@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -33,4 +31,20 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns =@JoinColumn(name = "role_id"))
     private List<Role> roles;
+
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "user")
+    @PrimaryKeyJoinColumn
+    private UserProfile userProfile;
+
+    public User(){
+        UserProfile userProfile = new UserProfile();
+        Cart cart = new Cart();
+        userProfile.setUser(this);
+        cart.setUserProfile(userProfile);
+        userProfile.setCart(cart);
+        this.userProfile = userProfile;
+    }
+
 }

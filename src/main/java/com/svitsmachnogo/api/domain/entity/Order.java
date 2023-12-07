@@ -20,10 +20,25 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserProfile userProfile;
 
     @Column(name = "order_comment")
     private String comment;
+
+    @Column(name = "total_cost", nullable = false)
+    private Double totalCost;
+
+    @Column(name = "customer_name", nullable = false)
+    private String customerName;
+
+    @Column(name = "customer_surname", nullable = false)
+    private String customerSurname;
+
+    @Column(name = "customer_phone_number", nullable = false)
+    private String customerPhoneNumber;
+
+    @Column(name = "customer_address", nullable = false)
+    private String customerAddress;
 
     @Column(name = "create_date", nullable = false)
     private Timestamp createDate;

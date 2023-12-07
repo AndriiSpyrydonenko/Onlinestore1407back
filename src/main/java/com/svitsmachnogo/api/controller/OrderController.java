@@ -1,9 +1,16 @@
 package com.svitsmachnogo.api.controller;
 
-import com.svitsmachnogo.api.dto.OrderDTO;
+import com.svitsmachnogo.api.domain.entity.Order;
+import com.svitsmachnogo.api.dto.DtoFactory;
+import com.svitsmachnogo.api.dto.order.FactoryType;
+import com.svitsmachnogo.api.dto.order.OrderDto;
+import com.svitsmachnogo.api.dto.order.OrderDtoFactory;
+import com.svitsmachnogo.api.dto.order.request_dto.RequestOrderDto;
 import com.svitsmachnogo.api.exceptions.NoSuchOrderException;
-import com.svitsmachnogo.api.service.OrderServiceImpl;
-import jakarta.validation.constraints.Future;
+import com.svitsmachnogo.api.service.order.OrderService;
+import com.svitsmachnogo.api.utils.DtoUtils;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,37 +18,42 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.OK;
-
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
-@RequestMapping("/order")
+@Tag(name = "Order Controller", description = "Endpoints for managing orders")
+@RequestMapping("/api/order")
 public class OrderController {
 
-    private final OrderServiceImpl orderService;
+    private final OrderService orderService;
 
-    @GetMapping("/byId/{id}")
-    public ResponseEntity<OrderDTO> getOrderById(@PathVariable(name = "id") Long id) throws NoSuchOrderException {
-        OrderDTO orderDTO = OrderDTO.of(orderService.findOrderById(id));
-        return ResponseEntity.ok(orderDTO);
+    @Operation(summary = "Get order by ID.Is protected!")
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderDto> getOrderById(@PathVariable(name = "id") Long id) throws NoSuchOrderException {
+        return ResponseEntity.ok(OrderDtoFactory
+                .crateFactory(FactoryType.RESPONSE)
+                .of(orderService.findOrderById(id)));
     }
 
-    @GetMapping("/byUserId/{id}")
-    public ResponseEntity<List<OrderDTO>> getOrderByUserId(@PathVariable(name = "id") Long id) throws NoSuchOrderException {
-        List<OrderDTO> orderDTOList = OrderDTO.listOf(orderService.findAllByUserId(id));
+    @Operation(summary = "Get orders by user ID.Is protected!")
+    @GetMapping("/user/{id}/orders")
+    public ResponseEntity<List<OrderDto>> getOrderByUserId(@PathVariable(name = "id") Long id) throws NoSuchOrderException {
+        DtoFactory<Order> factory = OrderDtoFactory.crateFactory(FactoryType.RESPONSE);
+        List<OrderDto> orderDTOList = DtoUtils.listOf(orderService.findAllByUserId(id), factory);
         return ResponseEntity.ok(orderDTOList);
     }
 
-    @PostMapping("/createByCurrentUser")
-    public ResponseEntity<?> createOrderByCurrentUser(@RequestBody OrderDTO orderDTO){
-        orderService.createOrderByCurrentUser(orderDTO);
+    @Operation(summary = "Create order by user ID.Is protected!")
+    @PutMapping("/user")
+    public ResponseEntity<?> createOrderByUserId(@RequestBody RequestOrderDto orderDTO) {
+        orderService.createOrderByUserId(orderDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/createByUserId")
-    public ResponseEntity<?> createOrderByUserId(@RequestBody OrderDTO orderDTO){
-        orderService.createOrderByUserId(orderDTO);
+    @Operation(summary = "Create order by unauthorized user", description = "userId field must be null")
+    @PutMapping("/unauthorized-user")
+    public ResponseEntity<?> createOrderByNoUser(@RequestBody RequestOrderDto orderDTO) {
+        orderService.createOrderByNoUser(orderDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

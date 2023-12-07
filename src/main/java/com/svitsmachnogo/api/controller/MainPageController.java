@@ -4,32 +4,30 @@ import com.svitsmachnogo.api.domain.entity.Category;
 import com.svitsmachnogo.api.domain.entity.GiftSet;
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.dto.CategoryDTO;
-import com.svitsmachnogo.api.dto.ProductDTO;
+import com.svitsmachnogo.api.dto.product.ProductDTO;
 import com.svitsmachnogo.api.service.GiftSetServiceImpl;
 import com.svitsmachnogo.api.service.abstractional.CategoryService;
 import com.svitsmachnogo.api.service.abstractional.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 @Tag(name = "Endpoints for main page")
 @RequestMapping("/api/main_page")
 public class MainPageController {
 
-    @Autowired
-    CategoryService categoryService;
+    private final CategoryService categoryService;
 
-    @Autowired
-    GiftSetServiceImpl giftSetService;
+    private final GiftSetServiceImpl giftSetService;
 
-    @Autowired
-    ProductService productService;
+    private final ProductService productService;
 
     @GetMapping("/categories")
     @Operation(summary = "returns a list of categories." +

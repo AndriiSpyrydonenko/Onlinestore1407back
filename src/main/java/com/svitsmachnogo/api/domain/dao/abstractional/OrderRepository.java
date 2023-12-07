@@ -9,6 +9,8 @@ import java.util.Optional;
 
 /**
  * Repository interface for managing Order entities.
+ *
+ * @author Vanya Demydenko
  */
 public interface OrderRepository extends JpaRepository<Order, Long> {
 

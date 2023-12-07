@@ -1,4 +1,4 @@
-package com.svitsmachnogo.api.service.abstractional;
+package com.svitsmachnogo.api.service.order;
 
 import com.svitsmachnogo.api.domain.entity.Order;
 import com.svitsmachnogo.api.dto.order.OrderDto;

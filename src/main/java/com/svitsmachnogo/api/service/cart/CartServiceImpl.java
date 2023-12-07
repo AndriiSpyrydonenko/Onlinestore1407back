@@ -7,7 +7,7 @@ import com.svitsmachnogo.api.domain.entity.PackagingId;
 import com.svitsmachnogo.api.dto.cart.CartRequestDTO;
 import com.svitsmachnogo.api.dto.order.OrderDto;
 import com.svitsmachnogo.api.exceptions.NoSuchCartException;
-import com.svitsmachnogo.api.service.abstractional.PackagingService;
+import com.svitsmachnogo.api.service.packaging.PackagingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

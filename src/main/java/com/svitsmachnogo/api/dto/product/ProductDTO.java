@@ -1,6 +1,10 @@
-package com.svitsmachnogo.api.dto;
+package com.svitsmachnogo.api.dto.product;
 
 import com.svitsmachnogo.api.domain.entity.Product;
+import com.svitsmachnogo.api.dto.CategoryDTO;
+import com.svitsmachnogo.api.dto.picture.PictureDTO;
+import com.svitsmachnogo.api.dto.picture.PictureDtoFactory;
+import com.svitsmachnogo.api.utils.DtoUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -69,9 +73,14 @@ public class ProductDTO {
     @Schema(description = "Contains a price map where product quantity is the key and price is the value")
     private Map<Integer ,Double> packaging;
 
+    private static final PictureDtoFactory pictureDtoFactory = new PictureDtoFactory();
 
     private ProductDTO() {
     }
+
+
+    //todo: CREATE SPECIFIC PRODUCT DTO WITH FACTORIES  FOR EACH.
+
 
     public static ProductDTO createSimpleCard(Product product) {
         ProductDTO dto = new ProductDTO();
@@ -85,11 +94,10 @@ public class ProductDTO {
         dto.reviewCount = product.getReviewCount();
         dto.unit = product.getUnit();
         dto.packaging = product.getPackaging();
-        if(product.getPictures().isEmpty()){
-            dto.mainPicture = null;
-        }else {
-            dto.mainPicture = PictureDTO.getList(product.getPictures()).get(0);
-        }
+        dto.mainPicture = (product.getPictures().isEmpty()) //if product have any picture
+                ?null
+                :pictureDtoFactory.of(product.getPictures().get(0)); // return first one
+
         return dto;
     }
 
@@ -97,7 +105,7 @@ public class ProductDTO {
         ProductDTO dto = new ProductDTO();
         dto.id = product.getId();
         dto.discountPercent = product.getDiscountPercent();
-        dto.mainPicture = PictureDTO.getList(product.getPictures()).get(0);
+        dto.mainPicture = pictureDtoFactory.of(product.getPictures().get(0));
         return dto;
     }
 
@@ -124,7 +132,7 @@ public class ProductDTO {
         if(product.getPictures().isEmpty()){
             dto.pictures = null;
         }else {
-            dto.pictures = PictureDTO.getList(product.getPictures());
+            dto.pictures = DtoUtils.listOf(product.getPictures(), pictureDtoFactory);
         }
         dto.discountPercent = product.getDiscountPercent();
         dto.unit = product.getUnit();

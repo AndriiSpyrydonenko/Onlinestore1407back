@@ -22,13 +22,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 @Tag(name = "Order Controller", description = "Endpoints for managing orders")
-@RequestMapping("/api/order")
+@RequestMapping("/api")
 public class OrderController {
 
     private final OrderService orderService;
 
     @Operation(summary = "Get order by ID.Is protected!")
-    @GetMapping("/{id}")
+    @GetMapping("/order/{id}")
     public ResponseEntity<OrderDto> getOrderById(@PathVariable(name = "id") Long id) throws NoSuchOrderException {
         return ResponseEntity.ok(OrderDtoFactory
                 .crateFactory(FactoryType.RESPONSE)
@@ -36,7 +36,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Get orders by user ID.Is protected!")
-    @GetMapping("/user/{id}/orders")
+    @GetMapping("/order/user/{id}/orders")
     public ResponseEntity<List<OrderDto>> getOrderByUserId(@PathVariable(name = "id") Long id) throws NoSuchOrderException {
         DtoFactory<Order> factory = OrderDtoFactory.crateFactory(FactoryType.RESPONSE);
         List<OrderDto> orderDTOList = DtoUtils.listOf(orderService.findAllByUserId(id), factory);
@@ -44,7 +44,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Create order by user ID.Is protected!")
-    @PutMapping("/user")
+    @PutMapping("/order/user")
     public ResponseEntity<?> createOrderByUserId(@RequestBody RequestOrderDto orderDTO) {
         orderService.createOrderByUserId(orderDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();

@@ -27,12 +27,22 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    //todo: change order to orders in the which mappings
+
     @Operation(summary = "Get order by ID.Is protected!")
     @GetMapping("/order/{id}")
     public ResponseEntity<OrderDto> getOrderById(@PathVariable(name = "id") Long id) throws NoSuchOrderException {
         return ResponseEntity.ok(OrderDtoFactory
                 .crateFactory(FactoryType.RESPONSE)
                 .of(orderService.findOrderById(id)));
+    }
+
+    @Operation(summary = "Get all orders.")
+    @GetMapping("/order")
+    public ResponseEntity<List<OrderDto>> getAllOrder() throws NoSuchOrderException {
+        return ResponseEntity.ok(DtoUtils.listOf(
+                orderService.findAll(),
+                OrderDtoFactory.crateFactory(FactoryType.RESPONSE)));
     }
 
     @Operation(summary = "Get orders by user ID.Is protected!")

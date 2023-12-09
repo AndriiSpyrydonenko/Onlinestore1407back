@@ -23,7 +23,7 @@ public class ResponseOrderDtoFactory implements DtoFactory<Order> {
         orderDTO.setId(targetEntity.getId());
         orderDTO.setTotalCost(targetEntity.getTotalCost());
         orderDTO.setCreateDate(targetEntity.getCreateDate());
-        orderDTO.setUserId(targetEntity.getUserProfile().getId());
+        orderDTO.setUserId((targetEntity.getUserProfile() != null) ? targetEntity.getUserProfile().getId() : null);
         orderDTO.setComment(targetEntity.getComment());
         orderDTO.setCustomerName(targetEntity.getCustomerName());
         orderDTO.setCustomerSurname(targetEntity.getCustomerSurname());

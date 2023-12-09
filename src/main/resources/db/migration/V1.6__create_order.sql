@@ -3,7 +3,7 @@ use svitsmachnogo;
 
 create table user_profiles
 (
-    user_id      bigint       not null,
+    user_id      bigint not null,
     user_name    varchar(255),
     user_surname varchar(255),
     phone_number varchar(15),
@@ -15,7 +15,7 @@ create table user_profiles
 
 create table carts
 (
-    user_id          bigint not null,
+    user_id               bigint not null,
     customer_name         varchar(64),
     customer_surname      varchar(64),
     customer_phone_number varchar(64),
@@ -36,7 +36,7 @@ create table wishlists
 create table orders
 (
     order_id              bigint auto_increment,
-    user_id               bigint       not null,
+    user_id               bigint,
     order_comment         varchar(255),
     total_cost            int          not null,
     customer_name         varchar(64)  not null,
@@ -73,5 +73,9 @@ create table carts_packaging
     constraint carts_packaging__product_id__amount_FK foreign key (product_id, amount)
         references packaging (product_id, amount)
 );
-insert into user_profiles(user_id) values (1),(2);
-insert into carts(user_id) values(1),(2);
+insert into user_profiles(user_id)
+values (1),
+       (2);
+insert into carts(user_id)
+values (1),
+       (2);

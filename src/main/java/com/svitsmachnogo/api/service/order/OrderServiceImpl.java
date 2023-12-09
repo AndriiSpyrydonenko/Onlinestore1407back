@@ -66,8 +66,6 @@ public class OrderServiceImpl implements OrderService {
      */
     public Order createOrderByNoUser(OrderDto orderDTO) {
         Order order = DtoUtils.mapToOrder(null, orderDTO);
-        cartService.removeAllFromCart(orderDTO.getUserId());
-        cartService.updateCustomer(orderDTO);
         return orderRepository.save(order);
     }
 
@@ -95,6 +93,15 @@ public class OrderServiceImpl implements OrderService {
      */
     public List<Order> findAllByUserId(Long userId) {
         return orderRepository.findAllByUserId(userId);
+    }
+
+    /**
+     * Finds all orders .
+     *
+     * @return A list of Order entities.
+     */
+    public List<Order> findAll() {
+        return orderRepository.findAll();
     }
 
 }

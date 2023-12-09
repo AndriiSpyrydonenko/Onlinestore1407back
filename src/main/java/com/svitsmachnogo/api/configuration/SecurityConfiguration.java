@@ -38,9 +38,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("api/secure/authorise").authenticated()
                         .requestMatchers("api/secure/info").authenticated()
-                        .requestMatchers("api/cart/*").authenticated()
-                        .requestMatchers("api/order/*").authenticated()
-                        .requestMatchers("api/wishlist/*").authenticated()
+                        .requestMatchers("api/cart/**").authenticated()
+                        .requestMatchers("api/order/**").authenticated()
+                        .requestMatchers("api/wishlist/**").authenticated()
                         .requestMatchers("api/secure/admin").hasRole("ADMIN")
                         .anyRequest().permitAll())
                 .sessionManagement(management -> management

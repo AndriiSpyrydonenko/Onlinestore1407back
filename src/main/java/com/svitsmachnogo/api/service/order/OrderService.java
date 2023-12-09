@@ -38,6 +38,13 @@ public interface OrderService {
     List<Order> findAllByUserId(Long userId);
 
     /**
+     * Finds all orders.
+     *
+     * @return A list of Order entities associated with the given user ID.
+     */
+    List<Order> findAll();
+
+    /**
      * Creates an order without associating it with a specific user.
      *
      * @param orderDTO The OrderDto containing details to create an order without a user.

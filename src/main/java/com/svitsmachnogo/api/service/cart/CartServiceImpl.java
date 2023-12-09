@@ -41,7 +41,8 @@ public class CartServiceImpl implements CartService {
         Packaging packaging = packagingService
                 .findById(mapToPackagingId(addToCartRequestDTO))
                 .orElseThrow(throwException(addToCartRequestDTO));
-
+        //todo: add bounds to the ability of adds product to the cart t.e. (add -1 product or add more than there is)
+        //todo: make this when products will has the total amount in the store
         cart.getPackagingList().add(packaging);
 
         cartRepository.saveAndFlush(cart);

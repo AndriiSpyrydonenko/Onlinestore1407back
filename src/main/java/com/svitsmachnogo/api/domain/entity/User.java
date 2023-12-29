@@ -1,13 +1,16 @@
 package com.svitsmachnogo.api.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @EqualsAndHashCode
 @Table(name = "users")
 public class User {
@@ -36,6 +39,7 @@ public class User {
             cascade = CascadeType.ALL,
             mappedBy = "user")
     @PrimaryKeyJoinColumn
+    @ToString.Exclude
     private UserProfile userProfile;
 
     public User(){
@@ -47,4 +51,16 @@ public class User {
         this.userProfile = userProfile;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

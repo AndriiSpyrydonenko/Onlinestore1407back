@@ -60,7 +60,7 @@ class CartRepositoryTest {
             @Sql(value = "classpath:drop_test_data.sql", executionPhase = AFTER_TEST_METHOD),
             @Sql(value = "classpath:create_test_data.sql", executionPhase = BEFORE_TEST_METHOD)
     })
-    public void removeAllPackagingById_should_remove_all_items_by_user_si() {
+    public void removeAllPackagingById_should_remove_all_items_by_user_id() {
         jdbcTemplate.update("""
                 INSERT INTO carts_packaging VALUES (1,1,200), (1,2,500)
                 """);

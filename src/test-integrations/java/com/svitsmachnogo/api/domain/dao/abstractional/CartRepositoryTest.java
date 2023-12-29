@@ -1,77 +1,74 @@
 package com.svitsmachnogo.api.domain.dao.abstractional;
 
 import com.svitsmachnogo.api.domain.entity.Cart;
-import com.svitsmachnogo.api.domain.entity.User;
-import com.svitsmachnogo.api.domain.entity.UserProfile;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlGroup;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
+import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
 @DataJpaTest
 @TestPropertySource(locations = "/application-test.properties")
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class CartRepositoryTest {
 
     @Autowired
     private CartRepository cartRepository;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserProfileRepository userProfileRepository;
-
-    @Autowired
     private TestEntityManager entityManager;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @BeforeEach
     public void setup() {
-        entityManager.clear();
 
-        User user = new User();
-        user.setEmail("email@gmail.com");
-        user = entityManager.persistAndFlush(user);
-
-        UserProfile userProfile = new UserProfile();
-        userProfile.setUser(user);
-        userProfile.setId(user.getId());
-        userProfileRepository.saveAndFlush(userProfile);
-
-        Cart cart = new Cart();
-        cart.setUserProfile(userProfile);
-        cart.setId(userProfile.getId());
-        cartRepository.saveAndFlush(cart);
-    }
-
-    @AfterEach
-    public void tearDown(){
-        userRepository.deleteAll();
-        userProfileRepository.deleteAll();
-        cartRepository.deleteAll();
     }
 
     @Test
-    public void findByIdShouldReturnCart(){
-        Cart cart = cartRepository
-                .findAll()
-                .stream()
-                .findAny()
-                .orElse(null);
+    @SqlGroup({
+            @Sql(value = "classpath:drop_test_data.sql", executionPhase = AFTER_TEST_METHOD),
+            @Sql(value = "classpath:create_test_data.sql", executionPhase = BEFORE_TEST_METHOD)
+    })
+    public void removePackagingById_should_remove_item_by_specify_id() {
+        jdbcTemplate.update("""
+                INSERT INTO carts_packaging VALUES (1,1,200), (1,2,500)
+                """);
 
-        Assertions.assertNotNull(cart);
+        cartRepository.removePackagingById(1L, 1, 200);
+
+        Cart cart = entityManager.getEntityManager().find(Cart.class, 1L);
+
+        assertEquals(1, cart.getPackagingList().size());
+        assertEquals(2, cart.getPackagingList().get(0).getId().getProductId());
     }
 
     @Test
-    public void findByIdShouldReturnCartWithSpecifyId(){
+    @SqlGroup({
+            @Sql(value = "classpath:drop_test_data.sql", executionPhase = AFTER_TEST_METHOD),
+            @Sql(value = "classpath:create_test_data.sql", executionPhase = BEFORE_TEST_METHOD)
+    })
+    public void removeAllPackagingById_should_remove_all_items_by_user_si() {
+        jdbcTemplate.update("""
+                INSERT INTO carts_packaging VALUES (1,1,200), (1,2,500)
+                """);
 
-        Cart cart = cartRepository
-                .findById(2L)
-                .orElse(null);
-        Assertions.assertEquals(2L, cart.getId());
+        cartRepository.removeAllPackagingById(1L);
 
+        Cart cart = entityManager.getEntityManager().find(Cart.class, 1L);
+
+        assertTrue(cart.getPackagingList().isEmpty());
     }
 }

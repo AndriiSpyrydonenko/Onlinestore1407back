@@ -27,10 +27,8 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    //todo: change order to orders in the which mappings
-
     @Operation(summary = "Get order by ID.Is protected!")
-    @GetMapping("/order/{id}")
+    @GetMapping("/orders/{id}")
     public ResponseEntity<OrderDto> getOrderById(@PathVariable(name = "id") Long id) throws NoSuchOrderException {
         return ResponseEntity.ok(OrderDtoFactory
                 .crateFactory(FactoryType.RESPONSE)
@@ -38,7 +36,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Get all orders.")
-    @GetMapping("/order")
+    @GetMapping("/orders")
     public ResponseEntity<List<OrderDto>> getAllOrder() throws NoSuchOrderException {
         return ResponseEntity.ok(DtoUtils.listOf(
                 orderService.findAll(),
@@ -46,7 +44,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Get orders by user ID.Is protected!")
-    @GetMapping("/order/user/{id}/orders")
+    @GetMapping("/orders/user/{id}/orders")
     public ResponseEntity<List<OrderDto>> getOrderByUserId(@PathVariable(name = "id") Long id) throws NoSuchOrderException {
         DtoFactory<Order> factory = OrderDtoFactory.crateFactory(FactoryType.RESPONSE);
         List<OrderDto> orderDTOList = DtoUtils.listOf(orderService.findAllByUserId(id), factory);
@@ -54,7 +52,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Create order by user ID.Is protected!")
-    @PutMapping("/order/user")
+    @PutMapping("/orders/user")
     public ResponseEntity<?> createOrderByUserId(@RequestBody RequestOrderDto orderDTO) {
         orderService.createOrderByUserId(orderDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();

@@ -61,7 +61,7 @@ class OrderControllerTest {
     @DisplayName(value = "getOrderById should return 401 code if Jwt no exist")
     void getOrderByIdReturn401() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/orders/1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/secure/orders/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
     }
@@ -71,7 +71,7 @@ class OrderControllerTest {
     @DisplayName(value = "getAllOrder should return 401 code if Jwt no exist")
     void getAllOrderReturn401() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/orders")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/secure/orders")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
     }
@@ -81,7 +81,7 @@ class OrderControllerTest {
     @DisplayName(value = "getOrderByUserId should return 401 code if Jwt no exist")
     void getOrderByUserIdReturn401() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/orders/user/1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/secure/orders/user/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
     }
@@ -91,7 +91,7 @@ class OrderControllerTest {
     @DisplayName(value = "createOrderByUserId should return 401 code if Jwt no exist")
     void createOrderByUserIdReturn401() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/orders/user")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/secure/orders/user")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
     }
@@ -114,7 +114,7 @@ class OrderControllerTest {
 
         initOrder();
 
-        String response = mockMvc.perform(MockMvcRequestBuilders.get("/api/orders/1")
+        String response = mockMvc.perform(MockMvcRequestBuilders.get("/api/secure/orders/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -168,7 +168,7 @@ class OrderControllerTest {
 
         initOrder();
 
-        String response = mockMvc.perform(MockMvcRequestBuilders.get("/api/orders/user/1")
+        String response = mockMvc.perform(MockMvcRequestBuilders.get("/api/secure/orders/user/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -193,7 +193,7 @@ class OrderControllerTest {
     @DisplayName(value = "createOrderByUserId should adds orders by userId to DB and return 200 code")
     void createOrderByUserIdReturn200() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/orders/user")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/secure/orders/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token)
                         .content(createJsonOrderDto()))

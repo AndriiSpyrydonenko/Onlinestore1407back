@@ -36,13 +36,9 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("api/secure/authorise").authenticated()
-                        .requestMatchers("api/secure/info").authenticated()
-                        .requestMatchers("api/cart/**").authenticated()
-                        .requestMatchers("api/orders/**").authenticated()
-                        .requestMatchers("api/wishlist/**").authenticated()
-                        .requestMatchers("api/secure/admin","api/admin/orders").hasRole("ADMIN")
-                        .anyRequest().permitAll()) //todo: replace a matchers to property file;
+                        .requestMatchers("*/admin/**").hasRole("ADMIN")
+                        .requestMatchers("*/secure/**").authenticated()
+                        .anyRequest().permitAll())
                 .sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(handling -> handling

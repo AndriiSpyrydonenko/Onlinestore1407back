@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/cart")
+@RequestMapping("/api/secure/cart")
 @RequiredArgsConstructor
 @Tag(name = "Cart", description = "Endpoints for managing the user cart")
 public class CartController {

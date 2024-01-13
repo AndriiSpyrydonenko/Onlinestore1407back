@@ -53,7 +53,7 @@ class CartControllerTest {
     void addToCart_should_return_401_error_if_user_has_not_JWT_in_headers() throws Exception {
         String json = createCartRequestJson();
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/cart/product")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/secure/cart/product")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
@@ -64,7 +64,7 @@ class CartControllerTest {
     void removeFromCart_should_return_401_error_if_user_has_not_JWT_in_headers() throws Exception {
         String json = createCartRequestJson();
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/cart/product")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/secure/cart/product")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
@@ -73,7 +73,7 @@ class CartControllerTest {
     @InitSQL
     void getCartByUserId_should_return_401_error_if_user_has_not_JWT_in_headers() throws Exception {
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/cart/1"))
+                .perform(MockMvcRequestBuilders.get("/api/secure/cart/1"))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
     }
 
@@ -82,7 +82,7 @@ class CartControllerTest {
     void addToCart_should_return_code_200_if_user_has_JWT_in_headers() throws Exception {
         String json = createCartRequestJson();
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/cart/product")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/secure/cart/product")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token)
                         .content(json))
@@ -94,7 +94,7 @@ class CartControllerTest {
     void removeFromCart_should_return_code_200_if_user_has_JWT_in_headers() throws Exception {
         String json = createCartRequestJson();
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/cart/product")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/secure/cart/product")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token)
                         .content(json))
@@ -105,7 +105,7 @@ class CartControllerTest {
     @InitSQL
     void getCartByUserId_should_return_code_200_if_user_has_JWT_in_headers() throws Exception {
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/cart/1")
+                .perform(MockMvcRequestBuilders.get("/api/secure/cart/1")
                         .header("Authorization", token))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -115,7 +115,7 @@ class CartControllerTest {
     void addToCart_should_adds_products_to_cart() throws Exception {//
         String json = createCartRequestJson();
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/cart/product")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/secure/cart/product")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token)
                         .content(json))
@@ -138,7 +138,7 @@ class CartControllerTest {
                 .createNativeQuery("INSERT INTO carts_packaging values (1,1,200),(1,2,500)")
                 .executeUpdate();
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/cart/product")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/secure/cart/product")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token)
                         .content(json));

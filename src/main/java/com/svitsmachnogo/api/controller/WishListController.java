@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 @Tag(name = "Wishlist", description = "Endpoints for managing user wishlist.Fully protected")
-@RequestMapping("/api/wishlist")
+@RequestMapping("/api/secure/wishlist")
 public class WishListController {
 
     private final UserProfileService userProfileService;

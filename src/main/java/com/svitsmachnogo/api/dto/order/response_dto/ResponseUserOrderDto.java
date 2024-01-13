@@ -11,9 +11,11 @@ import java.sql.Timestamp;
  * Extends the OrderDto class and implements the AbstractDto interface.
  */
 @Data
-public class ResponseOrderDto extends OrderDto implements AbstractDto {
+public class ResponseUserOrderDto extends OrderDto implements AbstractDto {
 
     private Long id;
+
+    private Long userId;
 
     private Double totalCost;
 

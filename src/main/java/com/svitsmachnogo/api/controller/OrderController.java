@@ -5,7 +5,8 @@ import com.svitsmachnogo.api.dto.DtoFactory;
 import com.svitsmachnogo.api.dto.order.FactoryType;
 import com.svitsmachnogo.api.dto.order.OrderDto;
 import com.svitsmachnogo.api.dto.order.OrderDtoFactory;
-import com.svitsmachnogo.api.dto.order.request_dto.RequestOrderDto;
+import com.svitsmachnogo.api.dto.order.request_dto.RequestGuestOrderDto;
+import com.svitsmachnogo.api.dto.order.request_dto.RequestUserOrderDto;
 import com.svitsmachnogo.api.exceptions.NoSuchOrderException;
 import com.svitsmachnogo.api.service.order.OrderService;
 import com.svitsmachnogo.api.utils.DtoUtils;
@@ -53,14 +54,14 @@ public class OrderController {
 
     @Operation(summary = "Create order by user ID.Is protected!")
     @PutMapping("/orders/user")
-    public ResponseEntity<?> createOrderByUserId(@RequestBody RequestOrderDto orderDTO) {
+    public ResponseEntity<?> createOrderByUserId(@RequestBody RequestUserOrderDto orderDTO) {
         orderService.createOrderByUserId(orderDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @Operation(summary = "Create order by unauthorized user", description = "userId field must be null")
+    @Operation(summary = "Create order by unauthorized user")
     @PutMapping("/unauthorized-user")
-    public ResponseEntity<?> createOrderByNoUser(@RequestBody RequestOrderDto orderDTO) {
+    public ResponseEntity<?> createOrderByNoUser(@RequestBody RequestGuestOrderDto orderDTO) {
         orderService.createOrderByNoUser(orderDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

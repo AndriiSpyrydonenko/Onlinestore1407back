@@ -19,7 +19,7 @@ public class ResponseOrderDtoFactory implements DtoFactory<Order> {
      */
     @Override
     public OrderDto of(Order targetEntity){
-        ResponseOrderDto orderDTO = new ResponseOrderDto();
+        ResponseUserOrderDto orderDTO = new ResponseUserOrderDto();
         orderDTO.setId(targetEntity.getId());
         orderDTO.setTotalCost(targetEntity.getTotalCost());
         orderDTO.setCreateDate(targetEntity.getCreateDate());

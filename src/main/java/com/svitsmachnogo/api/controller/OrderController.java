@@ -35,8 +35,8 @@ public class OrderController {
                 .of(orderService.findOrderById(id)));
     }
 
-    @Operation(summary = "Get all orders.")
-    @GetMapping("/orders")
+    @Operation(summary = "Get all orders.Is protected! Only for admin.")
+    @GetMapping("/admin/orders")
     public ResponseEntity<List<OrderDto>> getAllOrder() throws NoSuchOrderException {
         return ResponseEntity.ok(DtoUtils.listOf(
                 orderService.findAll(),
@@ -44,8 +44,8 @@ public class OrderController {
     }
 
     @Operation(summary = "Get orders by user ID.Is protected!")
-    @GetMapping("/orders/user/{id}/orders")
-    public ResponseEntity<List<OrderDto>> getOrderByUserId(@PathVariable(name = "id") Long id) throws NoSuchOrderException {
+    @GetMapping("/orders/user/{id}")
+    public ResponseEntity<List<OrderDto>> getOrdersByUserId(@PathVariable(name = "id") Long id) throws NoSuchOrderException {
         DtoFactory<Order> factory = OrderDtoFactory.crateFactory(FactoryType.RESPONSE);
         List<OrderDto> orderDTOList = DtoUtils.listOf(orderService.findAllByUserId(id), factory);
         return ResponseEntity.ok(orderDTOList);

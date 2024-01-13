@@ -41,8 +41,8 @@ public class SecurityConfiguration {
                         .requestMatchers("api/cart/**").authenticated()
                         .requestMatchers("api/orders/**").authenticated()
                         .requestMatchers("api/wishlist/**").authenticated()
-                        .requestMatchers("api/secure/admin").hasRole("ADMIN")
-                        .anyRequest().permitAll())
+                        .requestMatchers("api/secure/admin","api/admin/orders").hasRole("ADMIN")
+                        .anyRequest().permitAll()) //todo: replace a matchers to property file;
                 .sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(handling -> handling

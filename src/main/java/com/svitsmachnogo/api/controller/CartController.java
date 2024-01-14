@@ -24,7 +24,7 @@ public class CartController {
 
     private final CartService cartService;
 
-    @PostMapping("/product")
+    @PutMapping("/product")
     @Operation(summary = "Add product to cart", description = "Adds a product to the user's cart.Fully protected.")
     public ResponseEntity<?> addToCart(@RequestBody CartRequestDTO addToCartRequestDTO) {
         cartService.addToCart(addToCartRequestDTO);

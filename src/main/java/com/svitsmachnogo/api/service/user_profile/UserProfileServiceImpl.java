@@ -62,6 +62,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         UserProfile user = findById(userId);
         Product product = productService.getProductById(productId);
         user.getWishList().add(product);
+        userProfileRepository.saveAndFlush(user);
     }
 
     /**
@@ -76,6 +77,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         UserProfile user = findById(userId);
         Product product = productService.getProductById(productId);
         user.getWishList().remove(product);
+        userProfileRepository.saveAndFlush(user);
     }
 
     /**

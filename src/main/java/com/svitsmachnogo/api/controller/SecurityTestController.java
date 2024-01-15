@@ -17,7 +17,7 @@ import java.security.Principal;
 @CrossOrigin(origins = "*")
 @Tag(name = "Auth test controller",
         description = "For each request you must add an 'Authorization' header with a body like 'Bearer some_token'")
-@RequestMapping("/api/secure")
+@RequestMapping("/api")
 public class SecurityTestController {
 
     private final MailSenderService mailSenderService;
@@ -31,7 +31,7 @@ public class SecurityTestController {
     }
 
     @Operation(summary = "For authorise users ", description = "Access for authorized users only.")
-    @GetMapping("/authorise")
+    @GetMapping("/secure/authorise")
     public String secure() {
         return "For authorise users ";
     }
@@ -43,7 +43,7 @@ public class SecurityTestController {
     }
 
     @Operation(summary = "User info", description = "Return some information about user.")
-    @GetMapping("/info")
+    @GetMapping("/secure/info")
     public String getUser(Principal principal) {
         return principal.getName();
     }

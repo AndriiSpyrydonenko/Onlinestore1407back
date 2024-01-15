@@ -3,7 +3,7 @@ use svitsmachnogo;
 create table users
 (
     user_id   bigint auto_increment,
-    user_name varchar(30)  not null unique,
+    user_name varchar(30)  not null,
     password  varchar(255) not null,
     email     varchar(255) unique,
     constraint users_user_id_PK primary key (user_id)

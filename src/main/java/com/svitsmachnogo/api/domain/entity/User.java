@@ -1,16 +1,18 @@
 package com.svitsmachnogo.api.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Data
-@EqualsAndHashCode
-@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Table(name = "users")
 public class User {
 
@@ -33,4 +35,33 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns =@JoinColumn(name = "role_id"))
     private List<Role> roles;
+
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "user")
+    @PrimaryKeyJoinColumn
+    @ToString.Exclude
+    private UserProfile userProfile;
+
+    public User(){
+        UserProfile userProfile = new UserProfile();
+        Cart cart = new Cart();
+        userProfile.setUser(this);
+        cart.setUserProfile(userProfile);
+        userProfile.setCart(cart);
+        this.userProfile = userProfile;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

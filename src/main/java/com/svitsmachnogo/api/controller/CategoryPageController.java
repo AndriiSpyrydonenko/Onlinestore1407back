@@ -1,9 +1,10 @@
 package com.svitsmachnogo.api.controller;
 
-import com.svitsmachnogo.api.service.CategoryPageService;
 import com.svitsmachnogo.api.component.PriceFilter;
-import com.svitsmachnogo.api.dto.*;
+import com.svitsmachnogo.api.dto.category_page.CategoryPageRequestDTO;
+import com.svitsmachnogo.api.dto.category_page.CategoryPageResponseDTO;
 import com.svitsmachnogo.api.exceptions.IncorrectSortingCriteriaException;
+import com.svitsmachnogo.api.service.CategoryPageService;
 import com.svitsmachnogo.api.service.abstractional.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

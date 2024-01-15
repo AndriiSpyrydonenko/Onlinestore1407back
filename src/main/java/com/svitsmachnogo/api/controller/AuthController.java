@@ -1,8 +1,8 @@
 package com.svitsmachnogo.api.controller;
 
-import com.svitsmachnogo.api.dto.JwtRequestDTO;
-import com.svitsmachnogo.api.dto.JwtResponseDTO;
-import com.svitsmachnogo.api.dto.JwtUser;
+import com.svitsmachnogo.api.dto.jwt.JwtRequestDTO;
+import com.svitsmachnogo.api.dto.jwt.JwtResponseDTO;
+import com.svitsmachnogo.api.dto.jwt.JwtUser;
 import com.svitsmachnogo.api.dto.RegistrationUserDTO;
 import com.svitsmachnogo.api.exceptions.AppError;
 import com.svitsmachnogo.api.exceptions.DifferentPasswordsExceptions;
@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 @RequestMapping("/api")
+@Tag(name = "Auth controller")
 public class AuthController {
 
     private final AuthService authService;

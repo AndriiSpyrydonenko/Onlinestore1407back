@@ -2,8 +2,8 @@ package com.svitsmachnogo.api.service;
 
 import com.svitsmachnogo.api.domain.entity.Role;
 import com.svitsmachnogo.api.domain.entity.User;
-import com.svitsmachnogo.api.dto.JwtRequestDTO;
-import com.svitsmachnogo.api.dto.JwtResponseDTO;
+import com.svitsmachnogo.api.dto.jwt.JwtRequestDTO;
+import com.svitsmachnogo.api.dto.jwt.JwtResponseDTO;
 import com.svitsmachnogo.api.dto.RegistrationUserDTO;
 import com.svitsmachnogo.api.exceptions.DifferentPasswordsExceptions;
 import com.svitsmachnogo.api.exceptions.UserAlreadyExistException;

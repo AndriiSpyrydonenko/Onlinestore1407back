@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
+
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -170,11 +172,10 @@ class UserServiceTest {
     @Test
     public void createNewUserShouldReturnSavedUser() {
         createUserDTO();
-        user.setId(null);
 
         Mockito.when(encoder.encode(userDTO.getPassword())).thenReturn("123");
         Mockito.when(roleService.findByName("ROLE_USER")).thenReturn(Optional.of(userRole));
-        Mockito.when(userRepository.save(user)).thenReturn(user);
+        Mockito.when(userRepository.save(any(User.class))).thenReturn(user);
 
         User returnedUser = userService.createNewUser(userDTO);
 

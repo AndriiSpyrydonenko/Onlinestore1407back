@@ -60,7 +60,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Create order by unauthorized user")
-    @PutMapping("/unauthorized-user")
+    @PutMapping("/orders/unauthorized-user")
     public ResponseEntity<?> createOrderByNoUser(@RequestBody RequestGuestOrderDto orderDTO) {
         orderService.createOrderByNoUser(orderDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();

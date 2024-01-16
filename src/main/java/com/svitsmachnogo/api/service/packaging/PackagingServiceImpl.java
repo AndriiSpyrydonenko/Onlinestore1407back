@@ -1,8 +1,8 @@
 package com.svitsmachnogo.api.service.packaging;
 
 import com.svitsmachnogo.api.domain.dao.abstractional.PackagingRepository;
-import com.svitsmachnogo.api.domain.entity.Packaging;
-import com.svitsmachnogo.api.domain.entity.PackagingId;
+import com.svitsmachnogo.api.domain.entity.packaging.Packaging;
+import com.svitsmachnogo.api.domain.entity.packaging.PackagingId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

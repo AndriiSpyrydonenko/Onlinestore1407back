@@ -1,5 +1,6 @@
 package com.svitsmachnogo.api.domain.entity;
 
+import com.svitsmachnogo.api.domain.entity.packaging.Packaging;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.svitsmachnogo.api.domain.entity;
+package com.svitsmachnogo.api.domain.entity.packaging;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

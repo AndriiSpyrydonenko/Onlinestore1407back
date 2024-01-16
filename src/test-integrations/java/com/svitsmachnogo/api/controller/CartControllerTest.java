@@ -2,9 +2,7 @@ package com.svitsmachnogo.api.controller;
 
 import com.svitsmachnogo.api.InitSQL;
 import com.svitsmachnogo.api.domain.entity.Cart;
-import com.svitsmachnogo.api.domain.entity.Packaging;
 import com.svitsmachnogo.api.domain.entity.User;
-import com.svitsmachnogo.api.dto.cart.CartRequestDTO;
 import com.svitsmachnogo.api.service.abstractional.UserService;
 import com.svitsmachnogo.api.utils.JwtTokenUtils;
 import jakarta.persistence.EntityManager;
@@ -15,12 +13,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

@@ -1,13 +1,16 @@
 package com.svitsmachnogo.api.domain.entity;
 
+import com.svitsmachnogo.api.domain.entity.packaging.OrdersPackaging;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "orders")
@@ -46,11 +49,21 @@ public class Order {
     @Column(name = "pay_type", nullable = false)
     private String payType; // todo: change to enum. learning saving enum to db in correct view
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "orders_packaging",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = {
-            @JoinColumn(name = "product_id", referencedColumnName = "product_id"),
-                    @JoinColumn(name = "amount", referencedColumnName = "amount")})
-    private List<Packaging> packagingList;
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "order")
+    private List<OrdersPackaging> packagingList;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Order order = (Order) o;
+        return id != null && Objects.equals(id, order.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

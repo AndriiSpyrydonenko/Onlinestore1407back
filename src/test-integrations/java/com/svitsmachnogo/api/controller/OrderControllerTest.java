@@ -205,6 +205,8 @@ class OrderControllerTest {
         Assertions.assertEquals(1693, order.getTotalCost());
         Assertions.assertEquals("comment", order.getComment());
         Assertions.assertEquals("Vanya", order.getCustomerName());
+        Assertions.assertEquals(2, order.getPackagingList().get(0).getCount());
+        Assertions.assertEquals(1, order.getPackagingList().get(1).getCount());
     }
 
     @Test
@@ -213,7 +215,7 @@ class OrderControllerTest {
     @DisplayName(value = "createOrderByNoUser should adds orders with no user to DB and return 200 code")
     void createOrderByNoUserReturn200() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/unauthorized-user") // todo:change to /api/orders/unauthorized-user
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/orders/unauthorized-user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(createJsonOrderDto()))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
@@ -225,6 +227,8 @@ class OrderControllerTest {
         Assertions.assertEquals(1693, order.getTotalCost());
         Assertions.assertEquals("comment", order.getComment());
         Assertions.assertEquals("Vanya", order.getCustomerName());
+        Assertions.assertEquals(2, order.getPackagingList().get(0).getCount());
+        Assertions.assertEquals(1, order.getPackagingList().get(1).getCount());
     }
 
     private void initOrder() {
@@ -234,12 +238,13 @@ class OrderControllerTest {
                 (1, 'first', 481, 'John', 'Doe', '+1234567890', '123 Main St, Cityville', now(), 'card'),
                 (1, 'second', 481, 'John', 'Doe', '+1234567890', '123 Main St, Cityville', now(), 'cash');
                 """).executeUpdate();
+
         entityManager.createNativeQuery("""
-                INSERT INTO orders_packaging
-                VALUES (1, 1, 200),
-                       (1, 2, 500),
-                       (2, 1, 200),
-                       (2, 2, 500);
+                INSERT INTO orders_packaging (order_id, count, product_id, amount)
+                VALUES (1, 1, 1, 200),
+                       (2, 1, 2, 500),
+                       (1, 2, 1, 200),
+                       (2, 2, 2, 500);
                 """).executeUpdate();
     }
 
@@ -255,11 +260,13 @@ class OrderControllerTest {
                   "payType": "cart",
                   "packagingList": [
                     {
+                      "count": 2, 
                       "productId": 3,
                       "amount": 200,
                       "cost": 768
                     },
                     {
+                      "count": 1, 
                       "productId": 4,
                       "amount": 500,
                       "cost": 925

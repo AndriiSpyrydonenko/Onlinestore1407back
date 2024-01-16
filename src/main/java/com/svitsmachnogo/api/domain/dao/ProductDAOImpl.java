@@ -2,7 +2,6 @@ package com.svitsmachnogo.api.domain.dao;
 
 import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.domain.dao.abstractional.ProductDAO;
-import com.svitsmachnogo.api.domain.entity.PackagingId;
 import com.svitsmachnogo.api.domain.entity.Product;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;

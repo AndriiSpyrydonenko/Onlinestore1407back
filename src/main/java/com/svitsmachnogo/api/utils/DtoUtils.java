@@ -86,7 +86,7 @@ public class DtoUtils {
 
         order.setPackagingList(orderDTO.getPackagingList()
                 .stream()
-                .map( o -> DtoUtils.mapToOrdersPackaging(o, order))
+                .map(o -> DtoUtils.mapToOrdersPackaging(o, order))
                 .collect(Collectors.toList()));
 
         order.setTotalCost(order.getPackagingList()
@@ -113,7 +113,7 @@ public class DtoUtils {
         id.setAmount(packagingDto.getAmount());
         packaging.setId(id);
         packaging.setCost(packagingDto.getCost());
-        ordersPackaging.setCount(packagingDto.getCount());
+        ordersPackaging.setAmountOfUnits(packagingDto.getAmountOfUnits());
         ordersPackaging.setPackaging(packaging);
         ordersPackaging.setOrder(order);
         return ordersPackaging;

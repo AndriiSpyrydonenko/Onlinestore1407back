@@ -18,7 +18,7 @@ public class OrdersPackagingDtoFactory implements DtoFactory<OrdersPackaging> {
     @Override
     public OrdersPackagingDto of(OrdersPackaging targetEntity) {
         OrdersPackagingDto packagingDto = new OrdersPackagingDto();
-        packagingDto.setCount(targetEntity.getCount());
+        packagingDto.setAmountOfUnits(targetEntity.getAmountOfUnits());
         packagingDto.setProductId(targetEntity.getPackaging().getId().getProductId());
         packagingDto.setAmount(targetEntity.getPackaging().getId().getAmount());
         packagingDto.setCost(targetEntity.getPackaging().getCost());

@@ -2,7 +2,9 @@ package com.svitsmachnogo.api.domain.entity.packaging;
 
 import com.svitsmachnogo.api.domain.entity.Order;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
@@ -17,10 +19,10 @@ public class OrdersPackaging {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private  Long id;
+    private Long id;
 
-    @Column(name = "count")
-    private Integer count;
+    @Column(name = "amount_of_units")
+    private Integer amountOfUnits;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumns({

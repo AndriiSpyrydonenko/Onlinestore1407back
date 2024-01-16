@@ -54,26 +54,16 @@ create table orders
 
 create table orders_packaging
 (
-    id         bigint auto_increment,
-    order_id   bigint,
-    count      int not null,
-    product_id int not null,
-    amount     int not null,
+    id              bigint auto_increment,
+    order_id        bigint,
+    amount_of_units int not null,
+    product_id      int not null,
+    amount          int not null,
     constraint orders_packaging__order_id__product_id__PK primary key (id),
     constraint orders_packaging__orders_order_id_FK foreign key (order_id) references orders (order_id),
     constraint orders_packaging__orders_packaging__product_id__amount_FK foreign key (product_id, amount)
         references packaging (product_id, amount)
 );
-
-# create table count_of_packaging
-# (
-#     count      int not null,
-#     product_id int not null,
-#     amount     int not null,
-#     constraint count_of_packaging__count__product_id__PK primary key (count, product_id, amount),
-#     constraint orders_packaging__orders_packaging__product_id__amount_FK foreign key (product_id, amount)
-#         references packaging (product_id, amount)
-# );
 
 create table carts_packaging
 (

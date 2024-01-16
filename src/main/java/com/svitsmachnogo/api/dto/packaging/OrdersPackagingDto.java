@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class OrdersPackagingDto implements AbstractDto {
 
-    private Integer count;
+    private Integer amountOfUnits;
 
     protected Integer productId;
 

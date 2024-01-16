@@ -205,8 +205,8 @@ class OrderControllerTest {
         Assertions.assertEquals(1693, order.getTotalCost());
         Assertions.assertEquals("comment", order.getComment());
         Assertions.assertEquals("Vanya", order.getCustomerName());
-        Assertions.assertEquals(2, order.getPackagingList().get(0).getCount());
-        Assertions.assertEquals(1, order.getPackagingList().get(1).getCount());
+        Assertions.assertEquals(2, order.getPackagingList().get(0).getAmountOfUnits());
+        Assertions.assertEquals(1, order.getPackagingList().get(1).getAmountOfUnits());
     }
 
     @Test
@@ -227,8 +227,8 @@ class OrderControllerTest {
         Assertions.assertEquals(1693, order.getTotalCost());
         Assertions.assertEquals("comment", order.getComment());
         Assertions.assertEquals("Vanya", order.getCustomerName());
-        Assertions.assertEquals(2, order.getPackagingList().get(0).getCount());
-        Assertions.assertEquals(1, order.getPackagingList().get(1).getCount());
+        Assertions.assertEquals(2, order.getPackagingList().get(0).getAmountOfUnits());
+        Assertions.assertEquals(1, order.getPackagingList().get(1).getAmountOfUnits());
     }
 
     private void initOrder() {

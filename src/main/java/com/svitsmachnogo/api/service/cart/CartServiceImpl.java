@@ -2,8 +2,8 @@ package com.svitsmachnogo.api.service.cart;
 
 import com.svitsmachnogo.api.domain.dao.abstractional.CartRepository;
 import com.svitsmachnogo.api.domain.entity.Cart;
-import com.svitsmachnogo.api.domain.entity.Packaging;
-import com.svitsmachnogo.api.domain.entity.PackagingId;
+import com.svitsmachnogo.api.domain.entity.packaging.Packaging;
+import com.svitsmachnogo.api.domain.entity.packaging.PackagingId;
 import com.svitsmachnogo.api.dto.cart.CartRequestDTO;
 import com.svitsmachnogo.api.dto.order.OrderDto;
 import com.svitsmachnogo.api.exceptions.NoSuchCartException;

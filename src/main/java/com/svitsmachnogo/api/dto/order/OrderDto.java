@@ -1,7 +1,7 @@
 package com.svitsmachnogo.api.dto.order;
 
 import com.svitsmachnogo.api.dto.AbstractDto;
-import com.svitsmachnogo.api.dto.packaging.PackagingDto;
+import com.svitsmachnogo.api.dto.packaging.OrdersPackagingDto;
 import lombok.Data;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public abstract class OrderDto implements AbstractDto {
 
     String payType;
 
-    List<PackagingDto> packagingList;
+    List<OrdersPackagingDto> packagingList;
 
     protected OrderDto(){
 

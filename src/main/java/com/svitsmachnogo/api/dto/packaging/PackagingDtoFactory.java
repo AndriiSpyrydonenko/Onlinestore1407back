@@ -1,6 +1,6 @@
 package com.svitsmachnogo.api.dto.packaging;
 
-import com.svitsmachnogo.api.domain.entity.Packaging;
+import com.svitsmachnogo.api.domain.entity.packaging.Packaging;
 import com.svitsmachnogo.api.dto.DtoFactory;
 
 /**

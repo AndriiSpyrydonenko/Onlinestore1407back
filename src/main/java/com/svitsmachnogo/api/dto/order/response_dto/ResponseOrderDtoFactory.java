@@ -3,6 +3,7 @@ package com.svitsmachnogo.api.dto.order.response_dto;
 import com.svitsmachnogo.api.domain.entity.Order;
 import com.svitsmachnogo.api.dto.DtoFactory;
 import com.svitsmachnogo.api.dto.order.OrderDto;
+import com.svitsmachnogo.api.dto.packaging.OrdersPackagingDtoFactory;
 import com.svitsmachnogo.api.dto.packaging.PackagingDtoFactory;
 import com.svitsmachnogo.api.utils.DtoUtils;
 
@@ -30,7 +31,7 @@ public class ResponseOrderDtoFactory implements DtoFactory<Order> {
         orderDTO.setCustomerAddress(targetEntity.getCustomerAddress());
         orderDTO.setCustomerPhoneNumber(targetEntity.getCustomerPhoneNumber());
         orderDTO.setPayType(targetEntity.getPayType());
-        orderDTO.setPackagingList(DtoUtils.listOf(targetEntity.getPackagingList(), new PackagingDtoFactory()));
+        orderDTO.setPackagingList(DtoUtils.listOf(targetEntity.getPackagingList(), new OrdersPackagingDtoFactory()));
         return orderDTO;
     }
 }

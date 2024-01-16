@@ -76,7 +76,7 @@ values ('grocery', 'Бакалія', 'https://storage.googleapis.com/svsmach/cat
         'https://storage.googleapis.com/svsmach/categories/Spices%20Status%3DHover.svg');
 
 insert into gift_sets(url_picture, discount_percent)
-values ('https://storage.googleapis.com/svsmach/categories/Form_for_pic.png' , 50);
+values ('https://storage.googleapis.com/svsmach/categories/Form_for_pic.png', 50);
 
 
 insert into products
@@ -109,7 +109,7 @@ values ('grocery', 123456, 'Квасоля червона', true, 0, 4.2, 50, 20
 
 
 insert into pictures
-(product_id, url_path)
+    (product_id, url_path)
 values (1,
         'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0%20%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg'),
        (2,
@@ -315,10 +315,12 @@ create table orders
 
 create table orders_packaging
 (
-    order_id   bigint not null,
-    product_id int    not null,
-    amount     int    not null,
-    constraint orders_packaging__order_id__product_id__PK primary key (order_id, product_id, amount),
+    id              bigint auto_increment,
+    order_id        bigint,
+    amount_of_units int not null,
+    product_id      int not null,
+    amount          int not null,
+    constraint orders_packaging__order_id__product_id__PK primary key (id),
     constraint orders_packaging__orders_order_id_FK foreign key (order_id) references orders (order_id),
     constraint orders_packaging__orders_packaging__product_id__amount_FK foreign key (product_id, amount)
         references packaging (product_id, amount)

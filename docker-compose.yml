@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  svitsmachnogo-container:
+    image: onlinestore1407/svitsmachnogo:latest
+    container_name: svitsmachnogo-container
+    restart: always
+    ports:
+      - 8080:8080
+
+#Test info

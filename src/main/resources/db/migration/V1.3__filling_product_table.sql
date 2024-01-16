@@ -3,13 +3,13 @@ use svitsmachnogo;
 insert into products
 (category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
  country_producer, description)
-    value ('grocery', 123456, 'Квасоля червона', true, 0, 4.2, 50, 20, sysdate(), 'Україна',
+    value ('grocery', 123456, 'Квасоля червона', true, 10, 4.2, 50, 20, sysdate(), 'Україна',
            'Склад: Квасоля червона "Рубін" - вона є чудовою альтернативою м''ясу для вегетаріанців і тих, хто поститься. Червона квасоля містить до 25% білка, який за своєю харчовою цінністю не поступається білку м''яса. До того ж білок квасолі засвоюється на 70 – 80%.');
 
 insert into products
 (category_id, article, name, exist, priority_score, rating, review_count, discount_percent, create_date,
  country_producer, description)
-    value ('grocery', 548712, 'Кіноа Біла', true, 0, 3.2, 278, 0, sysdate(), 'Перу',
+    value ('grocery', 548712, 'Кіноа Біла', true, 11, 3.2, 278, 0, sysdate(), 'Перу',
            'Склад: Кіноа Біла - зернова культура з сімейства мареві, яка росте на гірських схилах Анд. Батьківщиною білої кіноа прийнято вважати берега озера Тітікака в Південній Америці.');
 
 insert into products
@@ -791,10 +791,8 @@ UPDATE products
 SET number_of_orders = FLOOR(RAND() * 100) + 1
 WHERE product_id BETWEEN 1 AND 75;
 
--- Початкове значення id
 SET @product_id = 1;
 
--- Генерація 150 запитів
 DELIMITER //
 CREATE PROCEDURE InsertPackagingData()
 BEGIN
@@ -817,12 +815,8 @@ BEGIN
 END //
 DELIMITER ;
 
--- Виклик процедури для генерації запитів
 CALL InsertPackagingData();
 
-# UPDATE products p
-# SET min_price = (select min(pac.cost) from packaging pac where pac.product_id = p.product_id)
-# where p.product_id > 0;
 
 UPDATE products p
 SET min_price = (select pac.cost

@@ -2,6 +2,7 @@ package com.svitsmachnogo.api.utils;
 
 import com.svitsmachnogo.api.dto.RegistrationUserDTO;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,9 @@ public class JwtTokenUtils {
     @Value("${jwt.lifetime}")
     private Duration jwtLifetime;
 
+    @Value("${jwt.confirm.lifetime}")
+    private Duration jwtConfirmLifetime;
+
     /**
      * Generates a JWT token for the provided UserDetails object, typically representing
      * user authentication information.
@@ -37,7 +41,7 @@ public class JwtTokenUtils {
      * @return A JWT token as a String.
      * @author Vanya Demydenko
      */
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         List<String> roles = userDetails
                 .getAuthorities()
@@ -58,14 +62,31 @@ public class JwtTokenUtils {
      * @return A JWT token for confirmation as a String.
      * @author Vanya Demydenko
      */
-    public String generateConfirmLink(RegistrationUserDTO userDTO){
+    public String generateConfirmKey(RegistrationUserDTO userDTO) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("name", userDTO.getName());
         claims.put("password", userDTO.getPassword());
         Date issuedDate = new Date();
-        Date expiredDate = new Date(issuedDate.getTime() + jwtLifetime.toMillis());
+        Date expiredDate = new Date(issuedDate.getTime() + jwtConfirmLifetime.toMillis());
 
         return buildJwt(userDTO.getEmail(), claims, issuedDate, expiredDate);
+    }
+
+    /**
+     * Parses a user registration DTO from a JWT.
+     *
+     * @param token The JWT string from which the user information will be extracted.
+     * @return A RegistrationUserDTO object containing user information parsed from the JWT.
+     * @throws JwtException If there is an issue parsing the JWT or extracting claims.
+     * @see #getAllClaimsFromToken(String)
+     */
+    public RegistrationUserDTO parseUserFromJwt(String token) throws JwtException {
+        RegistrationUserDTO userDTO = new RegistrationUserDTO();
+        Claims claims = getAllClaimsFromToken(token);
+        userDTO.setEmail(claims.getSubject());
+        userDTO.setName(claims.get("name", String.class));
+        userDTO.setPassword(claims.get("password", String.class));
+        return userDTO;
     }
 
     /**
@@ -75,7 +96,7 @@ public class JwtTokenUtils {
      * @return The email address contained in the token.
      * @author Vanya Demydenko
      */
-    public String getUserEmail(String token){
+    public String getUserEmail(String token) {
         return getAllClaimsFromToken(token).getSubject();
     }
 
@@ -86,8 +107,8 @@ public class JwtTokenUtils {
      * @return The password contained in the token.
      * @author Vanya Demydenko
      */
-    public String getPassword(String token){
-        return getAllClaimsFromToken(token).get("password",String.class);
+    public String getPassword(String token) {
+        return getAllClaimsFromToken(token).get("password", String.class);
     }
 
     /**
@@ -97,8 +118,8 @@ public class JwtTokenUtils {
      * @return The name contained in the token.
      * @author Vanya Demydenko
      */
-    public String getName(String token){
-        return getAllClaimsFromToken(token).get("name",String.class);
+    public String getName(String token) {
+        return getAllClaimsFromToken(token).get("name", String.class);
     }
 
     /**
@@ -108,8 +129,8 @@ public class JwtTokenUtils {
      * @return A list of roles contained in the token.
      * @author Vanya Demydenko
      */
-    public List<String> getRoles(String token){
-        return getAllClaimsFromToken(token).get("roles",List.class);
+    public List<String> getRoles(String token) {
+        return getAllClaimsFromToken(token).get("roles", List.class);
     }
 
     /**
@@ -119,7 +140,7 @@ public class JwtTokenUtils {
      * @return A Claims object representing the claims contained within the JWT token.
      * @author Vanya Demydenko
      */
-    private Claims getAllClaimsFromToken(String token){
+    private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
                 .verifyWith(getSigningKey())
                 .build()
@@ -133,7 +154,7 @@ public class JwtTokenUtils {
      * @return A SecretKey instance used for JWT token signing.
      * @author Vanya Demydenko
      */
-    private SecretKey getSigningKey(){
+    private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 

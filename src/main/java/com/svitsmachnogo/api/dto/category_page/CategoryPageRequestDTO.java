@@ -1,4 +1,4 @@
-package com.svitsmachnogo.api.dto;
+package com.svitsmachnogo.api.dto.category_page;
 
 import com.svitsmachnogo.api.component.CheckboxForSubcategory;
 import com.svitsmachnogo.api.component.PriceFilter;
@@ -10,6 +10,7 @@ import java.util.List;
 public class CategoryPageRequestDTO {
 
      private List<CheckboxForSubcategory> checkboxes;
+
      private PriceFilter priceFilter;
 
 }

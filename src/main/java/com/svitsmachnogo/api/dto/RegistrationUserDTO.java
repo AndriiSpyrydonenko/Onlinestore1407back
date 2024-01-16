@@ -2,6 +2,8 @@ package com.svitsmachnogo.api.dto;
 
 import lombok.Data;
 
+import java.net.URL;
+
 @Data
 public class RegistrationUserDTO {
 
@@ -12,4 +14,6 @@ public class RegistrationUserDTO {
     private String confirmPassword;
 
     private String email;
+
+    private String redirectTo;
 }

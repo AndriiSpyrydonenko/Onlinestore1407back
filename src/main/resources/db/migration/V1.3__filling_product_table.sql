@@ -508,8 +508,6 @@ insert into products
     value ('spices', 434902, 'Сіль', true, 0, 4.7, 60, 0, '2022-12-19 15:50:00', 'Україна',
            'Сіль для основних страв.');
 
-
-
 insert into pictures
     (product_id, url_path)
     value (1, 'https://storage.googleapis.com/svsmach/products/%D0%9A%D1%96%D0%BD%D0%BE%D0%B0%20%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0.jpg');
@@ -683,6 +681,7 @@ insert into pictures
 # VALUES (8, '1000', 743);
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (9, '200', 723);
+
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (9, '500', 950);
 # INSERT INTO packaging(product_id, amount, cost)
@@ -784,6 +783,10 @@ insert into pictures
 # INSERT INTO packaging(product_id, amount, cost)
 # VALUES (25, '1000', 590);
 
+update packaging
+set amount = 250
+where amount = 200;
+
 UPDATE products
 SET number_of_orders = FLOOR(RAND() * 100) + 1
 WHERE product_id BETWEEN 1 AND 75;
@@ -798,13 +801,13 @@ BEGIN
     WHILE i <= 75
         DO
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '200', FLOOR(RAND() * (1000 - 100 + 1) + 100));
+            VALUES (@product_id, '200', FLOOR(RAND() * (500 - 100 + 1) + 100));
 
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '500', FLOOR(RAND() * (1000 - 100 + 1) + 100));
+            VALUES (@product_id, '500', FLOOR(RAND() * (750 - 501 + 1) + 500));
 
             INSERT INTO packaging(product_id, amount, cost)
-            VALUES (@product_id, '1000', FLOOR(RAND() * (1000 - 100 + 1) + 100));
+            VALUES (@product_id, '1000', FLOOR(RAND() * (1000 - 751 + 1) + 750));
 
             SET @product_id = @product_id + 1;
             SET i = i + 1;

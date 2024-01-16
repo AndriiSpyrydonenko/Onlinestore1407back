@@ -17,6 +17,8 @@ public abstract class OrderDto implements AbstractDto {
 
     Long userId;
 
+    Double deliveryCost;
+
     String comment;
 
     String customerName;
@@ -28,6 +30,8 @@ public abstract class OrderDto implements AbstractDto {
     String customerAddress;
 
     String payType;
+
+    String deliveryType;
 
     List<OrdersPackagingDto> packagingList;
 

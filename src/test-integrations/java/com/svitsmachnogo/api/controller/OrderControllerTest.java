@@ -233,14 +233,14 @@ class OrderControllerTest {
 
     private void initOrder() {
         entityManager.createNativeQuery("""
-                INSERT INTO orders (user_id, order_comment, total_cost, customer_name, customer_surname, customer_phone_number, customer_address, create_date, pay_type)
+                INSERT INTO orders (user_id, order_comment, total_cost, delivery_cost, customer_name, customer_surname, customer_phone_number, customer_address, create_date, pay_type, delivery_type)
                 VALUES
-                (1, 'first', 481, 'John', 'Doe', '+1234567890', '123 Main St, Cityville', now(), 'card'),
-                (1, 'second', 481, 'John', 'Doe', '+1234567890', '123 Main St, Cityville', now(), 'cash');
+                (1, 'first', 481,0 , 'John', 'Doe', '+1234567890', '123 Main St, Cityville', now(), 'card', 'post'),
+                (1, 'second', 481,0 , 'John', 'Doe', '+1234567890', '123 Main St, Cityville', now(), 'cash', 'post');
                 """).executeUpdate();
 
         entityManager.createNativeQuery("""
-                INSERT INTO orders_packaging (order_id, count, product_id, amount)
+                INSERT INTO orders_packaging (order_id, amount_of_units, product_id, amount)
                 VALUES (1, 1, 1, 200),
                        (2, 1, 2, 500),
                        (1, 2, 1, 200),
@@ -252,21 +252,23 @@ class OrderControllerTest {
         return """
                 {
                   "userId": 1,
+                  "deliveryCost": 0,
                   "comment": "comment",
                   "customerName": "Vanya",
                   "customerSurname": "Demydenko",
                   "customerPhoneNumber": "+380988760800",
                   "customerAddress": "Address",
                   "payType": "cart",
+                  "deliveryType": "post",
                   "packagingList": [
                     {
-                      "count": 2, 
+                      "amountOfUnits": 2,
                       "productId": 3,
                       "amount": 200,
                       "cost": 768
                     },
                     {
-                      "count": 1, 
+                      "amountOfUnits": 1, 
                       "productId": 4,
                       "amount": 500,
                       "cost": 925

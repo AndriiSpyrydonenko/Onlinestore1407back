@@ -22,6 +22,7 @@ public class ResponseOrderDtoFactory implements DtoFactory<Order> {
     public OrderDto of(Order targetEntity){
         ResponseUserOrderDto orderDTO = new ResponseUserOrderDto();
         orderDTO.setId(targetEntity.getId());
+        orderDTO.setDeliveryCost(targetEntity.getDeliveryCost());
         orderDTO.setTotalCost(targetEntity.getTotalCost());
         orderDTO.setCreateDate(targetEntity.getCreateDate());
         orderDTO.setUserId((targetEntity.getUserProfile() != null) ? targetEntity.getUserProfile().getId() : null);
@@ -31,6 +32,7 @@ public class ResponseOrderDtoFactory implements DtoFactory<Order> {
         orderDTO.setCustomerAddress(targetEntity.getCustomerAddress());
         orderDTO.setCustomerPhoneNumber(targetEntity.getCustomerPhoneNumber());
         orderDTO.setPayType(targetEntity.getPayType());
+        orderDTO.setDeliveryType(targetEntity.getDeliveryType());
         orderDTO.setPackagingList(DtoUtils.listOf(targetEntity.getPackagingList(), new OrdersPackagingDtoFactory()));
         return orderDTO;
     }

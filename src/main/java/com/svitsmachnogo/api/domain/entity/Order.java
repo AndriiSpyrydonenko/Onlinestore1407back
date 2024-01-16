@@ -31,6 +31,9 @@ public class Order {
     @Column(name = "total_cost", nullable = false)
     private Double totalCost;
 
+    @Column(name = "delivery_cost", nullable = false)
+    private Double deliveryCost;
+
     @Column(name = "customer_name", nullable = false)
     private String customerName;
 
@@ -48,6 +51,9 @@ public class Order {
 
     @Column(name = "pay_type", nullable = false)
     private String payType; // todo: change to enum. learning saving enum to db in correct view
+
+    @Column(name = "delivery_type", nullable = false)
+    private String deliveryType;
 
     @OneToMany(fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,

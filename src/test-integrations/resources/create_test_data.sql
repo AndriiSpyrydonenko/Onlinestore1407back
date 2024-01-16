@@ -302,15 +302,18 @@ create table orders
     order_id              bigint auto_increment,
     user_id               bigint,
     order_comment         varchar(255),
+    delivery_cost         int          not null,
     total_cost            int          not null,
-    customer_name         varchar(255) not null,
-    customer_surname      varchar(255) not null,
-    customer_phone_number varchar(255) not null,
+    customer_name         varchar(255)  not null,
+    customer_surname      varchar(255)  not null,
+    customer_phone_number varchar(255)  not null,
     customer_address      varchar(255) not null,
     create_date           datetime     not null,
-    pay_type              varchar(255) not null,
+    pay_type              varchar(255)  not null,
+    delivery_type         varchar(255)  not null,
     constraint orders_order_id_PK primary key (order_id),
     constraint orders_user_profiles_user_id_FK foreign key (user_id) references user_profiles (user_id)
+
 );
 
 create table orders_packaging

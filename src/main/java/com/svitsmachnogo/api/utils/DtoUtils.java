@@ -76,12 +76,14 @@ public class DtoUtils {
     public static Order mapToOrder(UserProfile user, OrderDto orderDTO) {
         Order order = new Order();
         order.setUserProfile(user);
+        order.setDeliveryCost(orderDTO.getDeliveryCost());
         order.setComment(orderDTO.getComment());
         order.setCustomerName(orderDTO.getCustomerName());
         order.setCustomerSurname(orderDTO.getCustomerSurname());
         order.setCustomerPhoneNumber(orderDTO.getCustomerPhoneNumber());
         order.setCustomerAddress(orderDTO.getCustomerAddress());
         order.setPayType(orderDTO.getPayType());
+        order.setDeliveryType(orderDTO.getDeliveryType());
         order.setCreateDate(Timestamp.valueOf(LocalDateTime.now()));
 
         order.setPackagingList(orderDTO.getPackagingList()
@@ -89,11 +91,13 @@ public class DtoUtils {
                 .map(o -> DtoUtils.mapToOrdersPackaging(o, order))
                 .collect(Collectors.toList()));
 
-        order.setTotalCost(order.getPackagingList()
+        Double costWithOutDelivery = order.getPackagingList()
                 .stream()
                 .map(OrdersPackaging::getPackaging)
                 .mapToDouble(Packaging::getCost)
-                .sum());
+                .sum();
+
+        order.setTotalCost(order.getDeliveryCost() + costWithOutDelivery);
 
         return order;
     }

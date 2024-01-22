@@ -3,6 +3,7 @@ package com.svitsmachnogo.api.service;
 import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.domain.dao.abstractional.ProductDAO;
 import com.svitsmachnogo.api.domain.entity.Product;
+import com.svitsmachnogo.api.dto.product.AddProductDto;
 import com.svitsmachnogo.api.service.abstractional.ProductService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public PriceFilter getDefaultPriceFilterByCategoryId(String categoryId) {
         return productDAO.findMinAndMaxPrice(categoryId);
+    }
+
+    @Override
+    public void addProduct(AddProductDto product) {
+
     }
 }

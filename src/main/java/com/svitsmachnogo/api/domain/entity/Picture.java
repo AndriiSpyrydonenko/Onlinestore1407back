@@ -1,10 +1,14 @@
 package com.svitsmachnogo.api.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.net.URL;
 import java.util.Objects;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "pictures")
 public class Picture {

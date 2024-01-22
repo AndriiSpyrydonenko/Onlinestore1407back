@@ -27,8 +27,17 @@ public class Product implements Comparable<Product> {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = true)
     private String description;
+
+    @Column(name = "big_description", nullable = false)
+    private String bigDescription;
+
+    @Column(name = "nutritional_value", nullable = true)
+    private String nutritionalValue;
+
+    @Column(name = "usage", nullable = true)
+    private String usage;
 
     @Column(name = "country_producer")
     private String countryProducer;
@@ -66,6 +75,10 @@ public class Product implements Comparable<Product> {
 
     @Column(name = "min_price", nullable = false)
     private double minPrice = 0.0;
+
+    @Column(name = "quantity", nullable = false)
+    private int quantity ;
+
 
     @ElementCollection
     @CollectionTable(name = "packaging", joinColumns = @JoinColumn(name = "product_id"))

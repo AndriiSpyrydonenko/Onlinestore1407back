@@ -4,11 +4,12 @@ import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.domain.entity.Subcategory;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface SubcategoryDAO {
 
     List<Subcategory> findAllByCategoryId(String categoryId);
 
-    Subcategory findById(String subcategoryId);
+    Optional<Subcategory> findById(String subcategoryId);
 }

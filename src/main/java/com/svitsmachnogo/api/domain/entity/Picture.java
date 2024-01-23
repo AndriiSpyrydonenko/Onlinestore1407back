@@ -1,11 +1,17 @@
 package com.svitsmachnogo.api.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.net.URL;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "pictures")
 public class Picture {
 
@@ -21,30 +27,8 @@ public class Picture {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public Picture() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public URL getUrlPath() {
-        return urlPath;
-    }
-
-    public void setUrlPath(URL urlPath) {
+    public Picture(URL urlPath, Product product) {
         this.urlPath = urlPath;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
         this.product = product;
     }
 

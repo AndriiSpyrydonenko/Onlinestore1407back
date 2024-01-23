@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 @Tag(name = "Product Controller", description = "Endpoints for managing products. This endpoint is only accessible to an administrator.")
-@RequestMapping("/api/admin/product")
+@RequestMapping("/api/test/product")
 public class ProductController {
 
     private final ProductService productService;

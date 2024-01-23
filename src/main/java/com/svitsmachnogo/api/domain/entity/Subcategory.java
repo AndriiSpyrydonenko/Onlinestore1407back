@@ -1,9 +1,8 @@
 package com.svitsmachnogo.api.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.util.Objects;
 import java.util.Set;
@@ -23,7 +22,7 @@ import java.util.TreeSet;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode
+@NoArgsConstructor
 @Table(name = "subcategories")
 public class Subcategory {
 
@@ -56,6 +55,16 @@ public class Subcategory {
     @Transient
     private boolean active = false;
 
-    public Subcategory() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Subcategory that = (Subcategory) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

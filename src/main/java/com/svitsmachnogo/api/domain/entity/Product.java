@@ -1,13 +1,17 @@
 package com.svitsmachnogo.api.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-@Data
+
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "products")
 public class Product implements Comparable<Product> {
@@ -36,7 +40,7 @@ public class Product implements Comparable<Product> {
     @Column(name = "nutritional_value", nullable = true)
     private String nutritionalValue;
 
-    @Column(name = "usage", nullable = true)
+    @Column(name = "usage_description", nullable = true)
     private String usage;
 
     @Column(name = "country_producer")
@@ -67,6 +71,7 @@ public class Product implements Comparable<Product> {
     private Timestamp createDate;
 
     @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
             mappedBy = "product")
     private List<Picture> pictures;
 
@@ -91,4 +96,16 @@ public class Product implements Comparable<Product> {
         return Integer.compare(this.id, o.id);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Product product = (Product) o;
+        return id != null && Objects.equals(id, product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

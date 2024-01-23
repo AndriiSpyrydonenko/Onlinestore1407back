@@ -21,4 +21,6 @@ public interface ProductDAO {
     Set<Product> findAllByCategoryId(String categoryId);
 
     PriceFilter findMinAndMaxPrice(String categoryId);
+
+    void saveProduct(Product product);
 }

@@ -29,7 +29,7 @@ create table products
     description       varchar(1024) not null,
     big_description   varchar(1024),
     nutritional_value varchar(1024),
-    usage             varchar(1024),
+    usage_description varchar(1024),
     country_producer  varchar(255),
     exist             boolean       not null default true,
     is_gift_set       boolean       not null default false,

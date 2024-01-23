@@ -1,9 +1,11 @@
 package com.svitsmachnogo.api.dto.product;
 
 import com.svitsmachnogo.api.dto.packaging.PackagingDto;
+import com.svitsmachnogo.api.dto.picture.PictureDTO;
 import com.svitsmachnogo.api.dto.subcategory.AddSubcategoryDto;
 import lombok.Data;
 
+import java.net.URL;
 import java.util.List;
 
 @Data
@@ -25,8 +27,6 @@ public class AddProductDto {
 
     private String countryProducer;
 
-    private boolean exist = true;
-
     private int discountPercent = 0;
 
     private int totalQuantity ;
@@ -37,6 +37,6 @@ public class AddProductDto {
 
     private List<PackagingDto> packagings;
 
-    private List<String> picturesURL;
+    private List<URL> pictures;
 
 }

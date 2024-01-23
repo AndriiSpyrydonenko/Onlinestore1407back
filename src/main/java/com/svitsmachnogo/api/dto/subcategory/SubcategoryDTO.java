@@ -1,4 +1,4 @@
-package com.svitsmachnogo.api.dto;
+package com.svitsmachnogo.api.dto.subcategory;
 
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.domain.entity.Subcategory;

@@ -2,7 +2,7 @@ package com.svitsmachnogo.api.dto.product;
 
 import com.svitsmachnogo.api.dto.packaging.PackagingDto;
 import com.svitsmachnogo.api.dto.picture.PictureDTO;
-import jakarta.persistence.Column;
+import com.svitsmachnogo.api.dto.subcategory.AddSubcategoryDto;
 import lombok.Data;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class AddProductDto {
 
-    private String category;
+    private String categoryId;
 
     private int article;
 
@@ -30,18 +30,14 @@ public class AddProductDto {
 
     private int discountPercent = 0;
 
-    private int quantity ;
+    private int totalQuantity ;
 
     private String unit;
 
-    private String subcategoryId;
-
-    private String subcategoryName;
-
-    private String subcategoryTitle;
+    private List<AddSubcategoryDto> subcategories;
 
     private List<PackagingDto> packagings;
 
-    private List<PictureDTO> pictures;
+    private List<String> picturesURL;
 
 }

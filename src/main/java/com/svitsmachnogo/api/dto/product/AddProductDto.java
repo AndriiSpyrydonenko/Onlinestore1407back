@@ -1,7 +1,6 @@
 package com.svitsmachnogo.api.dto.product;
 
 import com.svitsmachnogo.api.dto.packaging.PackagingDto;
-import com.svitsmachnogo.api.dto.picture.PictureDTO;
 import com.svitsmachnogo.api.dto.subcategory.AddSubcategoryDto;
 import lombok.Data;
 

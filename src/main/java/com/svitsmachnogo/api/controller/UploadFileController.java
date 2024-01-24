@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/admin/files") // todo: eventually the correct route will be added as "/api/admin/files"
+@RequestMapping("/api/admin/files")
 @Tag(name = "Upload files controller")
 public class UploadFileController {
 

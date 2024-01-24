@@ -27,7 +27,7 @@ public class UploadFileController {
 
     @PostMapping(value = "/products", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @Operation(summary = "Upload pictures for product"
-            , description = "Admin only. Picture size must be less than 10mb.The data type must be .jpg .jpeg or .png")
+            , description = "Admin only. Image size must be less than 10 MB. The file format must be \".jpg\", \".jpeg\" or \".png\". Should return an array of image references. It will need to be added to the endpoint that adds the product.")
     public ResponseEntity<List<String>> addPicturesForProduct(@RequestParam("files") MultipartFile[] files) {
         List<String> res = Arrays.stream(files)
                 .map(f -> fileService.uploadFile(f, UploadType.PRODUCT))
@@ -39,7 +39,7 @@ public class UploadFileController {
             value = "/categories",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @Operation(summary = "Upload pictures for category"
-            , description = "Admin only. Picture size must be less than 10mb.The data type must be .svg")
+            , description = "Admin only. Image size must be less than 10 MB. The file format must be \".svg\". Should return two image references. It will need to be added to the endpoint that adds the category.")
     public ResponseEntity<Map<String, String>> addPicturesForCategories(@RequestParam("hover") MultipartFile hover,
                                                                         @RequestParam("fill") MultipartFile fill) {
         return ResponseEntity.ok(

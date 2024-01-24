@@ -1,31 +1,21 @@
 package com.svitsmachnogo.api.exceptions;
 
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.security.SecurityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * Global exception handler for authentication-related exceptions.
  * This controller advice class handles various exceptions and maps them to appropriate
  * HTTP status codes along with custom error responses in the form of {@link AppError}.
  *
- * <p>Exception Handling Methods:
- * <ul>
- *     <li>{@link #handleIncorrectCredential(BadCredentialsException)} - Handles BadCredentialsException.</li>
- *     <li>{@link #handleUserAlreadyExist(UserAlreadyExistException)} - Handles UserAlreadyExistException.</li>
- *     <li>{@link #handleDifferentPasswords(DifferentPasswordsExceptions)} - Handles DifferentPasswordsExceptions.</li>
- *     <li>{@link #handleExpiredJwt(ExpiredJwtException)} - Handles ExpiredJwtException.</li>
- *     <li>{@link #handleGenericException(Exception)} - Handles other unexpected exceptions.</li>
- * </ul>
- *
  * @author Vanya Demydenko
  * @see AppError
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class AuthExceptionHandler {
 
     /**
@@ -51,6 +41,24 @@ public class AuthExceptionHandler {
      */
     @ExceptionHandler
     public ResponseEntity<AppError> handleDifferentPasswords(DifferentPasswordsExceptions exception) {
+        AppError error = AppError.of(400, exception.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * Handles FileExtensionException.
+     */
+    @ExceptionHandler(value = FileExtensionException.class)
+    public ResponseEntity<AppError> handleFileFormatException(FileExtensionException exception) {
+        AppError error = AppError.of(415, exception.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+    }
+
+    /**
+     * Handles BedRequestException.
+     */
+    @ExceptionHandler
+    public ResponseEntity<AppError> handleBedRequestException(BedRequestException exception) {
         AppError error = AppError.of(400, exception.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }

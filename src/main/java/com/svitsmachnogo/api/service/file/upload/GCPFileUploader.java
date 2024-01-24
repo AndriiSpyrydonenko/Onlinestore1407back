@@ -22,23 +22,23 @@ public abstract class GCPFileUploader {
     String gcpDir;
 
     @Value("${gcp.bucket.name}")
-    String gcpBucketName;
+    protected String gcpBucketName;
 
     @Value("${gcp.cloud.storage.link}")
-    String gcpStorageLink;
+    protected String gcpStorageLink;
 
-    public String uploadFile(MultipartFile file){
+    public String uploadFile(MultipartFile file) {
         try {
 
             BlobId blobId = BlobId.of(gcpBucketName, gcpDir + file.getOriginalFilename());
 
             BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(file.getContentType()).build();
 
-            Blob blob = storage.create(blobInfo,file.getBytes());
+            Blob blob = storage.create(blobInfo, file.getBytes());
 
-            return gcpStorageLink + gcpDir + blob.getName();
+            return gcpStorageLink + blob.getName();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

@@ -29,7 +29,7 @@ public class GCPFileService {
                 .collect(Collectors.toMap(GCPFileUploader::getUploadType, Function.identity()));
     }
 
-    public String uploadFile(MultipartFile file, UploadType type){
+    public String uploadFile(MultipartFile file, UploadType type) {
         return uploadersMap
                 .get(type)
                 .uploadFile(file);

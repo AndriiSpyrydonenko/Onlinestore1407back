@@ -33,7 +33,7 @@ public class AuthExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<AppError> handleUserAlreadyExist(UserAlreadyExistException exception) {
         AppError error = AppError.of(409, exception.getMessage());
-        return new ResponseEntity<>(AppError.of(409, exception.getMessage()), HttpStatus.CONFLICT);
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 
     /**

@@ -1,6 +1,5 @@
-package com.svitsmachnogo.api.service;
+package com.svitsmachnogo.api.service.product;
 
-import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.domain.dao.abstractional.ProductDAO;
 import com.svitsmachnogo.api.domain.entity.Category;
 import com.svitsmachnogo.api.domain.entity.Picture;
@@ -10,7 +9,6 @@ import com.svitsmachnogo.api.dto.packaging.PackagingDto;
 import com.svitsmachnogo.api.dto.product.AddProductDto;
 import com.svitsmachnogo.api.dto.subcategory.AddSubcategoryDto;
 import com.svitsmachnogo.api.service.abstractional.CategoryService;
-import com.svitsmachnogo.api.service.abstractional.ProductService;
 import com.svitsmachnogo.api.service.abstractional.SubcategoryService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,14 +16,16 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ProductServiceImpl implements ProductService {
+@Transactional
+public class ManageProductServiceImpl implements ManageProductService {
 
     private final ProductDAO productDAO;
 
@@ -35,49 +35,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public List<Product> getByPriorityForMainPage() {
-        List<Product> productsByPriority = productDAO.findByPriorityForMainPage();
-        int limit = 25 - (productsByPriority.size());
-        List<Product> productsByRating = productDAO.findAllByRatingWithLimit(limit);
-        productsByPriority.addAll(productsByRating);
-        return productsByPriority;
-    }
-
-    @Override
-    @Transactional
-    public List<Product> getByDiscountPercentForMainPage() {
-        return productDAO.findForDiscountBlock();
-    }
-
-    @Override
-    @Transactional
-    public List<Product> getByPartName(String partName) {
-        return productDAO.findByPartName(partName);
-    }
-
-    @Override
-    @Transactional
-    public Product getProductById(int id) {
-        return productDAO.findById(id);
-    }
-
-    @Override
-    public Set<Product> getAllByCategoryId(String categoryId) {
-
-        return productDAO.findAllByCategoryId(categoryId);
-    }
-
-    @Override
-    public PriceFilter getDefaultPriceFilterByCategoryId(String categoryId) {
-        return productDAO.findMinAndMaxPrice(categoryId);
-    }
-
-    @Override
-    @Transactional
     public void addProduct(AddProductDto productDto) {
         Category category = categoryService.findById(productDto.getCategoryId());
-        Product product = new Product();
 
+        Product product = mapToProduct(productDto, category); // new product without id
+
+        product = productDAO.saveProduct(product); // save to the DB and get the id from it
+
+        findAllSubcategoriesByIds(productDto, product)
+                .forEach(subcategoryService::save); // save subcategories with new product
+    }
+
+    private Product mapToProduct(AddProductDto productDto, Category category) {
+        Product product = new Product();
 
         product.setCategory(category);
         product.setArticle(productDto.getArticle());
@@ -88,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
         product.setUsage(productDto.getUsage());
         product.setCountryProducer(productDto.getCountryProducer());
         product.setArticle(productDto.getArticle());
-        product.setExist(isExit(productDto));
+        product.setExist(isExist(productDto));
         product.setDiscountPercent(productDto.getDiscountPercent());
         product.setQuantity(productDto.getTotalQuantity());
         product.setUnit(productDto.getUnit());
@@ -99,30 +69,19 @@ public class ProductServiceImpl implements ProductService {
         product.setMinPrice(getMinPrice(productDto));
         product.setPackaging(mapToPackagings(productDto));
         product.setPictures(mapToPictures(productDto, product));
-
-        List<Subcategory> subcategories = findAllSubcategoriesByIds(productDto,product);
-
-        subcategories.forEach(s -> s.getProducts().add(product));
-
-        productDAO.saveProduct(product);
+        return product;
     }
 
-    private boolean isExit(AddProductDto product) {
+    private boolean isExist(AddProductDto product) {
         Integer maxAmount = product.getPackagings()
                 .stream()
                 .map(PackagingDto::getAmount)
                 .max(Integer::compareTo)
-                .get();
-
+                .orElseThrow(throwException(product.getName()));
         return maxAmount < product.getTotalQuantity();
     }
 
     private List<Subcategory> findAllSubcategoriesByIds(AddProductDto productDto, Product product) {
-//        return productDto.getSubcategories()
-//                .stream()
-//                .map(AddSubcategoryDto::getSubcategoryId)
-//                .map(subcategoryService::findById)
-//                .collect(Collectors.toList());
         return productDto
                 .getSubcategories()
                 .stream()
@@ -131,15 +90,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private Subcategory getSubcategory(AddSubcategoryDto subcategoryDto, Product product) {
-        return subcategoryService
+        Subcategory subcategory = subcategoryService
                 .findById(subcategoryDto.getSubcategoryId())
-                .orElse(getNewSubcategory(subcategoryDto, product));
+                .orElse(getNewSubcategory(subcategoryDto, product.getCategory()));
+
+        subcategory.getProducts().add(product);
+
+        return subcategory;
     }
 
-    private Subcategory getNewSubcategory(AddSubcategoryDto subcategoryDto, Product product) {
+    private Subcategory getNewSubcategory(AddSubcategoryDto subcategoryDto, Category category) {
         Subcategory subcategory = new Subcategory();
-        subcategory.setProducts(Set.of(product));
-        subcategory.setCategory(product.getCategory());
+        subcategory.setProducts(new HashSet<>());
+        subcategory.setCategory(category);
         subcategory.setId(subcategoryDto.getSubcategoryId());
         subcategory.setName(subcategoryDto.getSubcategoryName());
         subcategory.setTitle(subcategoryDto.getSubcategoryTitle());
@@ -165,7 +128,13 @@ public class ProductServiceImpl implements ProductService {
                 .getPackagings()
                 .stream()
                 .min(Comparator.comparingInt(PackagingDto::getAmount))
-                .get()
+                .orElseThrow(throwException(product.getName()))
                 .getCost();
     }
+
+    private static Supplier<RuntimeException> throwException(String productName) {
+        return () -> new RuntimeException(
+                String.format("The product '%s' does not have packaging.", productName));
+    }
+
 }

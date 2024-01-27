@@ -1,9 +1,14 @@
 package com.svitsmachnogo.api.controller;
 
+import com.svitsmachnogo.api.domain.entity.Subcategory;
 import com.svitsmachnogo.api.dto.product.AddProductDto;
 import com.svitsmachnogo.api.dto.subcategory.SubcategoryDTO;
+import com.svitsmachnogo.api.dto.subcategory.SubcategorySimpleDto;
+import com.svitsmachnogo.api.dto.subcategory.SubcategorySimpleDtoFactory;
 import com.svitsmachnogo.api.service.abstractional.SubcategoryService;
 import com.svitsmachnogo.api.service.product.ManageProductService;
+import com.svitsmachnogo.api.utils.DtoUtils;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,8 +34,13 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/products/subcategory/{categoryId}")
-    public ResponseEntity<List<SubcategoryDTO>> getSubcategoriesByCategoryId(@PathVariable String categoryId){
-        subcategoryService.getAllSubcategoryByCategoryId(categoryId);
+    @GetMapping("/products/subcategories")
+    public ResponseEntity<List<SubcategorySimpleDto>> getSubcategoriesByCategoryId(
+            @RequestParam(name = "categoryId")
+            @Parameter(name = "categoryId" ,required = true ,description = "The category id of target product")
+            String categoryId){
+
+        List<Subcategory> subcategories = subcategoryService.getAllSubcategoryByCategoryId(categoryId);
+        return ResponseEntity.ok(DtoUtils.listOf(subcategories,new SubcategorySimpleDtoFactory()));
     }
 }

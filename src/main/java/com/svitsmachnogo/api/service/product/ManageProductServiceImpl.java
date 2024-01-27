@@ -7,7 +7,7 @@ import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.domain.entity.Subcategory;
 import com.svitsmachnogo.api.dto.packaging.PackagingDto;
 import com.svitsmachnogo.api.dto.product.AddProductDto;
-import com.svitsmachnogo.api.dto.subcategory.AddSubcategoryDto;
+import com.svitsmachnogo.api.dto.subcategory.SubcategorySimpleDto;
 import com.svitsmachnogo.api.service.abstractional.CategoryService;
 import com.svitsmachnogo.api.service.abstractional.SubcategoryService;
 import jakarta.transaction.Transactional;
@@ -89,7 +89,7 @@ public class ManageProductServiceImpl implements ManageProductService {
                 .collect(Collectors.toList());
     }
 
-    private Subcategory getSubcategory(AddSubcategoryDto subcategoryDto, Product product) {
+    private Subcategory getSubcategory(SubcategorySimpleDto subcategoryDto, Product product) {
         Subcategory subcategory = subcategoryService
                 .findById(subcategoryDto.getSubcategoryId())
                 .orElse(getNewSubcategory(subcategoryDto, product.getCategory()));
@@ -99,7 +99,7 @@ public class ManageProductServiceImpl implements ManageProductService {
         return subcategory;
     }
 
-    private Subcategory getNewSubcategory(AddSubcategoryDto subcategoryDto, Category category) {
+    private Subcategory getNewSubcategory(SubcategorySimpleDto subcategoryDto, Category category) {
         Subcategory subcategory = new Subcategory();
         subcategory.setProducts(new HashSet<>());
         subcategory.setCategory(category);

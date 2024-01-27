@@ -1,8 +1,7 @@
 package com.svitsmachnogo.api.dto.product;
 
 import com.svitsmachnogo.api.dto.packaging.PackagingDto;
-import com.svitsmachnogo.api.dto.picture.PictureDTO;
-import com.svitsmachnogo.api.dto.subcategory.AddSubcategoryDto;
+import com.svitsmachnogo.api.dto.subcategory.SubcategorySimpleDto;
 import lombok.Data;
 
 import java.net.URL;
@@ -33,7 +32,7 @@ public class AddProductDto {
 
     private String unit;
 
-    private List<AddSubcategoryDto> subcategories;
+    private List<SubcategorySimpleDto> subcategories;
 
     private List<PackagingDto> packagings;
 

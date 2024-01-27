@@ -22,5 +22,5 @@ public interface ProductDAO {
 
     PriceFilter findMinAndMaxPrice(String categoryId);
 
-    void saveProduct(Product product);
+    Product saveProduct(Product product);
 }

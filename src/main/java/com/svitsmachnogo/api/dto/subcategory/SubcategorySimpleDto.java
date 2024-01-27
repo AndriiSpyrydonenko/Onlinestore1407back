@@ -1,9 +1,10 @@
 package com.svitsmachnogo.api.dto.subcategory;
 
+import com.svitsmachnogo.api.dto.AbstractDto;
 import lombok.Data;
 
 @Data
-public class SubcategorySimpleDto {
+public class SubcategorySimpleDto implements AbstractDto {
 
     private String subcategoryId;
 

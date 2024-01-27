@@ -7,7 +7,7 @@ import com.svitsmachnogo.api.dto.CategoryDTO;
 import com.svitsmachnogo.api.dto.product.ProductDTO;
 import com.svitsmachnogo.api.service.GiftSetServiceImpl;
 import com.svitsmachnogo.api.service.abstractional.CategoryService;
-import com.svitsmachnogo.api.service.abstractional.ProductService;
+import com.svitsmachnogo.api.service.product.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

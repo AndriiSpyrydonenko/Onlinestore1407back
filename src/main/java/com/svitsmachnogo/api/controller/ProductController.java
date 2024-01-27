@@ -1,7 +1,7 @@
 package com.svitsmachnogo.api.controller;
 
 import com.svitsmachnogo.api.dto.product.AddProductDto;
-import com.svitsmachnogo.api.service.abstractional.ProductService;
+import com.svitsmachnogo.api.service.product.ManageProductService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/test/product")
 public class ProductController {
 
-    private final ProductService productService;
+    private final ManageProductService productService;
 
     @PutMapping()
     public ResponseEntity<?> addProduct(@RequestBody AddProductDto product){

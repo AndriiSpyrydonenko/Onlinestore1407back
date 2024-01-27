@@ -106,9 +106,11 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public void saveProduct(Product product) {
+    public Product saveProduct(Product product) {
         Session session = entityManager.unwrap(Session.class);
         session.setDefaultReadOnly(true);
         session.persist(product);
+        session.flush();
+        return session.get(Product.class,session.getIdentifier(product));
     }
 }

@@ -115,7 +115,7 @@ class ProductControllerTest {
     @DisplayName(value = "getSubcategoriesByCategoryId should return 200 code ")
     void getSubcategoriesByCategoryIdReturn200() throws Exception {
 
-         mockMvc.perform(MockMvcRequestBuilders.get("/api/admin/products/subcategories?categoryId=nuts")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/admin/products/subcategories?categoryId=nuts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -128,11 +128,11 @@ class ProductControllerTest {
     void addProductAddsProductToDB() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/admin/products")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", token)
-                        .content(getJson()));
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", token)
+                .content(getJson()));
 
-        Product product = entityManager.find(Product.class , 11);
+        Product product = entityManager.find(Product.class, 11);
 
         assertNotNull(product);
         assertEquals("Супер пупер горіх", product.getName());
@@ -148,12 +148,12 @@ class ProductControllerTest {
     void addProductAddsNewSubcategoryToDB() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/admin/products")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", token)
-                        .content(getJson()));
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", token)
+                .content(getJson()));
 
-        Product product = entityManager.find(Product.class , 11);
-        Subcategory subcategory = entityManager.find(Subcategory.class , "jusic");
+        Product product = entityManager.find(Product.class, 11);
+        Subcategory subcategory = entityManager.find(Subcategory.class, "jusic");
 
         assertNotNull(product);
         assertNotNull(subcategory);
@@ -162,7 +162,7 @@ class ProductControllerTest {
         assertTrue(subcategory.getProducts().contains(product));
     }
 
-    private String getJson(){
+    private String getJson() {
         return """
                 {
                   "categoryId": "nuts",

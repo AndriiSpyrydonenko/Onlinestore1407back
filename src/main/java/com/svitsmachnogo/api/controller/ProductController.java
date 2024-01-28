@@ -28,8 +28,7 @@ public class ProductController {
 
     private final SubcategoryService subcategoryService;
 
-    @Operation(summary = "Add product.", description = "Is protected! Admin only.   ... ")
-    //todo: after the merge to add into description the picture addition process and ^ reference for it.
+    @Operation(summary = "Add product.", description = "Is protected! Admin only.At the beginning call this endpoint /api/admin/files/products for uploading picture and insert the returned links into the 'pictures' array. ")
     @PutMapping()
     public ResponseEntity<?> addProduct(@RequestBody ProductAdditionDto product) {
         productService.addProduct(product);
@@ -37,8 +36,8 @@ public class ProductController {
     }
 
     @Operation(summary = "Get subcategory.",
-                description = "Is protected! Admin only.Receives the categoryId as key of request parameter, value is a specific category ID (e.g 'nuts'). Returns the SUBCATEGORY list for a specific CATEGORY.")
-    @GetMapping("/products/subcategories")
+            description = "Is protected! Admin only.Receives the categoryId as key of request parameter, value is a specific category ID (e.g 'nuts'). Returns the SUBCATEGORY list for a specific CATEGORY.")
+    @GetMapping("/subcategories")
     public ResponseEntity<List<SubcategorySimpleDto>> getSubcategoriesByCategoryId(
             @RequestParam(name = "categoryId")
             @Parameter(name = "categoryId", required = true, description = "The category id of target product")

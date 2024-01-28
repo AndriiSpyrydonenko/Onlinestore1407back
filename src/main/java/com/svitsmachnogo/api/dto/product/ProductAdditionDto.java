@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.List;
 
 @Data
-public class AddProductDto {
+public class ProductAdditionDto {
 
     private String categoryId;
 

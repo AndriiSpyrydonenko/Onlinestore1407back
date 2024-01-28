@@ -6,7 +6,7 @@ import com.svitsmachnogo.api.domain.entity.Picture;
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.domain.entity.Subcategory;
 import com.svitsmachnogo.api.dto.packaging.PackagingDto;
-import com.svitsmachnogo.api.dto.product.AddProductDto;
+import com.svitsmachnogo.api.dto.product.ProductAdditionDto;
 import com.svitsmachnogo.api.dto.subcategory.SubcategorySimpleDto;
 import com.svitsmachnogo.api.service.abstractional.CategoryService;
 import com.svitsmachnogo.api.service.abstractional.SubcategoryService;
@@ -35,7 +35,7 @@ public class ManageProductServiceImpl implements ManageProductService {
 
     @Override
     @Transactional
-    public void addProduct(AddProductDto productDto) {
+    public void addProduct(ProductAdditionDto productDto) {
         Category category = categoryService.findById(productDto.getCategoryId());
 
         Product product = mapToProduct(productDto, category); // new product without id
@@ -46,7 +46,7 @@ public class ManageProductServiceImpl implements ManageProductService {
                 .forEach(subcategoryService::save); // save subcategories with new product
     }
 
-    private Product mapToProduct(AddProductDto productDto, Category category) {
+    private Product mapToProduct(ProductAdditionDto productDto, Category category) {
         Product product = new Product();
 
         product.setCategory(category);
@@ -72,7 +72,7 @@ public class ManageProductServiceImpl implements ManageProductService {
         return product;
     }
 
-    private boolean isExist(AddProductDto product) {
+    private boolean isExist(ProductAdditionDto product) {
         Integer maxAmount = product.getPackagings()
                 .stream()
                 .map(PackagingDto::getAmount)
@@ -81,7 +81,7 @@ public class ManageProductServiceImpl implements ManageProductService {
         return maxAmount < product.getTotalQuantity();
     }
 
-    private List<Subcategory> findAllSubcategoriesByIds(AddProductDto productDto, Product product) {
+    private List<Subcategory> findAllSubcategoriesByIds(ProductAdditionDto productDto, Product product) {
         return productDto
                 .getSubcategories()
                 .stream()
@@ -109,21 +109,21 @@ public class ManageProductServiceImpl implements ManageProductService {
         return subcategory;
     }
 
-    private Map<Integer, Double> mapToPackagings(AddProductDto product) {
+    private Map<Integer, Double> mapToPackagings(ProductAdditionDto product) {
         return product.getPackagings()
                 .stream()
                 .collect(Collectors
                         .toMap(PackagingDto::getAmount, PackagingDto::getCost));
     }
 
-    private List<Picture> mapToPictures(AddProductDto productDto, Product product) {
+    private List<Picture> mapToPictures(ProductAdditionDto productDto, Product product) {
         return productDto.getPictures()
                 .stream()
                 .map(u -> new Picture(u, product))
                 .collect(Collectors.toList());
     }
 
-    private Double getMinPrice(AddProductDto product) {
+    private Double getMinPrice(ProductAdditionDto product) {
         return product
                 .getPackagings()
                 .stream()

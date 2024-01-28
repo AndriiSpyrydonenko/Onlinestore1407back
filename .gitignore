@@ -18,7 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
-**/practical-scion-402018-977132df6f00.json
+**/src/main/resources/practical-scion-402018-977132df6f00.json
 
 ### NetBeans ###
 /nbproject/private/

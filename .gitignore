@@ -18,7 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
-C:\Users\Vanya\IdeaProjects\Onlinestore1407back\src\main\resources\practical-scion-402018-977132df6f00.json
+*.json
 
 ### NetBeans ###
 /nbproject/private/

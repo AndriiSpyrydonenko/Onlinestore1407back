@@ -8,10 +8,10 @@ import lombok.Setter;
 import java.net.URL;
 import java.util.Objects;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
 @Table(name = "pictures")
 public class Picture {
 

@@ -4,7 +4,7 @@ services:
     image: onlinestore1407/svitsmachnogo:latest
     container_name: svitsmachnogo-container
     volumes:
-      - ./practical-scion-402018-e8260f7b0a30.json:/app/practical-scion-402018-e8260f7b0a30.json
+      - ../practical-scion-402018-e8260f7b0a30.json:/app/practical-scion-402018-e8260f7b0a30.json
     environment:
       GOOGLE_APPLICATION_CREDENTIALS: "/app/practical-scion-402018-e8260f7b0a30.json"
     restart: always

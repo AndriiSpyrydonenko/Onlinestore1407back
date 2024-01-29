@@ -31,7 +31,7 @@ public class AuthController {
             "authorization token (JWT) if the request is valid.The token must be included in the HTTP request " +
             "header with the name 'Authorization', and it should be prefixed with 'Bearer ' followed by " +
             "a space (e.g., 'Bearer your_JWT_token_here'). The token is considered valid for testing purposes " +
-            "for 5 minute after issuance.)";
+            "for 1 hour after issuance.)";
 
     private final String registrationDescription = "The endpoint retrieve the user in the request body and redirect URL." +
             " Returns http status only";

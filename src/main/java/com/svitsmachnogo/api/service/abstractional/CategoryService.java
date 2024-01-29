@@ -11,4 +11,6 @@ public interface CategoryService {
 
     List<Product>  getByIdAndReturnAllProducts(String id);
 
+    Category findById(String categoryId);
+
 }

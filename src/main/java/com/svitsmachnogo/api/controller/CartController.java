@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/secure/cart")
 @RequiredArgsConstructor
 @Tag(name = "Cart", description = "Endpoints for managing the user cart")
-public class CartController {
+public class  CartController {
 
     private final CartService cartService;
 

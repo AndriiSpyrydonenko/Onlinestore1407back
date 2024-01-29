@@ -2,9 +2,8 @@ package com.svitsmachnogo.api.controller;
 
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.dto.product.ProductDTO;
-import com.svitsmachnogo.api.service.GiftSetServiceImpl;
 import com.svitsmachnogo.api.service.abstractional.CategoryService;
-import com.svitsmachnogo.api.service.abstractional.ProductService;
+import com.svitsmachnogo.api.service.product.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

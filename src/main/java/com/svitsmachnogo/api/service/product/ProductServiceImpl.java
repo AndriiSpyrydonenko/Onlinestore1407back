@@ -1,24 +1,23 @@
-package com.svitsmachnogo.api.service;
+package com.svitsmachnogo.api.service.product;
 
 import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.domain.dao.abstractional.ProductDAO;
 import com.svitsmachnogo.api.domain.entity.Product;
-import com.svitsmachnogo.api.service.abstractional.ProductService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    ProductDAO productDAO;
+    private final ProductDAO productDAO;
 
     @Override
-    @Transactional
     public List<Product> getByPriorityForMainPage() {
         List<Product> productsByPriority = productDAO.findByPriorityForMainPage();
         int limit = 25 - (productsByPriority.size());
@@ -28,19 +27,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional
     public List<Product> getByDiscountPercentForMainPage() {
-       return productDAO.findForDiscountBlock();
+        return productDAO.findForDiscountBlock();
     }
 
     @Override
-    @Transactional
     public List<Product> getByPartName(String partName) {
         return productDAO.findByPartName(partName);
     }
 
     @Override
-    @Transactional
     public Product getProductById(int id) {
         return productDAO.findById(id);
     }
@@ -55,4 +51,5 @@ public class ProductServiceImpl implements ProductService {
     public PriceFilter getDefaultPriceFilterByCategoryId(String categoryId) {
         return productDAO.findMinAndMaxPrice(categoryId);
     }
+
 }

@@ -1,6 +1,7 @@
 package com.svitsmachnogo.api.dto;
 
 import com.svitsmachnogo.api.component.BlockOfCriteria;
+import com.svitsmachnogo.api.dto.subcategory.SubcategoryDTO;
 import lombok.Data;
 
 import java.util.List;

@@ -4,7 +4,7 @@ import com.svitsmachnogo.api.domain.dao.abstractional.UserProfileRepository;
 import com.svitsmachnogo.api.domain.entity.Product;
 import com.svitsmachnogo.api.domain.entity.UserProfile;
 import com.svitsmachnogo.api.exceptions.NoSuchUserException;
-import com.svitsmachnogo.api.service.abstractional.ProductService;
+import com.svitsmachnogo.api.service.product.ProductService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

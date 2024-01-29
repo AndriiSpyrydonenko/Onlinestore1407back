@@ -104,4 +104,13 @@ public class ProductDAOImpl implements ProductDAO {
         priceFilter.setMaxPrice(max);
         return priceFilter;
     }
+
+    @Override
+    public Product saveProduct(Product product) {
+        Session session = entityManager.unwrap(Session.class);
+        session.setDefaultReadOnly(true);
+        session.persist(product);
+        session.flush();
+        return session.get(Product.class,session.getIdentifier(product));
+    }
 }

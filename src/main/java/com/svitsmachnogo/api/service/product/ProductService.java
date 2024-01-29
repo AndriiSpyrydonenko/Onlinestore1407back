@@ -1,4 +1,4 @@
-package com.svitsmachnogo.api.service.abstractional;
+package com.svitsmachnogo.api.service.product;
 
 import com.svitsmachnogo.api.component.PriceFilter;
 import com.svitsmachnogo.api.domain.entity.Product;

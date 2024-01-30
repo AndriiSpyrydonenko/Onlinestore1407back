@@ -7,7 +7,7 @@
   Example: created_at, last_modified
 
 - Primary key name has the following structure:
-  table_name + id + PK, written in CamelCase.
+  table_name + id + PK, written in snake_case.
   Example: user_user_id_PK
 
 - Foreign key name has the following structure:
